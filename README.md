@@ -36,7 +36,7 @@ Custom Swift Comparator class. This required some C glue code - I'm not the worl
 			}
 		}
 		
-		func compare(a : NSData, _ b : NSData) -> NSComparisonResult 		{
+		func compare(a : NSData, _ b : NSData) -> NSComparisonResult {
 			let string1 = NSString(data: a, encoding: NSUTF8StringEncoding)
 			let string2 = NSString(data: a, encoding: NSUTF8StringEncoding)
 			return string1.compare(string2)
@@ -59,6 +59,7 @@ Note that all keys & values are NSData instances, as this is the closest Foundat
 The LevelDB source is included as a submodule (run `git submodule init && git submodule update` if you've cloned the source). It's compiled into the framework targets directly by Xcode rather than using an external build target because I rage-quit the LevelDB Makefile.
 
 The TODO list:
+
 * Implement filter policy support
 * More code comments & better doco
 * Better failure indication than NSLog messages
@@ -66,6 +67,7 @@ The TODO list:
 * Snapshot might be better as a trailing closure method 
 * Rethink Iterator API
 * DB properties, compact & cache support
+
 
 
 Copyright © 2104, codesplice pty ltd

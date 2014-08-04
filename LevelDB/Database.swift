@@ -77,7 +77,7 @@ public class Database {
         } else if (valueLength == 0) {
             return nil
         } else {
-            return NSData(bytes: value, length: valueLength.asSigned())
+            return NSData(bytesNoCopy: value, length: valueLength.asSigned(), freeWhenDone:true)
         }
     }
     
