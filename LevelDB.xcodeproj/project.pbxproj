@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		222F06F719910934000BA689 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 227B08E319828AD8009C3BC5 /* libstdc++.dylib */; };
+		222F06F819910942000BA689 /* LevelDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 2275902219531FBA009080EB /* LevelDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2253E1901971797500DCA0F0 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275915C19532794009080EB /* Database.swift */; };
 		2253E1911971797500DCA0F0 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2240E47F195F007400B009EE /* Options.swift */; };
 		2253E1921971797500DCA0F0 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22881A0F1969406300EC031D /* Snapshot.swift */; };
@@ -52,7 +54,6 @@
 		227B090B19828F3E009C3BC5 /* logging.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2253E0F619701FC500DCA0F0 /* logging.cc */; settings = {COMPILER_FLAGS = "-w"; }; };
 		227B090C19828F42009C3BC5 /* options.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2253E0FA19701FC500DCA0F0 /* options.cc */; settings = {COMPILER_FLAGS = "-w"; }; };
 		227B090E19828F49009C3BC5 /* status.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2253E0FE19701FC500DCA0F0 /* status.cc */; settings = {COMPILER_FLAGS = "-w"; }; };
-		227B09121982957C009C3BC5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 227B09111982957C009C3BC5 /* Foundation.framework */; };
 		227B09131982976A009C3BC5 /* builder.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2253E05019701FC500DCA0F0 /* builder.cc */; settings = {COMPILER_FLAGS = "-w"; }; };
 		227B09141982976A009C3BC5 /* c.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2253E05319701FC500DCA0F0 /* c.cc */; settings = {COMPILER_FLAGS = "-w"; }; };
 		227B09151982976A009C3BC5 /* db_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2253E05819701FC500DCA0F0 /* db_impl.cc */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -94,7 +95,6 @@
 		227B0939198297AB009C3BC5 /* status.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2253E0FE19701FC500DCA0F0 /* status.cc */; settings = {COMPILER_FLAGS = "-w"; }; };
 		227B093B198298A1009C3BC5 /* LevelDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275902F19531FBB009080EB /* LevelDBTests.swift */; };
 		227B093F198298EE009C3BC5 /* LevelDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275902F19531FBB009080EB /* LevelDBTests.swift */; };
-		22C36A2F197D4AB800710563 /* LevelDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C36A24197D4AB800710563 /* LevelDB.framework */; };
 		22C36A57197D4D2000710563 /* LevelDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 2275902219531FBA009080EB /* LevelDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22C36A5D197D50D700710563 /* WriteBatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA4A0B19697F2F00772430 /* WriteBatch.swift */; };
 		22C36A5E197D50DE00710563 /* Iterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22881A1119694AF900EC031D /* Iterator.swift */; };
@@ -336,7 +336,6 @@
 		2275902F19531FBB009080EB /* LevelDBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDBTests.swift; sourceTree = "<group>"; };
 		2275915C19532794009080EB /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		227B08E319828AD8009C3BC5 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk/usr/lib/libstdc++.dylib"; sourceTree = DEVELOPER_DIR; };
-		227B09111982957C009C3BC5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		22881A0F1969406300EC031D /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		22881A1119694AF900EC031D /* Iterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Iterator.swift; sourceTree = "<group>"; };
 		22BA4A0B19697F2F00772430 /* WriteBatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteBatch.swift; sourceTree = "<group>"; };
@@ -352,6 +351,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				222F06F719910934000BA689 /* libstdc++.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,7 +366,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				227B09121982957C009C3BC5 /* Foundation.framework in Frameworks */,
 				227B08E419828AD8009C3BC5 /* libstdc++.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,7 +374,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22C36A2F197D4AB800710563 /* LevelDB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,7 +621,6 @@
 		2253E10E1970218800DCA0F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				227B09111982957C009C3BC5 /* Foundation.framework */,
 				227B08E319828AD8009C3BC5 /* libstdc++.dylib */,
 			);
 			name = Frameworks;
@@ -718,6 +715,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				222F06F819910942000BA689 /* LevelDB.h in Headers */,
 				22EB9F2B198C922900A7DF7B /* comparator.h in Headers */,
 				22EB9F2D198D035300A7DF7B /* c.h in Headers */,
 			);
@@ -1092,6 +1090,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/vendor/leveldb",
+					"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk/usr/lib",
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_CPLUSPLUSFLAGS = (
@@ -1125,6 +1124,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/vendor/leveldb",
+					"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk/usr/lib",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CPLUSPLUSFLAGS = (

@@ -16,7 +16,7 @@ public class Snapshot {
     }
     
     deinit {
-        if pointer {
+        if pointer != nil {
             leveldb_release_snapshot(db.pointer, pointer)
         }
     }

@@ -51,27 +51,24 @@ public struct Options {
     func asCPointer() -> COpaquePointer {
         let opt = leveldb_options_create();
         leveldb_options_set_block_restart_interval(opt, CInt(blockRestartInterval))
-        leveldb_options_set_block_size(opt, blockSize.asUnsigned())
+        leveldb_options_set_block_size(opt, UInt(blockSize))
         leveldb_options_set_compression(opt, CInt(compression.toRaw()))
         leveldb_options_set_create_if_missing(opt, createIfMissing ? 1 : 0)
         leveldb_options_set_error_if_exists(opt, errorIfExists ? 1 : 0)
         leveldb_options_set_max_open_files(opt, CInt(maxOpenFiles));
         leveldb_options_set_paranoid_checks(opt, paranoidChecks ? 1 : 0)
-        leveldb_options_set_write_buffer_size(opt, writeBufferSize.asUnsigned())
+        leveldb_options_set_write_buffer_size(opt, UInt(writeBufferSize))
 
         // TODO: Comparator
         
         if let comparatorObj = comparator {
-            let compareClosure : (ConstUnsafePointer<Int8>, UInt, ConstUnsafePointer<Int8>, UInt) -> CInt =
+            let compareClosure : (UnsafePointer<Int8>, UInt, UnsafePointer<Int8>, UInt) -> CInt =
             {(a, alen, b, blen) in
-                let aData = NSData(bytes: a, length: alen.asSigned())
-                let bData = NSData(bytes: b, length: blen.asSigned())
+                let aData = NSData(bytes: a, length: Int(alen))
+                let bData = NSData(bytes: b, length: Int(blen))
                 return CInt(comparatorObj.compare(aData, bData).toRaw())
                 };
-            var name : ConstUnsafePointer<Int8> = nil
-            comparatorObj.name.withCString({
-                name = $0
-            })
+            let name = (comparatorObj.name as NSString).UTF8String
             let cmp = leveldb_comparator_create_wrapper(name, compareClosure)
             leveldb_options_set_comparator(opt, cmp);
         }
@@ -89,7 +86,7 @@ public struct ReadOptions {
         let opt = leveldb_readoptions_create();
         leveldb_readoptions_set_fill_cache(opt, fillCache ? 1 : 0)
         leveldb_readoptions_set_verify_checksums(opt, verifyChecksums ? 1 : 0)
-        if snapshot {
+        if snapshot != nil {
             leveldb_readoptions_set_snapshot(opt, snapshot!.pointer)
         }
         return opt;

@@ -18,16 +18,16 @@ public class WriteBatch {
     }
     
     public func put(key : NSData, value : NSData?) {
-        if (value) {
-            leveldb_writebatch_put(pointer, ConstUnsafePointer<Int8>(key.bytes), key.length.asUnsigned(), ConstUnsafePointer<Int8>(value!.bytes), value!.length.asUnsigned())
+        if value != nil {
+            leveldb_writebatch_put(pointer, UnsafePointer<Int8>(key.bytes), UInt(key.length), UnsafePointer<Int8>(value!.bytes), UInt(value!.length))
         } else {
-            leveldb_writebatch_put(pointer, ConstUnsafePointer<Int8>(key.bytes), key.length.asUnsigned(), nil, 0)
+            leveldb_writebatch_put(pointer, UnsafePointer<Int8>(key.bytes), UInt(key.length), nil, 0)
         }
     }
     
     public func delete(key : NSData) {
         var valueLength : UInt = 0
-        leveldb_writebatch_delete(pointer, ConstUnsafePointer<Int8>(key.bytes), key.length.asUnsigned())
+        leveldb_writebatch_delete(pointer, UnsafePointer<Int8>(key.bytes), UInt(key.length))
     }
     
     public func clear() {
