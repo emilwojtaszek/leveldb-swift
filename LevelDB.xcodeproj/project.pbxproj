@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		222F06F719910934000BA689 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 227B08E319828AD8009C3BC5 /* libstdc++.dylib */; };
 		222F06F819910942000BA689 /* LevelDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 2275902219531FBA009080EB /* LevelDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2235BDF1199123BD0008DA7E /* KeySequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2235BDF0199123BD0008DA7E /* KeySequence.swift */; };
+		2235BDF2199123BD0008DA7E /* KeySequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2235BDF0199123BD0008DA7E /* KeySequence.swift */; };
 		2253E1901971797500DCA0F0 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275915C19532794009080EB /* Database.swift */; };
 		2253E1911971797500DCA0F0 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2240E47F195F007400B009EE /* Options.swift */; };
 		2253E1921971797500DCA0F0 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22881A0F1969406300EC031D /* Snapshot.swift */; };
 		2253E1931971797500DCA0F0 /* Iterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22881A1119694AF900EC031D /* Iterator.swift */; };
 		2253E1941971797500DCA0F0 /* WriteBatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA4A0B19697F2F00772430 /* WriteBatch.swift */; };
-		227B08E419828AD8009C3BC5 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 227B08E319828AD8009C3BC5 /* libstdc++.dylib */; };
 		227B08E519828E34009C3BC5 /* builder.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2253E05019701FC500DCA0F0 /* builder.cc */; settings = {COMPILER_FLAGS = "-w"; }; };
 		227B08E619828E38009C3BC5 /* c.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2253E05319701FC500DCA0F0 /* c.cc */; settings = {COMPILER_FLAGS = "-w"; }; };
 		227B08E719828E47009C3BC5 /* db_impl.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2253E05819701FC500DCA0F0 /* db_impl.cc */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -101,6 +101,8 @@
 		22C36A5F197D50E100710563 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22881A0F1969406300EC031D /* Snapshot.swift */; };
 		22C36A60197D50E400710563 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2240E47F195F007400B009EE /* Options.swift */; };
 		22C36A61197D50E900710563 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275915C19532794009080EB /* Database.swift */; };
+		22E9BA021993BB16009EA25F /* KeyValueSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E9BA011993BB16009EA25F /* KeyValueSequence.swift */; };
+		22E9BA031993BB16009EA25F /* KeyValueSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E9BA011993BB16009EA25F /* KeyValueSequence.swift */; };
 		22EB9F29198C922900A7DF7B /* comparator.c in Sources */ = {isa = PBXBuildFile; fileRef = 22EB9F27198C922900A7DF7B /* comparator.c */; };
 		22EB9F2A198C922900A7DF7B /* comparator.c in Sources */ = {isa = PBXBuildFile; fileRef = 22EB9F27198C922900A7DF7B /* comparator.c */; };
 		22EB9F2B198C922900A7DF7B /* comparator.h in Headers */ = {isa = PBXBuildFile; fileRef = 22EB9F28198C922900A7DF7B /* comparator.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -192,6 +194,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2235BDF0199123BD0008DA7E /* KeySequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeySequence.swift; sourceTree = "<group>"; };
 		2240E47F195F007400B009EE /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		2253E04A19701FC500DCA0F0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		2253E04B19701FC500DCA0F0 /* AUTHORS */ = {isa = PBXFileReference; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
@@ -341,6 +344,7 @@
 		22BA4A0B19697F2F00772430 /* WriteBatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteBatch.swift; sourceTree = "<group>"; };
 		22C36A24197D4AB800710563 /* LevelDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LevelDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22C36A2E197D4AB800710563 /* LevelDBTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LevelDBTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		22E9BA011993BB16009EA25F /* KeyValueSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyValueSequence.swift; sourceTree = "<group>"; };
 		22EB9F27198C922900A7DF7B /* comparator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = comparator.c; sourceTree = "<group>"; };
 		22EB9F28198C922900A7DF7B /* comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = comparator.h; sourceTree = "<group>"; };
 		22EB9F2E198D13FB00A7DF7B /* TestComparator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestComparator.swift; sourceTree = "<group>"; };
@@ -351,7 +355,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				222F06F719910934000BA689 /* libstdc++.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,7 +369,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				227B08E419828AD8009C3BC5 /* libstdc++.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -656,6 +658,8 @@
 				2240E47F195F007400B009EE /* Options.swift */,
 				22881A0F1969406300EC031D /* Snapshot.swift */,
 				22881A1119694AF900EC031D /* Iterator.swift */,
+				2235BDF0199123BD0008DA7E /* KeySequence.swift */,
+				22E9BA011993BB16009EA25F /* KeyValueSequence.swift */,
 				22BA4A0B19697F2F00772430 /* WriteBatch.swift */,
 				22EB9F28198C922900A7DF7B /* comparator.h */,
 				22EB9F27198C922900A7DF7B /* comparator.c */,
@@ -886,6 +890,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22E9BA031993BB16009EA25F /* KeyValueSequence.swift in Sources */,
 				2253E1901971797500DCA0F0 /* Database.swift in Sources */,
 				2253E1911971797500DCA0F0 /* Options.swift in Sources */,
 				2253E1921971797500DCA0F0 /* Snapshot.swift in Sources */,
@@ -910,6 +915,7 @@
 				227B092319829791009C3BC5 /* block.cc in Sources */,
 				227B092419829791009C3BC5 /* block_builder.cc in Sources */,
 				227B092519829791009C3BC5 /* filter_block.cc in Sources */,
+				2235BDF2199123BD0008DA7E /* KeySequence.swift in Sources */,
 				227B092619829791009C3BC5 /* format.cc in Sources */,
 				227B092719829791009C3BC5 /* iterator.cc in Sources */,
 				227B092819829791009C3BC5 /* merger.cc in Sources */,
@@ -947,6 +953,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22E9BA021993BB16009EA25F /* KeyValueSequence.swift in Sources */,
 				22C36A61197D50E900710563 /* Database.swift in Sources */,
 				22C36A60197D50E400710563 /* Options.swift in Sources */,
 				22C36A5D197D50D700710563 /* WriteBatch.swift in Sources */,
@@ -971,6 +978,7 @@
 				227B08F519828EB7009C3BC5 /* block.cc in Sources */,
 				227B08F619828EBD009C3BC5 /* block_builder.cc in Sources */,
 				227B08F719828EC1009C3BC5 /* filter_block.cc in Sources */,
+				2235BDF1199123BD0008DA7E /* KeySequence.swift in Sources */,
 				227B08F919828EC9009C3BC5 /* format.cc in Sources */,
 				227B08FA19828ECD009C3BC5 /* iterator.cc in Sources */,
 				227B08FB19828ED0009C3BC5 /* merger.cc in Sources */,
@@ -1087,11 +1095,6 @@
 				INFOPLIST_FILE = LevelDB/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/vendor/leveldb",
-					"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk/usr/lib",
-				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -1121,11 +1124,6 @@
 				INFOPLIST_FILE = LevelDB/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/vendor/leveldb",
-					"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk/usr/lib",
-				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -1273,7 +1271,6 @@
 				INFOPLIST_FILE = LevelDB/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/iOS";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CPLUSPLUSFLAGS = (
@@ -1306,7 +1303,6 @@
 				INFOPLIST_FILE = LevelDB/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/Frameworks/iOS";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",

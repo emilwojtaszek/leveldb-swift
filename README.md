@@ -19,15 +19,18 @@ WriteBatch support:
 	batch.delete(key2)
 	db.write(batch)
 
-Iterators:
+The C++ style LevelDB iterator has been wrapped with Swift `SequenceType`s:
 
-	let iter = db.newIterator()
-	iter.seek(startKey)
-	while iter.next() {
-		NSLog("%@: %@", iter.key, iter.value)
+	for key in db.keys()
+		NSLog("%@", key)
 	}
+  
+	for (key, value) in db.values(from: startKey, to: endKey, descending: true)
+		NSLog("%@: %@", key, value)
+	}
+  
 
-Custom Swift Comparator class. This required some C glue code - I'm not the world best C programmer, so there's a good chance I've stuffed up something really basic.
+Custom Swift Comparator class. This required some C glue code - I'm not the world's best C programmer, so there's a good chance I've stuffed up something really basic.
 
 	class MyCustomComparator : Comparator {
 		var name : String {

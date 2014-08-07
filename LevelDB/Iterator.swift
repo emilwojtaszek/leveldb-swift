@@ -6,7 +6,8 @@
 
 import Foundation
 
-public class Iterator {
+class Iterator {
+    
     var pointer : COpaquePointer
     
     init(_ iterator : COpaquePointer) {
@@ -16,37 +17,37 @@ public class Iterator {
     deinit {
         leveldb_iter_destroy(pointer)
     }
-    
-    public var isValid : Bool {
+        
+    var isValid : Bool {
         get { return (leveldb_iter_valid(pointer) != 0) }
     }
     
-    public func seekToFirst() -> Bool {
+    func seekToFirst() -> Bool {
         leveldb_iter_seek_to_first(pointer);
         return isValid
     }
     
-    public func seekToLast() -> Bool {
+    func seekToLast() -> Bool {
         leveldb_iter_seek_to_last(pointer);
         return isValid
     }
     
-    public func seek(key : NSData) -> Bool {
+    func seek(key : NSData) -> Bool {
         leveldb_iter_seek(pointer, UnsafePointer<Int8>(key.bytes), UInt(key.length))
         return isValid
     }
     
-    public func next() -> Bool {
+    func next() -> Bool {
         leveldb_iter_next(pointer)
         return isValid
     }
     
-    public func prev() -> Bool {
+    func prev() -> Bool {
         leveldb_iter_prev(pointer)
         return isValid
     }
     
-    public var key : NSData? {
+    var key : NSData? {
         get {
             var length : UInt = 0
             let bytes = leveldb_iter_key(pointer, &length)
@@ -58,7 +59,7 @@ public class Iterator {
         }
     }
     
-    public var value : NSData? {
+    var value : NSData? {
         get {
             var length : UInt = 0
             let bytes = leveldb_iter_value(pointer, &length)
@@ -70,7 +71,7 @@ public class Iterator {
         }
     }
     
-    public var error : String? {
+    var error : String? {
         get {
             var error = UnsafeMutablePointer<Int8>.null()
             leveldb_iter_get_error(pointer, &error)

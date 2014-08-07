@@ -11,6 +11,7 @@ import Foundation
 /// Use the class factory method 'createDatabase' to create a new instance.
 public class Database {
     var pointer : COpaquePointer;
+    let comparator : Comparator;
     
     public class var majorVersion : Int {
         get { return Int(leveldb_major_version()) }
@@ -29,7 +30,7 @@ public class Database {
             NSLog("%@", String.fromCString(error)!)
             return nil;
         } else {
-            return Database(dbPointer)
+            return Database(dbPointer, comparator: options.comparator)
         }
     }
     
@@ -55,8 +56,9 @@ public class Database {
         }
     }
 
-    public init(_ dbPointer : COpaquePointer) {
+    init(_ dbPointer : COpaquePointer, comparator : Comparator? = nil) {
         self.pointer = dbPointer;
+        self.comparator = (comparator != nil) ? comparator! : DefaultComparator()
     }
 
     deinit {
@@ -116,14 +118,33 @@ public class Database {
         }        
     }
     
-    public func newIterator(options : ReadOptions = ReadOptions()) -> Iterator {
+    func newIterator(options : ReadOptions = ReadOptions()) -> Iterator {
         let optionPointer = options.asCPointer()
         let iterator = leveldb_create_iterator(pointer, optionPointer)
         leveldb_readoptions_destroy(optionPointer)
         return Iterator(iterator)
     }
     
+    public func keys(from: NSData? = nil, to : NSData? = nil, descending : Bool = false) -> KeySequence {
+        return KeySequence(db: self, startKey: from, endKey: to, descending: descending)
+    }
+    
+    public func values(from: NSData? = nil, to : NSData? = nil, descending : Bool = false) -> KeyValueSequence {
+        return KeyValueSequence(db: self, startKey: from, endKey: to, descending: descending)
+    }
+
     public func getSnapshot() -> Snapshot {
         return Snapshot(self);
+    }
+    
+    /// A Swift implementation of the default LevelDB BytewiseComparator. Note this is not actually passed
+    /// to LevelDB, it's only used where needed from Swift code
+    class DefaultComparator : Comparator {
+        var name : String { get { return "leveldb.BytewiseComparator" } }
+        func compare(a: NSData, _ b: NSData) -> NSComparisonResult {
+            var r = Int(memcmp(a.bytes, b.bytes, min(UInt(a.length), UInt(b.length))))
+            if (r == 0) { r = a.length - b.length }
+            return NSComparisonResult.fromRaw((r < 0) ? -1 : (r > 0) ? 1 : 0)!
+        }
     }
 }
