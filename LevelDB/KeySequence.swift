@@ -6,14 +6,14 @@
 
 import Foundation
 
-public struct KeySequence : SequenceType {
-    public typealias Generator = GeneratorOf<NSData>
+public struct KeySequence<Key: KeyType> : SequenceType {
+    public typealias Generator = AnyGenerator<Key>
     let db : Database
-    let startKey : NSData?
-    let endKey : NSData?
+    let startKey : Key?
+    let endKey : Key?
     let descending : Bool
     
-    init(db : Database, startKey : NSData? = nil, endKey : NSData? = nil, descending : Bool = false) {
+    init(db : Database, startKey : Key? = nil, endKey : Key? = nil, descending : Bool = false) {
         self.db = db
         self.startKey = startKey
         self.endKey = endKey
@@ -23,25 +23,31 @@ public struct KeySequence : SequenceType {
     public func generate() -> Generator {
         let iterator = db.newIterator()
         if let key = startKey {
-            iterator.seek(key)
-            if descending && iterator.isValid && db.comparator.compare(key, iterator.key!) == NSComparisonResult.OrderedAscending {
-                iterator.prev()
+            key.withSlice { k in
+                iterator.seek(k)
+                if descending && iterator.isValid && db.compare(k, iterator.key!) == .OrderedAscending {
+                    iterator.prev()
+                }
             }
         } else if descending {
             iterator.seekToLast()
         } else {
             iterator.seekToFirst()
         }
-        return GeneratorOf<NSData>({ () -> NSData? in
+        return anyGenerator({
             if !iterator.isValid {
                 return nil
             }
-            let currentKey = iterator.key!
-            if self.endKey.hasValue {
-                let result = self.db.comparator.compare(currentKey, self.endKey!)
-                if !self.descending && result == NSComparisonResult.OrderedDescending
-                    || self.descending && result == NSComparisonResult.OrderedAscending {
-                    return nil
+            let currentSlice = iterator.key!
+            let currentKey = Key(bytes: currentSlice.bytes, length: currentSlice.length)
+            if let key = self.endKey {
+                var result = NSComparisonResult.OrderedSame
+                key.withSlice { k in
+                    result = self.db.compare(currentSlice, k)
+                }
+                if !self.descending && result == .OrderedDescending
+                    || self.descending && result == .OrderedAscending {
+                        return nil
                 }
             }
             if self.descending { iterator.prev() } else { iterator.next() }

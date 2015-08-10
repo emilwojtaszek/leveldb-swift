@@ -13,7 +13,7 @@ public enum CompressionType : Int {
 
 public protocol Comparator {
     var name : String { get }
-    func compare(a : NSData, _ b : NSData) -> NSComparisonResult
+    func compare(a : Slice, _ b : Slice) -> NSComparisonResult
 }
 
 public struct Options {
@@ -50,27 +50,34 @@ public struct Options {
     
     func asCPointer() -> COpaquePointer {
         let opt = leveldb_options_create();
-        leveldb_options_set_block_restart_interval(opt, CInt(blockRestartInterval))
-        leveldb_options_set_block_size(opt, UInt(blockSize))
-        leveldb_options_set_compression(opt, CInt(compression.toRaw()))
+        leveldb_options_set_block_restart_interval(opt, Int32(blockRestartInterval))
+        leveldb_options_set_block_size(opt, Int(blockSize))
+        leveldb_options_set_compression(opt, Int32(compression.rawValue))
         leveldb_options_set_create_if_missing(opt, createIfMissing ? 1 : 0)
         leveldb_options_set_error_if_exists(opt, errorIfExists ? 1 : 0)
-        leveldb_options_set_max_open_files(opt, CInt(maxOpenFiles));
+        leveldb_options_set_max_open_files(opt, Int32(maxOpenFiles));
         leveldb_options_set_paranoid_checks(opt, paranoidChecks ? 1 : 0)
-        leveldb_options_set_write_buffer_size(opt, UInt(writeBufferSize))
-
-        // TODO: Comparator
+        leveldb_options_set_write_buffer_size(opt, Int(writeBufferSize))
         
         if let comparatorObj = comparator {
-            let compareClosure : (UnsafePointer<Int8>, UInt, UnsafePointer<Int8>, UInt) -> CInt =
-            {(a, alen, b, blen) in
-                let aData = NSData(bytes: a, length: Int(alen))
-                let bData = NSData(bytes: b, length: Int(blen))
-                return CInt(comparatorObj.compare(aData, bData).toRaw())
-                };
-            let name = (comparatorObj.name as NSString).UTF8String
-            let cmp = leveldb_comparator_create_wrapper(name, compareClosure)
-            leveldb_options_set_comparator(opt, cmp);
+            let state = UnsafeMutablePointer<Comparator>.alloc(1)
+            state.initialize(comparatorObj)
+
+            let cmp = leveldb_comparator_create(UnsafeMutablePointer<Void>(state),
+                { s in
+                    UnsafeMutablePointer<Comparator>(s).destroy()
+                },
+                { s, a, alen, b, blen in
+                    let c = UnsafeMutablePointer<Comparator>(s).memory
+                    let aSlice = Slice(bytes: a, length: alen)
+                    let bSlice = Slice(bytes: b, length: blen)
+                    return CInt(c.compare(aSlice, bSlice).rawValue)
+                },
+                { s in
+                    // TODO: avoid NSString bridge?
+                    (UnsafeMutablePointer<Comparator>(s).memory.name as NSString).UTF8String
+                })
+            leveldb_options_set_comparator(opt, cmp)
         }
         // TODO: Filter policy
         

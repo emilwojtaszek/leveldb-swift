@@ -18,16 +18,18 @@ class LevelDBTests: XCTestCase {
         super.tearDown()
     }
     
-    func createDb(options : Options = Options(createIfMissing: true)) -> Database? {
+    func createDb(options options : Options = Options(createIfMissing: true)) -> Database? {
         #if TARGET_OS_IPHONE
             let dirs = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
             let directory = (dirs as [String])[0].stringByAppendingPathComponent("LevelDB")
         #else
-            let currentDir = NSBundle(forClass: LevelDBTests.self).bundlePath.stringByDeletingLastPathComponent
-            let directory = currentDir.stringByAppendingPathComponent("LevelDB")
+            let currentDir = NSString(string: NSBundle(forClass: LevelDBTests.self).bundlePath).stringByDeletingLastPathComponent
+            let directory = NSString(string: currentDir).stringByAppendingPathComponent("LevelDB")
         #endif
-        NSFileManager.defaultManager().removeItemAtPath(directory, error: nil)
-        return Database.createDatabase(directory, options: options)
+        do {
+            try NSFileManager.defaultManager().removeItemAtPath(directory)
+        } catch _ { /* swallow */ }
+        return try! Database.createDatabase(directory, options: options)
     }
     
     // Given a sequence of elements of type T, return Array<T>
@@ -37,80 +39,77 @@ class LevelDBTests: XCTestCase {
     
     func testPut() {
         let db = createDb()!
-        let key = "test".dataUsingEncoding(NSUTF8StringEncoding)!
-        db.put(key, value: "test1".dataUsingEncoding(NSUTF8StringEncoding))
-        let response = db.get(key)
-        XCTAssertEqual("test1", NSString(data: response, encoding: NSUTF8StringEncoding))
+        let value = "test1".dataUsingEncoding(NSUTF8StringEncoding)
+        try! db.put("test", value: value)
+        let response = try! db.get("test").map({ NSString(data: $0, encoding: NSUTF8StringEncoding) as! String })
+        XCTAssertEqual("test1", response!)
     }
     
     func testDelete() {
         let db = createDb()!
-       let key = "test".dataUsingEncoding(NSUTF8StringEncoding)!
-        db.put(key, value: "test1".dataUsingEncoding(NSUTF8StringEncoding))
-        db.delete(key)
-        let response = db.get(key)
+        let key = "test"
+        try! db.put(key, value: "test1".dataUsingEncoding(NSUTF8StringEncoding))
+        try! db.delete(key)
+        let response = try! db.get(key)
         XCTAssertNil(response)
     }
     
     func testWriteBatch() {
         let db = createDb()!
         let batch = WriteBatch()
-        let key1 = "test1".dataUsingEncoding(NSUTF8StringEncoding)!
-        let key2 = "test2".dataUsingEncoding(NSUTF8StringEncoding)!
-        batch.put(key1, value: key1)
-        batch.put(key2, value: key2)
-        db.write(batch);
-        let response = db.get(key2)
-        XCTAssertEqual("test2", NSString(data: response, encoding: NSUTF8StringEncoding))
+        let key1 = "test1"
+        let key2 = "test2"
+        batch.put(key1, value: key1.dataUsingEncoding(NSUTF8StringEncoding))
+        batch.put(key2, value: key2.dataUsingEncoding(NSUTF8StringEncoding))
+        try! db.write(batch);
+        let response = try! db.get(key2).map({ NSString(data: $0, encoding: NSUTF8StringEncoding) as! String })
+        XCTAssertEqual("test2", response!)
     }
     
     func testKeySequence() {
         let db = createDb()!
-        let key1 = "test1".dataUsingEncoding(NSUTF8StringEncoding)!
-        let key2 = "test2".dataUsingEncoding(NSUTF8StringEncoding)!
-        let key3 = "test3".dataUsingEncoding(NSUTF8StringEncoding)!
-        db.put(key1, value: "test1".dataUsingEncoding(NSUTF8StringEncoding))
-        db.put(key2, value: "test2".dataUsingEncoding(NSUTF8StringEncoding))
-        db.put(key3, value: "test3".dataUsingEncoding(NSUTF8StringEncoding))
+        let key1 = "test1"
+        let key2 = "test2"
+        let key3 = "test3"
+        try! db.put(key1, value: "test1".dataUsingEncoding(NSUTF8StringEncoding))
+        try! db.put(key2, value: "test2".dataUsingEncoding(NSUTF8StringEncoding))
+        try! db.put(key3, value: "test3".dataUsingEncoding(NSUTF8StringEncoding))
         var index = 0
-        NSLog("iterating all keys ascending")
-        for key in db.keys() {
+        print("iterating all keys ascending")
+        for key : String in db.keys() {
             index++
             let keyName = String(format: "test%d", index)
-            let keyString = NSString(data: key, encoding: NSUTF8StringEncoding) as String
-            NSLog("%@", keyString)
-            XCTAssertEqual(keyName, keyString)
+            print(key)
+            XCTAssertEqual(keyName, key)
         }
         XCTAssertEqual(index, 3)
         index = 1
-        NSLog("iterating all keys from test11 to test21 ascending")
-        for key in db.keys(from:"test11".dataUsingEncoding(NSUTF8StringEncoding)!, to:"test21".dataUsingEncoding(NSUTF8StringEncoding)!) {
+        print("iterating all keys from test11 to test21 ascending")
+        for key in db.keys(from:"test11", to:"test21") {
             index++
-            let keyName = String(format: "test%d", index)
-            let keyString = NSString(data: key, encoding: NSUTF8StringEncoding) as String
-            NSLog("%@", keyString)
-            XCTAssertEqual(keyName, keyString)
+            let keyName = "test\(index)"
+            print(key)
+            XCTAssertEqual(keyName, key)
         }
         XCTAssertEqual(index, 2)
     }
     
     func testKeyValueSequence() {
         let db = createDb()!
-        let key1 = "test1".dataUsingEncoding(NSUTF8StringEncoding)!
-        let key2 = "test2".dataUsingEncoding(NSUTF8StringEncoding)!
-        let key3 = "test3".dataUsingEncoding(NSUTF8StringEncoding)!
-        db.put(key1, value: "test1".dataUsingEncoding(NSUTF8StringEncoding))
-        db.put(key2, value: "test2".dataUsingEncoding(NSUTF8StringEncoding))
-        db.put(key3, value: "test3".dataUsingEncoding(NSUTF8StringEncoding))
+        let key1 = "test1"
+        let key2 = "test2"
+        let key3 = "test3"
+        try! db.put(key1, value: "test1".dataUsingEncoding(NSUTF8StringEncoding))
+        try! db.put(key2, value: "test2".dataUsingEncoding(NSUTF8StringEncoding))
+        try! db.put(key3, value: "test3".dataUsingEncoding(NSUTF8StringEncoding))
         var index = 0
-        NSLog("iterating all keys & values ascending")
-        for (key, value) in db.values() {
+        print("iterating all keys & values ascending")
+        for (key, value): (String, NSData?) in db.values() {
             index++
-            let keyName = String(format: "test%d", index)
-            let keyString = NSString(data: key, encoding: NSUTF8StringEncoding) as String
-            let valueString = NSString(data: value, encoding: NSUTF8StringEncoding) as String
-            NSLog("%@L %@", keyString, valueString)
-            XCTAssertEqual(keyName, keyString)
+            let keyName = "test\(index)"
+            let valueString = NSString(data: value!, encoding: NSUTF8StringEncoding) as! String
+            print("\(key): \(valueString)")
+            XCTAssertEqual(keyName, key)
             XCTAssertEqual(keyName, valueString)
         }
         XCTAssertEqual(index, 3)
@@ -118,29 +117,27 @@ class LevelDBTests: XCTestCase {
 
     func testKeySequenceDescending() {
         let db = createDb()!
-        let key1 = "test1".dataUsingEncoding(NSUTF8StringEncoding)!
-        let key2 = "test2".dataUsingEncoding(NSUTF8StringEncoding)!
-        let key3 = "test3".dataUsingEncoding(NSUTF8StringEncoding)!
-        db.put(key1, value: "test1".dataUsingEncoding(NSUTF8StringEncoding))
-        db.put(key2, value: "test2".dataUsingEncoding(NSUTF8StringEncoding))
-        db.put(key3, value: "test3".dataUsingEncoding(NSUTF8StringEncoding))
+        let key1 = "test1"
+        let key2 = "test2"
+        let key3 = "test3"
+        try! db.put(key1, value: "test1".dataUsingEncoding(NSUTF8StringEncoding))
+        try! db.put(key2, value: "test2".dataUsingEncoding(NSUTF8StringEncoding))
+        try! db.put(key3, value: "test3".dataUsingEncoding(NSUTF8StringEncoding))
         var index = 3
-        NSLog("iterating all keys descending")
-        for key in db.keys(descending:true) {
-            let keyName = String(format: "test%d", index)
-            let keyString = NSString(data: key, encoding: NSUTF8StringEncoding) as String
-            NSLog("%@", keyString)
-            XCTAssertEqual(keyName, keyString)
+        print("iterating all keys descending")
+        for key: String in db.keys(descending:true) {
+            let keyName = "test\(index)"
+            print(key)
+            XCTAssertEqual(keyName, key)
             index--
         }
         XCTAssertEqual(index, 0)
         index = 2
-        NSLog("iterating all keys from test21 to test11 descending")
-        for key in db.keys(from:"test21".dataUsingEncoding(NSUTF8StringEncoding)!, to:"test11".dataUsingEncoding(NSUTF8StringEncoding)!, descending:true) {
-            let keyName = String(format: "test%d", index)
-            let keyString = NSString(data: key, encoding: NSUTF8StringEncoding) as String
-            NSLog("%@", keyString)
-            XCTAssertEqual(keyName, keyString)
+        print("iterating all keys from test21 to test11 descending")
+        for key in db.keys(from:"test21", to:"test11", descending:true) {
+            let keyName = "test\(index)"
+            print(key)
+            XCTAssertEqual(keyName, key)
             index--
         }
         XCTAssertEqual(index, 1)
@@ -153,18 +150,17 @@ class LevelDBTests: XCTestCase {
         let key1 = "test1".dataUsingEncoding(NSUTF8StringEncoding)!
         let key2 = "test2".dataUsingEncoding(NSUTF8StringEncoding)!
         let key3 = "test3".dataUsingEncoding(NSUTF8StringEncoding)!
-        db.put(key3, value: "test3".dataUsingEncoding(NSUTF8StringEncoding))
-        db.put(key2, value: "test2".dataUsingEncoding(NSUTF8StringEncoding))
-        db.put(key1, value: "test1".dataUsingEncoding(NSUTF8StringEncoding))
+        try! db.put(key3, value: "test3".dataUsingEncoding(NSUTF8StringEncoding))
+        try! db.put(key2, value: "test2".dataUsingEncoding(NSUTF8StringEncoding))
+        try! db.put(key1, value: "test1".dataUsingEncoding(NSUTF8StringEncoding))
         var index = 0
-        NSLog("iterating all keys & values ascending")
-        for (key, value) in db.values() {
+        print("iterating all keys & values ascending")
+        for (key, value): (String, NSData?) in db.values() {
             index++
-            let keyName = String(format: "test%d", index)
-            let keyString = NSString(data: key, encoding: NSUTF8StringEncoding) as String
-            let valueString = NSString(data: value, encoding: NSUTF8StringEncoding) as String
-            NSLog("%@L %@", keyString, valueString)
-            XCTAssertEqual(keyName, keyString)
+            let keyName = "test\(index)"
+            let valueString = NSString(data: value!, encoding: NSUTF8StringEncoding) as! String
+            print("\(key): \(valueString)")
+            XCTAssertEqual(keyName, key)
             XCTAssertEqual(keyName, valueString)
         }
         // TODO: Failing - there's something wrong with the custom comparator

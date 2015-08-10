@@ -68,7 +68,6 @@ The TODO list:
 * Better failure indication than NSLog messages
 * Enable Snappy compression?
 * Snapshot might be better as a trailing closure method 
-* Rethink Iterator API
 * DB properties, compact & cache support
 
 

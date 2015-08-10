@@ -14,9 +14,9 @@ class TestComparator : Comparator {
     }
     }
     
-    func compare(a : NSData, _ b : NSData) -> NSComparisonResult {
-        let string1 = NSString(data: a, encoding: NSUTF8StringEncoding)
-        let string2 = NSString(data: a, encoding: NSUTF8StringEncoding)
+    func compare(a : LevelDB.Slice, _ b : LevelDB.Slice) -> NSComparisonResult {
+        let string1 = String(bytes: a.bytes, length: a.length)
+        let string2 = String(bytes: b.bytes, length: b.length)
         return string1.compare(string2)
     }
 }

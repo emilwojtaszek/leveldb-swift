@@ -17,22 +17,25 @@ public class WriteBatch {
         leveldb_writebatch_destroy(pointer)
     }
     
-    public func put(key : NSData, value : NSData?) {
-        if value != nil {
-            leveldb_writebatch_put(pointer, UnsafePointer<Int8>(key.bytes), UInt(key.length), UnsafePointer<Int8>(value!.bytes), UInt(value!.length))
-        } else {
-            leveldb_writebatch_put(pointer, UnsafePointer<Int8>(key.bytes), UInt(key.length), nil, 0)
+    public func put(key : KeyType, value : NSData?) {
+        key.withSlice { k in
+            if let value = value.map({ Slice(data: $0) }) {
+                leveldb_writebatch_put(pointer, k.bytes, k.length, value.bytes, value.length)
+            } else {
+                leveldb_writebatch_put(pointer, k.bytes, k.length, nil, 0)
+            }
         }
     }
     
-    public func delete(key : NSData) {
-        var valueLength : UInt = 0
-        leveldb_writebatch_delete(pointer, UnsafePointer<Int8>(key.bytes), UInt(key.length))
+    public func delete(key : KeyType) {
+        key.withSlice { k in
+            leveldb_writebatch_delete(pointer, k.bytes, k.length)
+        }
     }
     
     public func clear() {
         leveldb_writebatch_clear(pointer)
     }
 
-    // TODO: iterate - convert function pointers to blocks
+    // TODO: iterate
 }

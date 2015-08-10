@@ -14,4 +14,3 @@ FOUNDATION_EXPORT const unsigned char LevelDBVersionString[];
 
 // import leveldb C header as the bridging header is not available in frameworks
 #import "c.h"
-#import "comparator.h"

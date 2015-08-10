@@ -32,8 +32,8 @@ class Iterator {
         return isValid
     }
     
-    func seek(key : NSData) -> Bool {
-        leveldb_iter_seek(pointer, UnsafePointer<Int8>(key.bytes), UInt(key.length))
+    func seek(key : Slice) -> Bool {
+        leveldb_iter_seek(pointer, key.bytes, key.length)
         return isValid
     }
     
@@ -47,24 +47,24 @@ class Iterator {
         return isValid
     }
     
-    var key : NSData? {
+    var key : Slice? {
         get {
-            var length : UInt = 0
+            var length : Int = 0
             let bytes = leveldb_iter_key(pointer, &length)
             if length > 0 && bytes != nil {
-                return NSData(bytes: bytes, length: Int(length))
+                return Slice(bytes: bytes, length: length)
             } else {
                 return nil
             }
         }
     }
     
-    var value : NSData? {
+    var value : Slice? {
         get {
-            var length : UInt = 0
+            var length : Int = 0
             let bytes = leveldb_iter_value(pointer, &length)
             if length > 0 && bytes != nil {
-                return NSData(bytes: bytes, length: Int(length))
+                return Slice(bytes: bytes, length: length)
             } else {
                 return nil
             }
@@ -73,7 +73,7 @@ class Iterator {
     
     var error : String? {
         get {
-            var error = UnsafeMutablePointer<Int8>.null()
+            var error = UnsafeMutablePointer<Int8>()
             leveldb_iter_get_error(pointer, &error)
             if error != nil {
                 return String.fromCString(error)!

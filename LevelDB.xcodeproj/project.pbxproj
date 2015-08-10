@@ -10,6 +10,9 @@
 		222F06F819910942000BA689 /* LevelDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 2275902219531FBA009080EB /* LevelDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2235BDF1199123BD0008DA7E /* KeySequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2235BDF0199123BD0008DA7E /* KeySequence.swift */; };
 		2235BDF2199123BD0008DA7E /* KeySequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2235BDF0199123BD0008DA7E /* KeySequence.swift */; };
+		224D54C61A1E2ECE00BFF130 /* Slice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22891BB319A8C234003EF513 /* Slice.swift */; };
+		224D54C81A1E2EFC00BFF130 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 224D54C71A1E2EFC00BFF130 /* libc++.dylib */; };
+		224D54C91A1E304D00BFF130 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 224D54C31A1E2A8C00BFF130 /* libc++.dylib */; };
 		2253E1901971797500DCA0F0 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275915C19532794009080EB /* Database.swift */; };
 		2253E1911971797500DCA0F0 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2240E47F195F007400B009EE /* Options.swift */; };
 		2253E1921971797500DCA0F0 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22881A0F1969406300EC031D /* Snapshot.swift */; };
@@ -95,18 +98,19 @@
 		227B0939198297AB009C3BC5 /* status.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2253E0FE19701FC500DCA0F0 /* status.cc */; settings = {COMPILER_FLAGS = "-w"; }; };
 		227B093B198298A1009C3BC5 /* LevelDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275902F19531FBB009080EB /* LevelDBTests.swift */; };
 		227B093F198298EE009C3BC5 /* LevelDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275902F19531FBB009080EB /* LevelDBTests.swift */; };
+		22891BB419A8C234003EF513 /* Slice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22891BB319A8C234003EF513 /* Slice.swift */; };
 		22C36A57197D4D2000710563 /* LevelDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 2275902219531FBA009080EB /* LevelDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22C36A5D197D50D700710563 /* WriteBatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA4A0B19697F2F00772430 /* WriteBatch.swift */; };
 		22C36A5E197D50DE00710563 /* Iterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22881A1119694AF900EC031D /* Iterator.swift */; };
 		22C36A5F197D50E100710563 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22881A0F1969406300EC031D /* Snapshot.swift */; };
 		22C36A60197D50E400710563 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2240E47F195F007400B009EE /* Options.swift */; };
 		22C36A61197D50E900710563 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275915C19532794009080EB /* Database.swift */; };
+		22E499E21B4564D700E4E86A /* dumpfile.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22E499E01B4564CF00E4E86A /* dumpfile.cc */; };
+		22E499E31B4564D800E4E86A /* dumpfile.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22E499E01B4564CF00E4E86A /* dumpfile.cc */; };
+		22E499E51B45650D00E4E86A /* dumpfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 22E499E41B45650D00E4E86A /* dumpfile.h */; };
+		22E499E61B45650D00E4E86A /* dumpfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 22E499E41B45650D00E4E86A /* dumpfile.h */; };
 		22E9BA021993BB16009EA25F /* KeyValueSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E9BA011993BB16009EA25F /* KeyValueSequence.swift */; };
 		22E9BA031993BB16009EA25F /* KeyValueSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E9BA011993BB16009EA25F /* KeyValueSequence.swift */; };
-		22EB9F29198C922900A7DF7B /* comparator.c in Sources */ = {isa = PBXBuildFile; fileRef = 22EB9F27198C922900A7DF7B /* comparator.c */; };
-		22EB9F2A198C922900A7DF7B /* comparator.c in Sources */ = {isa = PBXBuildFile; fileRef = 22EB9F27198C922900A7DF7B /* comparator.c */; };
-		22EB9F2B198C922900A7DF7B /* comparator.h in Headers */ = {isa = PBXBuildFile; fileRef = 22EB9F28198C922900A7DF7B /* comparator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		22EB9F2C198C922900A7DF7B /* comparator.h in Headers */ = {isa = PBXBuildFile; fileRef = 22EB9F28198C922900A7DF7B /* comparator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22EB9F2D198D035300A7DF7B /* c.h in Headers */ = {isa = PBXBuildFile; fileRef = 2253E09819701FC500DCA0F0 /* c.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22EB9F2F198D13FB00A7DF7B /* TestComparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EB9F2E198D13FB00A7DF7B /* TestComparator.swift */; };
 		22EB9F30198D13FB00A7DF7B /* TestComparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EB9F2E198D13FB00A7DF7B /* TestComparator.swift */; };
@@ -196,6 +200,8 @@
 /* Begin PBXFileReference section */
 		2235BDF0199123BD0008DA7E /* KeySequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeySequence.swift; sourceTree = "<group>"; };
 		2240E47F195F007400B009EE /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		224D54C31A1E2A8C00BFF130 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/usr/lib/libc++.dylib"; sourceTree = DEVELOPER_DIR; };
+		224D54C71A1E2EFC00BFF130 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		2253E04A19701FC500DCA0F0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		2253E04B19701FC500DCA0F0 /* AUTHORS */ = {isa = PBXFileReference; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
 		2253E04D19701FC500DCA0F0 /* build_detect_platform */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build_detect_platform; sourceTree = "<group>"; };
@@ -278,7 +284,6 @@
 		2253E0B219701FC500DCA0F0 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		2253E0B319701FC500DCA0F0 /* thread_annotations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = thread_annotations.h; sourceTree = "<group>"; };
 		2253E0B519701FC500DCA0F0 /* stdint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stdint.h; sourceTree = "<group>"; };
-		2253E0B619701FC500DCA0F0 /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		2253E0B819701FC500DCA0F0 /* block.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = block.cc; sourceTree = "<group>"; };
 		2253E0B919701FC500DCA0F0 /* block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = block.h; sourceTree = "<group>"; };
 		2253E0BB19701FC500DCA0F0 /* block_builder.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = block_builder.cc; sourceTree = "<group>"; };
@@ -332,21 +337,25 @@
 		2253E10219701FC500DCA0F0 /* testutil.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = testutil.cc; sourceTree = "<group>"; };
 		2253E10319701FC500DCA0F0 /* testutil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testutil.h; sourceTree = "<group>"; };
 		2253E1531971787B00DCA0F0 /* LevelDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LevelDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2259D7291B2D2E8100F13088 /* CONTRIBUTING.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
+		2259D72A1B2D2E8100F13088 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2275902119531FBA009080EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2275902219531FBA009080EB /* LevelDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelDB.h; sourceTree = "<group>"; };
 		2275902819531FBB009080EB /* LevelDBTests-OSX.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LevelDBTests-OSX.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2275902E19531FBB009080EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2275902F19531FBB009080EB /* LevelDBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDBTests.swift; sourceTree = "<group>"; };
 		2275915C19532794009080EB /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
-		227B08E319828AD8009C3BC5 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk/usr/lib/libstdc++.dylib"; sourceTree = DEVELOPER_DIR; };
 		22881A0F1969406300EC031D /* Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		22881A1119694AF900EC031D /* Iterator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Iterator.swift; sourceTree = "<group>"; };
+		22891BB319A8C234003EF513 /* Slice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slice.swift; sourceTree = "<group>"; };
 		22BA4A0B19697F2F00772430 /* WriteBatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteBatch.swift; sourceTree = "<group>"; };
 		22C36A24197D4AB800710563 /* LevelDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LevelDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22C36A2E197D4AB800710563 /* LevelDBTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LevelDBTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		22E499E01B4564CF00E4E86A /* dumpfile.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = dumpfile.cc; sourceTree = "<group>"; };
+		22E499E11B4564CF00E4E86A /* fault_injection_test.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = fault_injection_test.cc; sourceTree = "<group>"; };
+		22E499E41B45650D00E4E86A /* dumpfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dumpfile.h; sourceTree = "<group>"; };
+		22E499E71B45653F00E4E86A /* hash_test.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = hash_test.cc; sourceTree = "<group>"; };
 		22E9BA011993BB16009EA25F /* KeyValueSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyValueSequence.swift; sourceTree = "<group>"; };
-		22EB9F27198C922900A7DF7B /* comparator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = comparator.c; sourceTree = "<group>"; };
-		22EB9F28198C922900A7DF7B /* comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = comparator.h; sourceTree = "<group>"; };
 		22EB9F2E198D13FB00A7DF7B /* TestComparator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestComparator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -355,6 +364,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				224D54C81A1E2EFC00BFF130 /* libc++.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +379,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				224D54C91A1E304D00BFF130 /* libc++.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +398,7 @@
 			children = (
 				2253E04A19701FC500DCA0F0 /* .gitignore */,
 				2253E04B19701FC500DCA0F0 /* AUTHORS */,
+				2259D7291B2D2E8100F13088 /* CONTRIBUTING.md */,
 				2253E04D19701FC500DCA0F0 /* build_detect_platform */,
 				2253E04E19701FC500DCA0F0 /* db */,
 				2253E08719701FC500DCA0F0 /* doc */,
@@ -397,7 +409,7 @@
 				2253E0A919701FC500DCA0F0 /* Makefile */,
 				2253E0AA19701FC500DCA0F0 /* NEWS */,
 				2253E0AB19701FC500DCA0F0 /* port */,
-				2253E0B619701FC500DCA0F0 /* README */,
+				2259D72A1B2D2E8100F13088 /* README.md */,
 				2253E0B719701FC500DCA0F0 /* table */,
 				2253E0D319701FC500DCA0F0 /* TODO */,
 				2253E0D419701FC500DCA0F0 /* util */,
@@ -408,6 +420,8 @@
 		2253E04E19701FC500DCA0F0 /* db */ = {
 			isa = PBXGroup;
 			children = (
+				22E499E01B4564CF00E4E86A /* dumpfile.cc */,
+				22E499E11B4564CF00E4E86A /* fault_injection_test.cc */,
 				2253E04F19701FC500DCA0F0 /* autocompact_test.cc */,
 				2253E05019701FC500DCA0F0 /* builder.cc */,
 				2253E05119701FC500DCA0F0 /* builder.h */,
@@ -506,6 +520,7 @@
 		2253E09719701FC500DCA0F0 /* leveldb */ = {
 			isa = PBXGroup;
 			children = (
+				22E499E41B45650D00E4E86A /* dumpfile.h */,
 				2253E09819701FC500DCA0F0 /* c.h */,
 				2253E09919701FC500DCA0F0 /* cache.h */,
 				2253E09A19701FC500DCA0F0 /* comparator.h */,
@@ -583,6 +598,7 @@
 		2253E0D419701FC500DCA0F0 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				22E499E71B45653F00E4E86A /* hash_test.cc */,
 				2253E0D519701FC500DCA0F0 /* arena.cc */,
 				2253E0D619701FC500DCA0F0 /* arena.h */,
 				2253E0D819701FC500DCA0F0 /* arena_test.cc */,
@@ -623,7 +639,8 @@
 		2253E10E1970218800DCA0F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				227B08E319828AD8009C3BC5 /* libstdc++.dylib */,
+				224D54C71A1E2EFC00BFF130 /* libc++.dylib */,
+				224D54C31A1E2A8C00BFF130 /* libc++.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -654,6 +671,7 @@
 			isa = PBXGroup;
 			children = (
 				2275902219531FBA009080EB /* LevelDB.h */,
+				22891BB319A8C234003EF513 /* Slice.swift */,
 				2275915C19532794009080EB /* Database.swift */,
 				2240E47F195F007400B009EE /* Options.swift */,
 				22881A0F1969406300EC031D /* Snapshot.swift */,
@@ -661,8 +679,6 @@
 				2235BDF0199123BD0008DA7E /* KeySequence.swift */,
 				22E9BA011993BB16009EA25F /* KeyValueSequence.swift */,
 				22BA4A0B19697F2F00772430 /* WriteBatch.swift */,
-				22EB9F28198C922900A7DF7B /* comparator.h */,
-				22EB9F27198C922900A7DF7B /* comparator.c */,
 				2275902019531FBA009080EB /* Supporting Files */,
 			);
 			path = LevelDB;
@@ -710,7 +726,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22C36A57197D4D2000710563 /* LevelDB.h in Headers */,
-				22EB9F2C198C922900A7DF7B /* comparator.h in Headers */,
+				22E499E61B45650D00E4E86A /* dumpfile.h in Headers */,
 				22EB9F31198D15E400A7DF7B /* c.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -720,7 +736,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				222F06F819910942000BA689 /* LevelDB.h in Headers */,
-				22EB9F2B198C922900A7DF7B /* comparator.h in Headers */,
+				22E499E51B45650D00E4E86A /* dumpfile.h in Headers */,
 				22EB9F2D198D035300A7DF7B /* c.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -815,7 +831,8 @@
 		2275901419531FBA009080EB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = codesplice;
 				TargetAttributes = {
 					2253E1521971787B00DCA0F0 = {
@@ -896,6 +913,8 @@
 				2253E1921971797500DCA0F0 /* Snapshot.swift in Sources */,
 				2253E1931971797500DCA0F0 /* Iterator.swift in Sources */,
 				2253E1941971797500DCA0F0 /* WriteBatch.swift in Sources */,
+				2235BDF2199123BD0008DA7E /* KeySequence.swift in Sources */,
+				224D54C61A1E2ECE00BFF130 /* Slice.swift in Sources */,
 				227B09131982976A009C3BC5 /* builder.cc in Sources */,
 				227B09141982976A009C3BC5 /* c.cc in Sources */,
 				227B09151982976A009C3BC5 /* db_impl.cc in Sources */,
@@ -903,6 +922,7 @@
 				227B09171982976A009C3BC5 /* dbformat.cc in Sources */,
 				227B09181982976A009C3BC5 /* filename.cc in Sources */,
 				227B09191982976A009C3BC5 /* log_reader.cc in Sources */,
+				22E499E31B4564D800E4E86A /* dumpfile.cc in Sources */,
 				227B091A1982976A009C3BC5 /* log_writer.cc in Sources */,
 				227B091B1982976A009C3BC5 /* memtable.cc in Sources */,
 				227B091C1982976A009C3BC5 /* repair.cc in Sources */,
@@ -915,7 +935,6 @@
 				227B092319829791009C3BC5 /* block.cc in Sources */,
 				227B092419829791009C3BC5 /* block_builder.cc in Sources */,
 				227B092519829791009C3BC5 /* filter_block.cc in Sources */,
-				2235BDF2199123BD0008DA7E /* KeySequence.swift in Sources */,
 				227B092619829791009C3BC5 /* format.cc in Sources */,
 				227B092719829791009C3BC5 /* iterator.cc in Sources */,
 				227B092819829791009C3BC5 /* merger.cc in Sources */,
@@ -923,7 +942,6 @@
 				227B092A19829791009C3BC5 /* table_builder.cc in Sources */,
 				227B092B19829791009C3BC5 /* two_level_iterator.cc in Sources */,
 				227B092C198297AB009C3BC5 /* arena.cc in Sources */,
-				22EB9F2A198C922900A7DF7B /* comparator.c in Sources */,
 				227B092D198297AB009C3BC5 /* bloom.cc in Sources */,
 				227B092E198297AB009C3BC5 /* cache.cc in Sources */,
 				227B092F198297AB009C3BC5 /* coding.cc in Sources */,
@@ -959,6 +977,8 @@
 				22C36A5D197D50D700710563 /* WriteBatch.swift in Sources */,
 				22C36A5F197D50E100710563 /* Snapshot.swift in Sources */,
 				22C36A5E197D50DE00710563 /* Iterator.swift in Sources */,
+				22891BB419A8C234003EF513 /* Slice.swift in Sources */,
+				2235BDF1199123BD0008DA7E /* KeySequence.swift in Sources */,
 				227B08E519828E34009C3BC5 /* builder.cc in Sources */,
 				227B08E619828E38009C3BC5 /* c.cc in Sources */,
 				227B08E719828E47009C3BC5 /* db_impl.cc in Sources */,
@@ -968,6 +988,7 @@
 				227B08EB19828E70009C3BC5 /* log_reader.cc in Sources */,
 				227B08EC19828E74009C3BC5 /* log_writer.cc in Sources */,
 				227B08ED19828E77009C3BC5 /* memtable.cc in Sources */,
+				22E499E21B4564D700E4E86A /* dumpfile.cc in Sources */,
 				227B08EE19828E7B009C3BC5 /* repair.cc in Sources */,
 				227B08EF19828E82009C3BC5 /* table_cache.cc in Sources */,
 				227B08F019828E87009C3BC5 /* version_edit.cc in Sources */,
@@ -978,7 +999,6 @@
 				227B08F519828EB7009C3BC5 /* block.cc in Sources */,
 				227B08F619828EBD009C3BC5 /* block_builder.cc in Sources */,
 				227B08F719828EC1009C3BC5 /* filter_block.cc in Sources */,
-				2235BDF1199123BD0008DA7E /* KeySequence.swift in Sources */,
 				227B08F919828EC9009C3BC5 /* format.cc in Sources */,
 				227B08FA19828ECD009C3BC5 /* iterator.cc in Sources */,
 				227B08FB19828ED0009C3BC5 /* merger.cc in Sources */,
@@ -986,7 +1006,6 @@
 				227B08FD19828EDA009C3BC5 /* table_builder.cc in Sources */,
 				227B08FE19828EE3009C3BC5 /* two_level_iterator.cc in Sources */,
 				227B08FF19828EEC009C3BC5 /* arena.cc in Sources */,
-				22EB9F29198C922900A7DF7B /* comparator.c in Sources */,
 				227B090019828EF1009C3BC5 /* bloom.cc in Sources */,
 				227B090119828EF5009C3BC5 /* cache.cc in Sources */,
 				227B090219828EF9009C3BC5 /* coding.cc in Sources */,
@@ -1095,12 +1114,18 @@
 				INFOPLIST_FILE = LevelDB/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/usr/lib",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DOS_MACOSX",
 					"-DLEVELDB_PLATFORM_POSIX",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "au.com.codesplice.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = LevelDB;
 				SKIP_INSTALL = YES;
 			};
@@ -1124,12 +1149,18 @@
 				INFOPLIST_FILE = LevelDB/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/usr/lib",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DOS_MACOSX",
 					"-DLEVELDB_PLATFORM_POSIX",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "au.com.codesplice.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = LevelDB;
 				SKIP_INSTALL = YES;
 			};
@@ -1155,6 +1186,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1231,6 +1263,7 @@
 				INFOPLIST_FILE = LevelDBTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "au.com.codesplice.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1246,6 +1279,7 @@
 				INFOPLIST_FILE = LevelDBTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "au.com.codesplice.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -1278,9 +1312,11 @@
 					"-DOS_MACOSX",
 					"-DLEVELDB_PLATFORM_POSIX",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "au.com.codesplice.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = LevelDB;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1309,9 +1345,11 @@
 					"-DOS_MACOSX",
 					"-DLEVELDB_PLATFORM_POSIX",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "au.com.codesplice.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = LevelDB;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1335,6 +1373,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "au.com.codesplice.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1354,6 +1393,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "au.com.codesplice.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
