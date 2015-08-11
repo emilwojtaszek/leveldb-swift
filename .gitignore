@@ -21,3 +21,6 @@ xcuserdata/
 *.xcdebugger
 
 build.output
+
+#Carthage
+Carthage

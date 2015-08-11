@@ -76,7 +76,7 @@ class LevelDBTests: XCTestCase {
         try! db.put(key3, value: "test3".dataUsingEncoding(NSUTF8StringEncoding))
         var index = 0
         print("iterating all keys ascending")
-        for key : String in db.keys() {
+        for key in db.keys() {
             index++
             let keyName = String(format: "test%d", index)
             print(key)
@@ -104,7 +104,7 @@ class LevelDBTests: XCTestCase {
         try! db.put(key3, value: "test3".dataUsingEncoding(NSUTF8StringEncoding))
         var index = 0
         print("iterating all keys & values ascending")
-        for (key, value): (String, NSData?) in db.values() {
+        for (key, value) in db.values() {
             index++
             let keyName = "test\(index)"
             let valueString = NSString(data: value!, encoding: NSUTF8StringEncoding) as! String
@@ -155,7 +155,7 @@ class LevelDBTests: XCTestCase {
         try! db.put(key1, value: "test1".dataUsingEncoding(NSUTF8StringEncoding))
         var index = 0
         print("iterating all keys & values ascending")
-        for (key, value): (String, NSData?) in db.values() {
+        for (key, value) in db.values() {
             index++
             let keyName = "test\(index)"
             let valueString = NSString(data: value!, encoding: NSUTF8StringEncoding) as! String

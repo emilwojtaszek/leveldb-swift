@@ -17,7 +17,7 @@ public enum LevelDBError: ErrorType {
 /** **A LevelDB database instance**
 There should only be one instance created for a specific directory.
 */
-public class Database {
+public final class Database {
     var pointer : COpaquePointer;
     let comparator : Comparator?;
     
@@ -140,10 +140,18 @@ public class Database {
         return Iterator(iterator)
     }
     
+    public func keys() -> KeySequence<String> {
+        return KeySequence<String>(db: self, startKey: nil, endKey: nil, descending: false)
+    }
+    
     public func keys<Key: KeyType>(from from: Key? = nil, to: Key? = nil, descending: Bool = false) -> KeySequence<Key> {
         return KeySequence<Key>(db: self, startKey: from, endKey: to, descending: descending)
     }
     
+    public func values() -> KeyValueSequence<String> {
+        return KeyValueSequence<String>(db: self, startKey: nil, endKey: nil, descending: false)
+    }
+
     public func values<Key: KeyType>(from from: Key? = nil, to: Key? = nil, descending: Bool = false) -> KeyValueSequence<Key> {
         return KeyValueSequence<Key>(db: self, startKey: from, endKey: to, descending: descending)
     }
