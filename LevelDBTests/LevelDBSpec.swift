@@ -11,6 +11,34 @@ import XCTest
 import LevelDB
 import SwiftCheck
 
+let nonEmptyString = String.arbitrary.suchThat { !$0.isEmpty }
+
+enum DBOperation: CustomDebugStringConvertible {
+    case Put(key: String, value: [Int8])
+    case Get(key: String)
+    case Delete(key: String)
+    
+    var debugDescription: String {
+        switch(self) {
+        case let .Put(k, s):
+            return "Put \(k): \(s)"
+        case let .Get(k):
+            return "Get \(k)"
+        case let .Delete(k):
+            return "Delete \(k)"
+        }
+    }
+}
+
+extension DBOperation: Arbitrary {
+    static var arbitrary: SwiftCheck.Gen<DBOperation> {
+        return Gen.oneOf([
+                    DBOperation.Get <^> nonEmptyString,
+                    DBOperation.Delete <^> nonEmptyString
+                ])
+    }
+}
+
 extension Database: Arbitrary, CustomDebugStringConvertible {
     
     public static func create(values: DictionaryOf<String, ArrayOf<Int8>>) -> Database {
@@ -55,6 +83,13 @@ class LevelDBTest: XCTestCase {
                 return NSData(bytes: UnsafePointer<Void>(p.baseAddress), length: v.getArray.count)
             }
 
+            /*
+            Uncomment to watch SwiftCheck do its stuff!
+            print("Key = \(k)")
+            print("Value = \(v)")
+            print("DB = \(db)")
+            */
+            
             try! db.put(k, value: data)
             let returnedData = try! db.get(k)
             
