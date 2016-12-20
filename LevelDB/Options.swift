@@ -7,13 +7,13 @@
 import Foundation
 
 public enum CompressionType : Int {
-    case NoCompression = 0
-    case SnappyCompression
+    case noCompression = 0
+    case snappyCompression
 }
 
 public protocol Comparator {
     var name : String { get }
-    func compare(a : Slice, _ b : Slice) -> NSComparisonResult
+    func compare(_ a : Slice, _ b : Slice) -> ComparisonResult
 }
 
 public struct Options {
@@ -34,7 +34,7 @@ public struct Options {
         maxOpenFiles : Int = 1000,
         blockSize : Int = 1024 * 4, // 4KB default
         blockRestartInterval : Int = 16,
-        compression : CompressionType = CompressionType.SnappyCompression,
+        compression : CompressionType = CompressionType.snappyCompression,
         comparator : Comparator? = nil) {
             
         self.createIfMissing = createIfMissing
@@ -48,7 +48,7 @@ public struct Options {
         self.comparator = comparator
     }
     
-    func asCPointer() -> COpaquePointer {
+    func asCPointer() -> OpaquePointer {
         let opt = leveldb_options_create();
         leveldb_options_set_block_restart_interval(opt, Int32(blockRestartInterval))
         leveldb_options_set_block_size(opt, Int(blockSize))
@@ -59,29 +59,29 @@ public struct Options {
         leveldb_options_set_paranoid_checks(opt, paranoidChecks ? 1 : 0)
         leveldb_options_set_write_buffer_size(opt, Int(writeBufferSize))
         
-        if let comparatorObj = comparator {
-            let state = UnsafeMutablePointer<Comparator>.alloc(1)
-            state.initialize(comparatorObj)
-
-            let cmp = leveldb_comparator_create(UnsafeMutablePointer<Void>(state),
-                { s in
-                    UnsafeMutablePointer<Comparator>(s).destroy()
-                },
-                { s, a, alen, b, blen in
-                    let c = UnsafeMutablePointer<Comparator>(s).memory
-                    let aSlice = Slice(bytes: a, length: alen)
-                    let bSlice = Slice(bytes: b, length: blen)
-                    return CInt(c.compare(aSlice, bSlice).rawValue)
-                },
-                { s in
-                    // TODO: avoid NSString bridge?
-                    (UnsafeMutablePointer<Comparator>(s).memory.name as NSString).UTF8String
-                })
-            leveldb_options_set_comparator(opt, cmp)
-        }
-        // TODO: Filter policy
+//        if let comparatorObj = comparator {
+//            let state = UnsafeMutablePointer<Comparator>.allocate(capacity: 1)
+//            state.initialize(to: comparatorObj)
+//
+//            let cmp = leveldb_comparator_create(UnsafeMutableRawPointer(state),
+//                { s in
+//                    UnsafeMutablePointer<Comparator>(s).deinitialize()
+//                },
+//                { s, a, alen, b, blen in
+//                    let c = UnsafeMutablePointer<Comparator>(s).pointee
+//                    let aSlice = Slice(bytes: a, length: alen)
+//                    let bSlice = Slice(bytes: b, length: blen)
+//                    return CInt(c.compare(aSlice, bSlice).rawValue)
+//                },
+//                { s in
+//                    // TODO: avoid NSString bridge?
+//                    (UnsafeMutablePointer<Comparator>(s).pointee.name as NSString).utf8String
+//                })
+//            leveldb_options_set_comparator(opt, cmp)
+//        }
+//        // TODO: Filter policy
         
-        return opt;
+        return opt!;
     }
 }
 
@@ -89,22 +89,22 @@ public struct ReadOptions {
     public let verifyChecksums = false
     public let fillCache = true
     public let snapshot : Snapshot? = nil
-    func asCPointer() -> COpaquePointer {
+    func asCPointer() -> OpaquePointer {
         let opt = leveldb_readoptions_create();
         leveldb_readoptions_set_fill_cache(opt, fillCache ? 1 : 0)
         leveldb_readoptions_set_verify_checksums(opt, verifyChecksums ? 1 : 0)
         if snapshot != nil {
             leveldb_readoptions_set_snapshot(opt, snapshot!.pointer)
         }
-        return opt;
+        return opt!;
     }
 }
 
 public struct WriteOptions {
     public let sync = false
-    func asCPointer() -> COpaquePointer {
+    func asCPointer() -> OpaquePointer {
         let opt = leveldb_writeoptions_create();
         leveldb_writeoptions_set_sync(opt, sync ? 1 : 0)
-        return opt;
+        return opt!;
     }
 }

@@ -8,9 +8,9 @@ import Foundation
 
 class Iterator {
     
-    var pointer : COpaquePointer
+    var pointer : OpaquePointer
     
-    init(_ iterator : COpaquePointer) {
+    init(_ iterator : OpaquePointer) {
         pointer = iterator
     }
     
@@ -32,7 +32,7 @@ class Iterator {
         return isValid
     }
     
-    func seek(key : Slice) -> Bool {
+    func seek(_ key : Slice) -> Bool {
         leveldb_iter_seek(pointer, key.bytes, key.length)
         return isValid
     }
@@ -52,7 +52,7 @@ class Iterator {
             var length : Int = 0
             let bytes = leveldb_iter_key(pointer, &length)
             if length > 0 && bytes != nil {
-                return Slice(bytes: bytes, length: length)
+                return Slice(bytes: bytes!, length: length)
             } else {
                 return nil
             }
@@ -64,7 +64,7 @@ class Iterator {
             var length : Int = 0
             let bytes = leveldb_iter_value(pointer, &length)
             if length > 0 && bytes != nil {
-                return Slice(bytes: bytes, length: length)
+                return Slice(bytes: bytes!, length: length)
             } else {
                 return nil
             }
@@ -73,10 +73,10 @@ class Iterator {
     
     var error : String? {
         get {
-            var error = UnsafeMutablePointer<Int8>()
+            var error: UnsafeMutablePointer<Int8>? = nil
             leveldb_iter_get_error(pointer, &error)
             if error != nil {
-                return String.fromCString(error)!
+                return String(cString: error!)
             } else {
                 return nil
             }

@@ -1,1 +1,1 @@
-github "Typelift/SwiftCheck" "swift-develop" # need Swift 2 support
+github "Typelift/SwiftCheck"

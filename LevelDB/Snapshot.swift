@@ -6,8 +6,8 @@
 
 import Foundation
 
-public class Snapshot {
-    var pointer : COpaquePointer
+open class Snapshot {
+    var pointer : OpaquePointer?
     var db : Database
     
     init(_ db : Database) {

@@ -19,63 +19,63 @@ public struct Slice {
 extension Slice {
     
     /// Initialises a Slice from an NSData instance.
-    public init(data: NSData) {
-        self.init(bytes: UnsafePointer<Int8>(data.bytes), length: data.length)
+    public init(data: Data) {
+        self.init(bytes: (data as NSData).bytes.bindMemory(to: Int8.self, capacity: data.count), length: data.count)
     }
     
     /// Converts the Slice to an NSData instance, copying by default.
-    public func asData(copy copy: Bool = true) -> NSData {
+    public func asData(copy: Bool = true) -> Data {
         if copy {
-            return NSData(bytes: UnsafePointer<Void>(self.bytes), length: self.length)
+            return Data(bytes: self.bytes, count: self.length)
         } else {
-            return NSData(bytesNoCopy: UnsafeMutablePointer<Void>(self.bytes), length: self.length, freeWhenDone:true)
+            return Data(bytesNoCopy: UnsafeMutableRawPointer(mutating: self.bytes), count: self.length, deallocator: .free)
         }
     }
     
     /// Coverts the Slice to a KeyType instance.
     public func asKey<Key: KeyType>() -> Key {
-        return Key(bytes: UnsafePointer<Void>(self.bytes), length: self.length)
+        return Key(bytes: UnsafeRawPointer(self.bytes), count: self.length)
     }
 }
 
 public protocol KeyType {
-    init(bytes: UnsafePointer<Void>, length: Int)
-    func withSlice(@noescape f: (Slice) -> ())
-    func asData() -> NSData
+    init(bytes: UnsafeRawPointer, count: Int)
+    func withSlice(_ f: (Slice) -> ())
+    func asData() -> Data
 }
 
-extension NSData: KeyType {
-    public func withSlice(@noescape f: (Slice) -> ()) {
-        f(Slice(bytes: UnsafePointer<Int8>(self.bytes), length: self.length))
+extension Data: KeyType {
+    public func withSlice(_ f: (Slice) -> ()) {
+        f(Slice(bytes: (self as NSData).bytes.bindMemory(to: Int8.self, capacity: self.count), length: self.count))
     }
     
-    public func asData() -> NSData {
+    public func asData() -> Data {
         return self
     }
 }
 
 extension String: KeyType {
-    public init(bytes: UnsafePointer<Void>, length: Int) {
+    public init(bytes: UnsafeRawPointer, count: Int) {
         // append nul-terminator so we can use built-in UTF8 conversion 
-        let data = UnsafeMutablePointer<Int8>.alloc(length + 1)
-        data.assignFrom(UnsafeMutablePointer<Int8>(bytes), count: length)
-        (data + length).memory = 0
-        self = String.fromCString(data)!
+        let data = UnsafeMutablePointer<Int8>.allocate(capacity: count + 1)
+        data.assign(from: bytes.bindMemory(to: Int8.self, capacity: count), count: count)
+        (data + count).pointee = 0
+        self = String(cString: data)
     }
     
-    public func withSlice(@noescape f: (Slice) -> ()) {
+    public func withSlice(_ f: (Slice) -> ()) {
         self.withCString { (p : UnsafePointer<Int8>) -> () in
             var i = 0
-            while (p + i).memory != 0 { i++ }
+            while (p + i).pointee != 0 { i += 1 }
             f(Slice(bytes: UnsafePointer<Int8>(p), length: i))
         }
     }
     
-    public func asData() -> NSData {
+    public func asData() -> Data {
         return self.withCString { p in
             var i = 0
-            while (p + i).memory != 0 { i++ }
-            return NSData(bytes: p, length: i)
+            while (p + i).pointee != 0 { i += 1 }
+            return Data(bytes: p, count: i)
         }
     }
 }
