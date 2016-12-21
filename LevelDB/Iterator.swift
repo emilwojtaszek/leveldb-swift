@@ -32,8 +32,11 @@ final class Iterator {
         return isValid
     }
     
-    func seek(_ key: Slice) -> Bool {
-        leveldb_iter_seek(pointer, key.bytes, key.length)
+    func seek(_ key: SliceProtocol) -> Bool {
+        key.slice { (keyBytes, keyCount) in
+            leveldb_iter_seek(pointer, keyBytes, keyCount)
+        }
+        
         return isValid
     }
     
@@ -47,27 +50,21 @@ final class Iterator {
         return isValid
     }
     
-    var key: Slice? {
+    var key: SliceProtocol? {
         get {
             var length: Int = 0
             let bytes = leveldb_iter_key(pointer, &length)
-            if length > 0 && bytes != nil {
-                return Slice(bytes: bytes!, length: length)
-            } else {
-                return nil
-            }
+            guard length > 0 && bytes != nil else { return nil }
+            return Data(bytes: bytes!, count: length)
         }
     }
     
-    var value: Slice? {
+    var value: SliceProtocol? {
         get {
             var length: Int = 0
             let bytes = leveldb_iter_value(pointer, &length)
-            if length > 0 && bytes != nil {
-                return Slice(bytes: bytes!, length: length)
-            } else {
-                return nil
-            }
+            guard length > 0 && bytes != nil else { return nil }
+            return Data(bytes: bytes!, count: length)
         }
     }
     

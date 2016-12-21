@@ -7,8 +7,8 @@
 import Foundation
 
 // TODO: DRY the crap out of this & KeySequence
-public struct KeyValueSequence<Key: KeyType>: Sequence {
-    public typealias Iterator = AnyIterator<(Key, Data?)>
+public struct KeyValueSequence<Key: SliceProtocol>: Sequence {
+    public typealias Iterator = AnyIterator<(Data, Data?)>
     let db: Database
     let startKey: Key?
     let endKey: Key?
@@ -24,17 +24,16 @@ public struct KeyValueSequence<Key: KeyType>: Sequence {
     public func makeIterator() -> Iterator {
         let iterator = db.newIterator()
         if let key = startKey {
-            key.withSlice { k in
-                _ = iterator.seek(k)
-                if descending && iterator.isValid && db.compare(k, iterator.key!) == .orderedAscending {
-                    _ = iterator.prev()
-                }
+            _ = iterator.seek(key)
+            if descending && iterator.isValid && db.compare(key, iterator.key!) == .orderedAscending {
+                _ = iterator.prev()
             }
         } else if descending {
             _ = iterator.seekToLast()
         } else {
             _ = iterator.seekToFirst()
         }
+
         return AnyIterator({
             if !iterator.isValid {
                 return nil
@@ -43,16 +42,14 @@ public struct KeyValueSequence<Key: KeyType>: Sequence {
             let currentValue = iterator.value
             if let key = self.endKey {
                 var result = ComparisonResult.orderedSame
-                key.withSlice { k in
-                    result = self.db.compare(currentKey, k)
-                }
+                result = self.db.compare(currentKey, key)
                 if !self.descending && result == .orderedDescending
                     || self.descending && result == .orderedAscending {
                         return nil
                 }
             }
             if self.descending { _ = iterator.prev() } else { _ = iterator.next() }
-            return (currentKey.asKey(), currentValue?.asData())
+            return (currentKey.data(), currentValue?.data())
         })
     }
 }

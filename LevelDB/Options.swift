@@ -13,7 +13,7 @@ public enum CompressionType: Int {
 
 public protocol Comparator {
     var name: String { get }
-    func compare(_ a: Slice, _ b: Slice) -> ComparisonResult
+    func compare(_ a: SliceProtocol, _ b: SliceProtocol) -> ComparisonResult
 }
 
 public protocol Options {

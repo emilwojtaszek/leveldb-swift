@@ -6,8 +6,8 @@
 
 import Foundation
 
-public struct KeySequence<Key: KeyType>: Sequence {
-    public typealias Iterator = AnyIterator<Key>
+public struct KeySequence<Key: SliceProtocol>: Sequence {
+    public typealias Iterator = AnyIterator<Data>
     let db: Database
     let startKey: Key?
     let endKey: Key?
@@ -23,28 +23,25 @@ public struct KeySequence<Key: KeyType>: Sequence {
     public func makeIterator() -> Iterator {
         let iterator = db.newIterator()
         if let key = startKey {
-            key.withSlice { k in
-                _ = iterator.seek(k)
-                if descending && iterator.isValid && db.compare(k, iterator.key!) == .orderedAscending {
-                    _ = iterator.prev()
-                }
+            _ = iterator.seek(key)
+            if descending && iterator.isValid && db.compare(key, iterator.key!) == .orderedAscending {
+                _ = iterator.prev()
             }
         } else if descending {
             _ = iterator.seekToLast()
         } else {
             _ = iterator.seekToFirst()
         }
+
         return AnyIterator({
             if !iterator.isValid {
                 return nil
             }
             let currentSlice = iterator.key!
-            let currentKey = Key(bytes: currentSlice.bytes, count: currentSlice.length)
+            let currentKey = currentSlice.data()
             if let key = self.endKey {
                 var result = ComparisonResult.orderedSame
-                key.withSlice { k in
-                    result = self.db.compare(currentSlice, k)
-                }
+                result = self.db.compare(currentSlice, key)
                 if !self.descending && result == .orderedDescending
                     || self.descending && result == .orderedAscending {
                         return nil

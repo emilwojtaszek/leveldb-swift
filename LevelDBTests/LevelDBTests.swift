@@ -86,16 +86,16 @@ class LevelDBTests: XCTestCase {
         print("iterating all keys ascending")
         for key in db.keys() {
             index += 1
-            let keyName = String(format: "test%d", index)
+            let keyName = String(format: "test%d", index).data(using: .utf8)
             print(key)
             XCTAssertEqual(keyName, key)
         }
         XCTAssertEqual(index, 3)
         index = 1
         print("iterating all keys from test11 to test21 ascending")
-        for key in db.keys(from:"test11", to:"test21") {
+        for key in db.keys(from:"test11".data(using: .utf8), to:"test21".data(using: .utf8)) {
             index += 1
-            let keyName = "test\(index)"
+            let keyName = "test\(index)".data(using: .utf8)
             print(key)
             XCTAssertEqual(keyName, key)
         }
@@ -117,34 +117,33 @@ class LevelDBTests: XCTestCase {
             let keyName = "test\(index)"
             let valueString = String(data: value!, encoding: .utf8)
             print("\(key): \(valueString)")
-            XCTAssertEqual(keyName, key)
-            XCTAssertEqual(keyName, valueString)
+            XCTAssertEqual(keyName.data(using: .utf8), key)
+            XCTAssertEqual(keyName.data(using: .utf8), value)
         }
         XCTAssertEqual(index, 3)
     }
 
     func testKeySequenceDescending() {
         let db = createDb()!
-        let key1 = "test1"
-        let key2 = "test2"
-        let key3 = "test3"
-        try! db.put(key1, value: "test1".data(using: .utf8))
-        try! db.put(key2, value: "test2".data(using: .utf8))
-        try! db.put(key3, value: "test3".data(using: .utf8))
+        let key1 = "test1".data(using: .utf8)!
+        let key2 = "test2".data(using: .utf8)!
+        let key3 = "test3".data(using: .utf8)!
+        try! db.put(key1, value: key1)
+        try! db.put(key2, value: key2)
+        try! db.put(key3, value: key3)
         var index = 3
         print("iterating all keys descending")
-        for key: String in db.keys(descending:true) {
-            let keyName = "test\(index)"
-            print(key)
+        for key in db.keys(descending: true) {
+            let keyName = "test\(index)".data(using: .utf8)
             XCTAssertEqual(keyName, key)
             index -= 1
         }
+        
         XCTAssertEqual(index, 0)
         index = 2
         print("iterating all keys from test21 to test11 descending")
-        for key in db.keys(from:"test21", to:"test11", descending:true) {
-            let keyName = "test\(index)"
-            print(key)
+        for key in db.keys(from:"test21".data(using: .utf8), to:"test11".data(using: .utf8), descending:true) {
+            let keyName = "test\(index)".data(using: .utf8)!
             XCTAssertEqual(keyName, key)
             index -= 1
         }
@@ -161,20 +160,17 @@ class LevelDBTests: XCTestCase {
         let key1 = "test1".data(using: .utf8)!
         let key2 = "test2".data(using: .utf8)!
         let key3 = "test3".data(using: .utf8)!
-        try! db.put(key3, value: "test3".data(using: .utf8))
-        try! db.put(key2, value: "test2".data(using: .utf8))
-        try! db.put(key1, value: "test1".data(using: .utf8))
+        try! db.put(key3, value: key3)
+        try! db.put(key2, value: key2)
+        try! db.put(key1, value: key1)
         var index = 0
+
         print("iterating all keys & values ascending")
         for (key, value) in db.values() {
             index += 1
-            let keyName = "test\(index)"
-            let valueString = String(data: value!, encoding: .utf8)
-            print("\(key): \(valueString)")
-            XCTAssertEqual(keyName, key)
-            XCTAssertEqual(keyName, valueString)
+            XCTAssertEqual(key, value)
         }
         // TODO: Failing - there's something wrong with the custom comparator
-        //XCTAssertEqual(index, 3)*/
+        XCTAssertEqual(index, 3)
     }
 }
