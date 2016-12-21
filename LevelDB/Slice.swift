@@ -79,3 +79,38 @@ extension String: KeyType {
         }
     }
 }
+
+
+
+
+public protocol SliceProtocol {
+    func slice(_ f: (UnsafePointer<Int8>, Int) -> ())
+    func data() -> Data
+}
+
+extension Data: SliceProtocol {
+    public func slice(_ f: (UnsafePointer<Int8>, Int) -> ()) {
+        self.withUnsafeBytes {
+            return f($0, self.count)
+        }
+    }
+
+    public func data() -> Data {
+        return self
+    }
+
+}
+
+extension String: SliceProtocol {
+    
+    public func slice(_ f: (UnsafePointer<Int8>, Int) -> ()) {
+        let data = self.data()
+        data.withUnsafeBytes {
+            return f($0, data.count)
+        }
+    }
+    
+    public func data() -> Data {
+        return self.data(using: .utf8)!
+    }
+}
