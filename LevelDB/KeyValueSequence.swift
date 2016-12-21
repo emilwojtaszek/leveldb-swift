@@ -7,14 +7,14 @@
 import Foundation
 
 // TODO: DRY the crap out of this & KeySequence
-public struct KeyValueSequence<Key: KeyType> : Sequence {
+public struct KeyValueSequence<Key: KeyType>: Sequence {
     public typealias Iterator = AnyIterator<(Key, Data?)>
-    let db : Database
-    let startKey : Key?
-    let endKey : Key?
-    let descending : Bool
+    let db: Database
+    let startKey: Key?
+    let endKey: Key?
+    let descending: Bool
     
-    init(db : Database, startKey : Key? = nil, endKey : Key? = nil, descending : Bool = false) {
+    init(db: Database, startKey: Key? = nil, endKey: Key? = nil, descending: Bool = false) {
         self.db = db
         self.startKey = startKey
         self.endKey = endKey

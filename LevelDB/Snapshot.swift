@@ -7,10 +7,10 @@
 import Foundation
 
 open class Snapshot {
-    var pointer : OpaquePointer?
-    var db : Database
+    var pointer: OpaquePointer?
+    var db: Database
     
-    init(_ db : Database) {
+    init(_ db: Database) {
         self.db = db
         pointer = leveldb_create_snapshot(db.pointer);
     }

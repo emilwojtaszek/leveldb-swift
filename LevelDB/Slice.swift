@@ -64,7 +64,7 @@ extension String: KeyType {
     }
     
     public func withSlice(_ f: (Slice) -> ()) {
-        self.withCString { (p : UnsafePointer<Int8>) -> () in
+        self.withCString { (p: UnsafePointer<Int8>) -> () in
             var i = 0
             while (p + i).pointee != 0 { i += 1 }
             f(Slice(bytes: UnsafePointer<Int8>(p), length: i))

@@ -7,7 +7,7 @@
 import Foundation
 
 open class WriteBatch {
-    var pointer : OpaquePointer
+    let pointer: OpaquePointer
     
     public init() {
         pointer = leveldb_writebatch_create()
@@ -17,7 +17,7 @@ open class WriteBatch {
         leveldb_writebatch_destroy(pointer)
     }
     
-    open func put(_ key : KeyType, value : Data?) {
+    open func put(_ key: KeyType, value: Data?) {
         key.withSlice { k in
             if let value = value.map({ Slice(data: $0) }) {
                 leveldb_writebatch_put(pointer, k.bytes, k.length, value.bytes, value.length)
@@ -27,7 +27,7 @@ open class WriteBatch {
         }
     }
     
-    open func delete(_ key : KeyType) {
+    open func delete(_ key: KeyType) {
         key.withSlice { k in
             leveldb_writebatch_delete(pointer, k.bytes, k.length)
         }

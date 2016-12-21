@@ -6,58 +6,62 @@
 
 import Foundation
 
-public enum CompressionType : Int {
-    case noCompression = 0
-    case snappyCompression
+public enum CompressionType: Int {
+    case none = 0
+    case snappy
 }
 
 public protocol Comparator {
-    var name : String { get }
-    func compare(_ a : Slice, _ b : Slice) -> ComparisonResult
+    var name: String { get }
+    func compare(_ a: Slice, _ b: Slice) -> ComparisonResult
 }
 
-public struct Options {
-    public let createIfMissing : Bool
-    public let errorIfExists : Bool
-    public let paranoidChecks  : Bool
-    public let writeBufferSize : Int
-    public let maxOpenFiles : Int
-    public let blockSize : Int
-    public let blockRestartInterval : Int
-    public let compression : CompressionType
-    public let comparator : Comparator?
+public protocol Options {
     
-    public init(createIfMissing : Bool = false,
-        errorIfExists : Bool = false,
-        paranoidChecks : Bool = false,
-        writeBufferSize : Int = 1024 * 1024 * 4, // 4MB default
-        maxOpenFiles : Int = 1000,
-        blockSize : Int = 1024 * 4, // 4KB default
-        blockRestartInterval : Int = 16,
-        compression : CompressionType = CompressionType.snappyCompression,
-        comparator : Comparator? = nil) {
-            
-        self.createIfMissing = createIfMissing
-        self.errorIfExists = errorIfExists
-        self.paranoidChecks = paranoidChecks
-        self.writeBufferSize = writeBufferSize
-        self.maxOpenFiles = maxOpenFiles
-        self.blockSize = blockSize
-        self.blockRestartInterval = blockRestartInterval
-        self.compression = compression
-        self.comparator = comparator
+    /// Get initialized pointer to options C struct
+    ///
+    /// - Returns: Pointer to options struct
+    func pointer() -> OpaquePointer
+}
+
+final public class FileOptions: Options {
+    
+    /// Private storage of C struct of options
+    private let options: OpaquePointer
+
+    /// Options properties
+    var createIfMissing: Bool = false
+    var errorIfExists: Bool = false
+    var paranoidChecks: Bool = false
+    var writeBufferSize: Int = 1024 * 1024 * 4 // 4MB default
+    var maxOpenFiles: Int = 1000
+    var blockSize: Int = 1024 * 4 // 4KB default
+    var blockRestartInterval: Int = 16
+    var compression: CompressionType = CompressionType.snappy
+    var comparator: Comparator?
+    
+    ///
+    init() {
+        self.options = leveldb_options_create();
     }
     
-    func asCPointer() -> OpaquePointer {
-        let opt = leveldb_options_create();
-        leveldb_options_set_block_restart_interval(opt, Int32(blockRestartInterval))
-        leveldb_options_set_block_size(opt, Int(blockSize))
-        leveldb_options_set_compression(opt, Int32(compression.rawValue))
-        leveldb_options_set_create_if_missing(opt, createIfMissing ? 1 : 0)
-        leveldb_options_set_error_if_exists(opt, errorIfExists ? 1 : 0)
-        leveldb_options_set_max_open_files(opt, Int32(maxOpenFiles));
-        leveldb_options_set_paranoid_checks(opt, paranoidChecks ? 1 : 0)
-        leveldb_options_set_write_buffer_size(opt, Int(writeBufferSize))
+    ///
+    deinit {
+        leveldb_options_destroy(options)
+    }
+    
+    ///
+    public func pointer() -> OpaquePointer {
+        leveldb_options_set_block_restart_interval(options, Int32(blockRestartInterval))
+        leveldb_options_set_block_size(options, Int(blockSize))
+        leveldb_options_set_compression(options, Int32(compression.rawValue))
+        leveldb_options_set_create_if_missing(options, createIfMissing ? 1: 0)
+        leveldb_options_set_error_if_exists(options, errorIfExists ? 1: 0)
+        leveldb_options_set_max_open_files(options, Int32(maxOpenFiles));
+        leveldb_options_set_paranoid_checks(options, paranoidChecks ? 1: 0)
+        leveldb_options_set_write_buffer_size(options, Int(writeBufferSize))
+        
+        
         
 //        if let comparatorObj = comparator {
 //            let state = UnsafeMutablePointer<Comparator>.allocate(capacity: 1)
@@ -81,30 +85,61 @@ public struct Options {
 //        }
 //        // TODO: Filter policy
         
-        return opt!;
+        return self.options;
     }
 }
 
-public struct ReadOptions {
-    public let verifyChecksums = false
-    public let fillCache = true
-    public let snapshot : Snapshot? = nil
-    func asCPointer() -> OpaquePointer {
-        let opt = leveldb_readoptions_create();
-        leveldb_readoptions_set_fill_cache(opt, fillCache ? 1 : 0)
-        leveldb_readoptions_set_verify_checksums(opt, verifyChecksums ? 1 : 0)
+final public class ReadOptions: Options {
+    /// Private storage of C struct of options
+    private let options: OpaquePointer
+
+    /// Options properties
+    var verifyChecksums = false
+    var fillCache = true
+    var snapshot: Snapshot?
+    
+    ///
+    init() {
+        self.options = leveldb_readoptions_create();
+    }
+    
+    ///
+    deinit {
+        leveldb_readoptions_destroy(options)
+    }
+    
+    ///
+    public func pointer() -> OpaquePointer {
+        leveldb_readoptions_set_fill_cache(options, fillCache ? 1: 0)
+        leveldb_readoptions_set_verify_checksums(options, verifyChecksums ? 1: 0)
         if snapshot != nil {
-            leveldb_readoptions_set_snapshot(opt, snapshot!.pointer)
+            leveldb_readoptions_set_snapshot(options, snapshot!.pointer)
         }
-        return opt!;
+
+        return options;
     }
 }
 
-public struct WriteOptions {
-    public let sync = false
-    func asCPointer() -> OpaquePointer {
-        let opt = leveldb_writeoptions_create();
-        leveldb_writeoptions_set_sync(opt, sync ? 1 : 0)
-        return opt!;
+final public class WriteOptions: Options {
+    /// Private storage of C struct of options
+    private let options: OpaquePointer
+
+    /// Options properties
+    var sync = false
+    
+    ///
+    init() {
+        self.options = leveldb_writeoptions_create();
+    }
+    
+    ///
+    deinit {
+        leveldb_writeoptions_destroy(options)
+    }
+    
+    ///
+    public func pointer() -> OpaquePointer {
+        leveldb_writeoptions_set_sync(options, sync ? 1: 0)
+        return options;
     }
 }
