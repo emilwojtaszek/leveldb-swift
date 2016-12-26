@@ -32,11 +32,11 @@ class LevelDBTests: XCTestCase {
         } catch _ { /* swallow */ }
         
         if let opt = options {
-            return try! Database.create(directory, options: opt)
+            return try! Database.create(path: directory, options: opt)
         } else {
             let opt = FileOptions()
             opt.createIfMissing = true
-            return try! Database.create(directory, options: opt)
+            return try! Database.create(path: directory, options: opt)
         }
     }
     

@@ -32,38 +32,50 @@ public final class Database {
     /**
     :param directory  The directory for the database. This should already exist?
     */
-    public class func create(_ directory: String, options: FileOptions = FileOptions()) throws -> Database {
-        let cdir = (directory as NSString).utf8String
+    public class func create(path: String, options: FileOptions = FileOptions()) throws -> Database {
         var error: UnsafeMutablePointer<Int8>? = nil
 
-        // open database
-        if let dbPointer = leveldb_open(options.pointer(), cdir, &error) {
-            return Database(dbPointer, comparator: options.comparator)
-        } else {
+        // open
+        let dbPointer = path.utf8CString.withUnsafeBufferPointer {
+            return leveldb_open(options.pointer(), $0.baseAddress!, &error)
+        }
+
+        // check if error
+        guard let pointer = dbPointer else {
             if let error = error {
                 throw LevelDBError.openError(message: String(cString: error))
             }
+            
             throw LevelDBError.undefinedError
         }
+
+        //
+        return Database(pointer, comparator: options.comparator)
     }
     
-    public class func destroy(_ directory: String, options: FileOptions = FileOptions()) throws {
-        let cdir = (directory as NSString).utf8String
+    public class func destroy(path: String, options: FileOptions = FileOptions()) throws {
         var error: UnsafeMutablePointer<Int8>? = nil
-
+        
         // close database
-        leveldb_destroy_db(options.pointer(), cdir, &error)
+        path.utf8CString.withUnsafeBufferPointer {
+            leveldb_destroy_db(options.pointer(), $0.baseAddress!, &error)
+        }
+
+        //
         if let error = error {
             throw LevelDBError.destroyError(message: String(cString: error))
         }
     }
 
-    public class func repair(_ directory: String, options: FileOptions = FileOptions()) throws {
-        let cdir = (directory as NSString).utf8String
+    public class func repair(path: String, options: FileOptions = FileOptions()) throws {
         var error: UnsafeMutablePointer<Int8>? = nil
         
         // rapair
-        leveldb_repair_db(options.pointer(), cdir, &error)
+        path.utf8CString.withUnsafeBufferPointer {
+            leveldb_repair_db(options.pointer(), $0.baseAddress!, &error)
+        }
+
+        //
         if let error = error {
             throw LevelDBError.repairError(message: String(cString: error))
         }
@@ -147,26 +159,10 @@ public final class Database {
         }
     }
     
-//    public func keys() -> KeySequence<String> {
-//        return KeySequence<String>(db: self, startKey: nil, endKey: nil, descending: false)
-//    }
-    
-//    public func keys<Key: Slice>(from: Key? = nil, to: Key? = nil, descending: Bool = false) -> KeySequence<Key> {
-//        return KeySequence<Key>(db: self, startKey: from, endKey: to, descending: descending)
-//    }
-
     public func keys(from: Data? = nil, to: Data? = nil, descending: Bool = false) -> KeySequence {
         let query = SequenceQuery(db: self, startKey: from, endKey: to, descending: descending)
         return KeySequence(query: query)
     }
-
-//    public func values() -> KeyValueSequence<String> {
-//        return KeyValueSequence<String>(db: self, startKey: nil, endKey: nil, descending: false)
-//    }
-
-//    public func values<Key: Slice>(from: Key? = nil, to: Key? = nil, descending: Bool = false) -> KeyValueSequence<Key> {
-//        return KeyValueSequence<Key>(db: self, startKey: from, endKey: to, descending: descending)
-//    }
     
     public func values(from: Data? = nil, to: Data? = nil, descending: Bool = false) -> KeyValueSequence {
         let query = SequenceQuery(db: self, startKey: from, endKey: to, descending: descending)
