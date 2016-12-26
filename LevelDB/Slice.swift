@@ -6,15 +6,15 @@
 
 import Foundation
 
-public protocol SliceProtocol {
+public protocol Slice {
     func slice<ResultType>(_ f: (UnsafePointer<Int8>, Int) -> ResultType) -> ResultType
     func data() -> Data
 }
 
-extension Data: SliceProtocol {
+extension Data: Slice {
     public func slice<ResultType>(_ f: (UnsafePointer<Int8>, Int) -> ResultType) -> ResultType {
         return self.withUnsafeBytes {
-            return f($0, self.count)
+            f($0, self.count)
         }
     }
 
@@ -23,15 +23,16 @@ extension Data: SliceProtocol {
     }
 }
 
-extension String: SliceProtocol {
+extension String: Slice {
     public func slice<ResultType>(_ f: (UnsafePointer<Int8>, Int) -> ResultType) -> ResultType {
-        let data = self.data()
-        return data.withUnsafeBytes {
-            return f($0, data.count)
+        return self.utf8CString.withUnsafeBufferPointer {
+            f($0.baseAddress!, Int(strlen($0.baseAddress!)))
         }
     }
     
     public func data() -> Data {
-        return self.data(using: .utf8)!
+        return self.utf8CString.withUnsafeBufferPointer {
+            return Data(buffer: $0)
+        }
     }
 }

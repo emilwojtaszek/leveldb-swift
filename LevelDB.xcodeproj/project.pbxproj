@@ -7,8 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20258DB01E1198150046CBC5 /* SequenceQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20258DAE1E107CDE0046CBC5 /* SequenceQuery.swift */; };
+		20258DB11E1198170046CBC5 /* Slice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22891BB319A8C234003EF513 /* Slice.swift */; };
+		20258DB21E1198170046CBC5 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275915C19532794009080EB /* Database.swift */; };
+		20258DB31E1198170046CBC5 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2240E47F195F007400B009EE /* Options.swift */; };
+		20258DB41E1198170046CBC5 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22881A0F1969406300EC031D /* Snapshot.swift */; };
+		20258DB51E1198170046CBC5 /* WriteBatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA4A0B19697F2F00772430 /* WriteBatch.swift */; };
+		20258DB61E1198170046CBC5 /* Iterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22881A1119694AF900EC031D /* Iterator.swift */; };
+		20258DB71E1198170046CBC5 /* KeySequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2235BDF0199123BD0008DA7E /* KeySequence.swift */; };
+		20258DB81E1198170046CBC5 /* KeyValueSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E9BA011993BB16009EA25F /* KeyValueSequence.swift */; };
+		20258DB91E1198170046CBC5 /* SequenceQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20258DAE1E107CDE0046CBC5 /* SequenceQuery.swift */; };
 		222F06F819910942000BA689 /* LevelDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 2275902219531FBA009080EB /* LevelDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2235BDF1199123BD0008DA7E /* KeySequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2235BDF0199123BD0008DA7E /* KeySequence.swift */; };
 		2235BDF2199123BD0008DA7E /* KeySequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2235BDF0199123BD0008DA7E /* KeySequence.swift */; };
 		224D54C61A1E2ECE00BFF130 /* Slice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22891BB319A8C234003EF513 /* Slice.swift */; };
 		2253E1901971797500DCA0F0 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275915C19532794009080EB /* Database.swift */; };
@@ -96,18 +105,11 @@
 		227B0939198297AB009C3BC5 /* status.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2253E0FE19701FC500DCA0F0 /* status.cc */; settings = {COMPILER_FLAGS = "-w"; }; };
 		227B093B198298A1009C3BC5 /* LevelDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275902F19531FBB009080EB /* LevelDBTests.swift */; };
 		227B093F198298EE009C3BC5 /* LevelDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275902F19531FBB009080EB /* LevelDBTests.swift */; };
-		22891BB419A8C234003EF513 /* Slice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22891BB319A8C234003EF513 /* Slice.swift */; };
 		22C36A57197D4D2000710563 /* LevelDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 2275902219531FBA009080EB /* LevelDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		22C36A5D197D50D700710563 /* WriteBatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BA4A0B19697F2F00772430 /* WriteBatch.swift */; };
-		22C36A5E197D50DE00710563 /* Iterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22881A1119694AF900EC031D /* Iterator.swift */; };
-		22C36A5F197D50E100710563 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22881A0F1969406300EC031D /* Snapshot.swift */; };
-		22C36A60197D50E400710563 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2240E47F195F007400B009EE /* Options.swift */; };
-		22C36A61197D50E900710563 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275915C19532794009080EB /* Database.swift */; };
 		22E499E21B4564D700E4E86A /* dumpfile.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22E499E01B4564CF00E4E86A /* dumpfile.cc */; };
 		22E499E31B4564D800E4E86A /* dumpfile.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22E499E01B4564CF00E4E86A /* dumpfile.cc */; };
 		22E499E51B45650D00E4E86A /* dumpfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 22E499E41B45650D00E4E86A /* dumpfile.h */; };
 		22E499E61B45650D00E4E86A /* dumpfile.h in Headers */ = {isa = PBXBuildFile; fileRef = 22E499E41B45650D00E4E86A /* dumpfile.h */; };
-		22E9BA021993BB16009EA25F /* KeyValueSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E9BA011993BB16009EA25F /* KeyValueSequence.swift */; };
 		22E9BA031993BB16009EA25F /* KeyValueSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E9BA011993BB16009EA25F /* KeyValueSequence.swift */; };
 		22EB9F2D198D035300A7DF7B /* c.h in Headers */ = {isa = PBXBuildFile; fileRef = 2253E09819701FC500DCA0F0 /* c.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22EB9F2F198D13FB00A7DF7B /* TestComparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EB9F2E198D13FB00A7DF7B /* TestComparator.swift */; };
@@ -227,6 +229,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		20258DAE1E107CDE0046CBC5 /* SequenceQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SequenceQuery.swift; sourceTree = "<group>"; };
 		2235BDF0199123BD0008DA7E /* KeySequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeySequence.swift; sourceTree = "<group>"; };
 		2240E47F195F007400B009EE /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		2253E04A19701FC500DCA0F0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -711,10 +714,11 @@
 				2275915C19532794009080EB /* Database.swift */,
 				2240E47F195F007400B009EE /* Options.swift */,
 				22881A0F1969406300EC031D /* Snapshot.swift */,
+				22BA4A0B19697F2F00772430 /* WriteBatch.swift */,
 				22881A1119694AF900EC031D /* Iterator.swift */,
 				2235BDF0199123BD0008DA7E /* KeySequence.swift */,
 				22E9BA011993BB16009EA25F /* KeyValueSequence.swift */,
-				22BA4A0B19697F2F00772430 /* WriteBatch.swift */,
+				20258DAE1E107CDE0046CBC5 /* SequenceQuery.swift */,
 				2275902019531FBA009080EB /* Supporting Files */,
 			);
 			path = LevelDB;
@@ -973,6 +977,7 @@
 				227B09201982976A009C3BC5 /* write_batch.cc in Sources */,
 				227B092119829774009C3BC5 /* memenv.cc in Sources */,
 				227B09221982977C009C3BC5 /* port_posix.cc in Sources */,
+				20258DB01E1198150046CBC5 /* SequenceQuery.swift in Sources */,
 				227B092319829791009C3BC5 /* block.cc in Sources */,
 				227B092419829791009C3BC5 /* block_builder.cc in Sources */,
 				227B092519829791009C3BC5 /* filter_block.cc in Sources */,
@@ -1013,15 +1018,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22E9BA021993BB16009EA25F /* KeyValueSequence.swift in Sources */,
-				22C36A61197D50E900710563 /* Database.swift in Sources */,
-				22C36A60197D50E400710563 /* Options.swift in Sources */,
-				22C36A5D197D50D700710563 /* WriteBatch.swift in Sources */,
-				22C36A5F197D50E100710563 /* Snapshot.swift in Sources */,
-				22C36A5E197D50DE00710563 /* Iterator.swift in Sources */,
-				22891BB419A8C234003EF513 /* Slice.swift in Sources */,
-				2235BDF1199123BD0008DA7E /* KeySequence.swift in Sources */,
 				227B08E519828E34009C3BC5 /* builder.cc in Sources */,
+				20258DB61E1198170046CBC5 /* Iterator.swift in Sources */,
 				227B08E619828E38009C3BC5 /* c.cc in Sources */,
 				227B08E719828E47009C3BC5 /* db_impl.cc in Sources */,
 				227B08E819828E4D009C3BC5 /* db_iter.cc in Sources */,
@@ -1033,13 +1031,19 @@
 				22E499E21B4564D700E4E86A /* dumpfile.cc in Sources */,
 				227B08EE19828E7B009C3BC5 /* repair.cc in Sources */,
 				227B08EF19828E82009C3BC5 /* table_cache.cc in Sources */,
+				20258DB21E1198170046CBC5 /* Database.swift in Sources */,
+				20258DB41E1198170046CBC5 /* Snapshot.swift in Sources */,
 				227B08F019828E87009C3BC5 /* version_edit.cc in Sources */,
 				227B08F119828E8B009C3BC5 /* version_set.cc in Sources */,
 				227B08F219828E8F009C3BC5 /* write_batch.cc in Sources */,
 				227B08F319828E9B009C3BC5 /* memenv.cc in Sources */,
+				20258DB71E1198170046CBC5 /* KeySequence.swift in Sources */,
+				20258DB31E1198170046CBC5 /* Options.swift in Sources */,
 				227B08F419828EAB009C3BC5 /* port_posix.cc in Sources */,
 				227B08F519828EB7009C3BC5 /* block.cc in Sources */,
+				20258DB51E1198170046CBC5 /* WriteBatch.swift in Sources */,
 				227B08F619828EBD009C3BC5 /* block_builder.cc in Sources */,
+				20258DB91E1198170046CBC5 /* SequenceQuery.swift in Sources */,
 				227B08F719828EC1009C3BC5 /* filter_block.cc in Sources */,
 				227B08F919828EC9009C3BC5 /* format.cc in Sources */,
 				227B08FA19828ECD009C3BC5 /* iterator.cc in Sources */,
@@ -1047,6 +1051,7 @@
 				227B08FC19828ED6009C3BC5 /* table.cc in Sources */,
 				227B08FD19828EDA009C3BC5 /* table_builder.cc in Sources */,
 				227B08FE19828EE3009C3BC5 /* two_level_iterator.cc in Sources */,
+				20258DB81E1198170046CBC5 /* KeyValueSequence.swift in Sources */,
 				227B08FF19828EEC009C3BC5 /* arena.cc in Sources */,
 				227B090019828EF1009C3BC5 /* bloom.cc in Sources */,
 				227B090119828EF5009C3BC5 /* cache.cc in Sources */,
@@ -1056,6 +1061,7 @@
 				227B090519828F06009C3BC5 /* env.cc in Sources */,
 				227B090719828F24009C3BC5 /* env_posix.cc in Sources */,
 				227B090819828F28009C3BC5 /* filter_policy.cc in Sources */,
+				20258DB11E1198170046CBC5 /* Slice.swift in Sources */,
 				227B090919828F2B009C3BC5 /* hash.cc in Sources */,
 				227B090A19828F2E009C3BC5 /* histogram.cc in Sources */,
 				227B090B19828F3E009C3BC5 /* logging.cc in Sources */,
@@ -1415,6 +1421,7 @@
 		22C36A3B197D4AB800710563 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1441,6 +1448,7 @@
 		22C36A3C197D4AB800710563 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (

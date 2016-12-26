@@ -6,63 +6,75 @@
 
 import Foundation
 
-final class Iterator {
-    
-    var pointer: OpaquePointer
-    
-    init(_ iterator: OpaquePointer) {
-        pointer = iterator
+final public class DBIterator {
+    private let db_pointer: OpaquePointer
+
+    init(query: SequenceQuery) {
+        db_pointer = leveldb_create_iterator(query.db.pointer!, query.options.pointer())
+        
+        if let key = query.startKey {
+            self.seek(key)
+            if query.descending && self.isValid && query.db.compare(key, self.key!) == .orderedAscending {
+                self.prevRow()
+            }
+        } else if query.descending {
+            self.seekToLast()
+        } else {
+            self.seekToFirst()
+        }
     }
-    
+
     deinit {
-        leveldb_iter_destroy(pointer)
+        leveldb_iter_destroy(db_pointer)
     }
         
     var isValid: Bool {
-        get { return (leveldb_iter_valid(pointer) != 0) }
+        get {
+            return leveldb_iter_valid(db_pointer) != 0
+        }
     }
     
-    func seekToFirst() -> Bool {
-        leveldb_iter_seek_to_first(pointer);
+    @discardableResult func seekToFirst() -> Bool {
+        leveldb_iter_seek_to_first(db_pointer);
         return isValid
     }
     
-    func seekToLast() -> Bool {
-        leveldb_iter_seek_to_last(pointer);
+    @discardableResult func seekToLast() -> Bool {
+        leveldb_iter_seek_to_last(db_pointer);
         return isValid
     }
     
-    func seek(_ key: SliceProtocol) -> Bool {
+    @discardableResult func seek(_ key: Slice) -> Bool {
         key.slice { (keyBytes, keyCount) in
-            leveldb_iter_seek(pointer, keyBytes, keyCount)
+            leveldb_iter_seek(db_pointer, keyBytes, keyCount)
         }
         
         return isValid
     }
     
-    func next() -> Bool {
-        leveldb_iter_next(pointer)
+    @discardableResult func nextRow() -> Bool {
+        leveldb_iter_next(db_pointer)
         return isValid
     }
     
-    func prev() -> Bool {
-        leveldb_iter_prev(pointer)
+    @discardableResult func prevRow() -> Bool {
+        leveldb_iter_prev(db_pointer)
         return isValid
     }
     
-    var key: SliceProtocol? {
+    var key: Data? {
         get {
             var length: Int = 0
-            let bytes = leveldb_iter_key(pointer, &length)
+            let bytes = leveldb_iter_key(db_pointer, &length)
             guard length > 0 && bytes != nil else { return nil }
             return Data(bytes: bytes!, count: length)
         }
     }
     
-    var value: SliceProtocol? {
+    var value: Data? {
         get {
             var length: Int = 0
-            let bytes = leveldb_iter_value(pointer, &length)
+            let bytes = leveldb_iter_value(db_pointer, &length)
             guard length > 0 && bytes != nil else { return nil }
             return Data(bytes: bytes!, count: length)
         }
@@ -71,7 +83,7 @@ final class Iterator {
     var error: String? {
         get {
             var error: UnsafeMutablePointer<Int8>? = nil
-            leveldb_iter_get_error(pointer, &error)
+            leveldb_iter_get_error(db_pointer, &error)
             if error != nil {
                 return String(cString: error!)
             } else {

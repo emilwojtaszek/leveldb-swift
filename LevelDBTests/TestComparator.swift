@@ -14,7 +14,7 @@ class TestComparator : LevelDB.Comparator {
         }
     }
     
-    func compare(_ a : LevelDB.SliceProtocol, _ b : LevelDB.SliceProtocol) -> ComparisonResult {
+    func compare(_ a : LevelDB.Slice, _ b : LevelDB.Slice) -> ComparisonResult {
         let string1 = String(data: a.data(), encoding: .utf8)!
         let string2 = String(data: b.data(), encoding: .utf8)!
         return string1.compare(string2)

@@ -17,7 +17,7 @@ open class WriteBatch {
         leveldb_writebatch_destroy(pointer)
     }
     
-    open func put(_ key: SliceProtocol, value: Data?) {
+    open func put(_ key: Slice, value: Data?) {
         key.slice { (keyBytes, keyCount) in
             if let value = value {
                 value.slice  { (valueBytes, valueCount) in
@@ -29,7 +29,7 @@ open class WriteBatch {
         }
     }
     
-    open func delete(_ key: SliceProtocol) {
+    open func delete(_ key: Slice) {
         key.slice { (keyBytes, keyCount) in
             leveldb_writebatch_delete(pointer, keyBytes, keyCount)
         }

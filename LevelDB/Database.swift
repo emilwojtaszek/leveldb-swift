@@ -19,8 +19,8 @@ public enum LevelDBError: Error {
 There should only be one instance created for a specific directory.
 */
 public final class Database {
-    var pointer: OpaquePointer?;
-    let comparator: Comparator?;
+    var pointer: OpaquePointer?
+    let comparator: Comparator
     
     public class var majorVersion: Int {
         get { return Int(leveldb_major_version()) }
@@ -69,7 +69,7 @@ public final class Database {
         }
     }
 
-    init(_ dbPointer: OpaquePointer, comparator: Comparator? = nil) {
+    init(_ dbPointer: OpaquePointer, comparator: Comparator = DefaultComparator()) {
         self.pointer = dbPointer
         self.comparator = comparator
     }
@@ -80,7 +80,7 @@ public final class Database {
         }
     }
     
-    public func get(_ key: SliceProtocol, options: ReadOptions = ReadOptions()) throws -> Data? {
+    public func get(_ key: Slice, options: ReadOptions = ReadOptions()) throws -> Data? {
         var valueLength = 0
         var error: UnsafeMutablePointer<Int8>? = nil
         var value: UnsafeMutablePointer<Int8>? = nil
@@ -103,7 +103,7 @@ public final class Database {
         return Data(bytes: value!, count: valueLength)
     }
     
-    public func put(_ key: SliceProtocol, value: Data?, options: WriteOptions = WriteOptions()) throws {
+    public func put(_ key: Slice, value: Data?, options: WriteOptions = WriteOptions()) throws {
         var error: UnsafeMutablePointer<Int8>? = nil
 
         //
@@ -123,7 +123,7 @@ public final class Database {
         }
     }
     
-    public func delete(_ key: SliceProtocol, options: WriteOptions = WriteOptions()) throws {
+    public func delete(_ key: Slice, options: WriteOptions = WriteOptions()) throws {
         var error: UnsafeMutablePointer<Int8>? = nil
         
         //
@@ -147,35 +147,30 @@ public final class Database {
         }
     }
     
-    func newIterator(_ options: ReadOptions = ReadOptions()) -> Iterator {
-        
-        //
-        let iterator = leveldb_create_iterator(pointer, options.pointer())
-        return Iterator(iterator!)
-    }
-    
 //    public func keys() -> KeySequence<String> {
 //        return KeySequence<String>(db: self, startKey: nil, endKey: nil, descending: false)
 //    }
     
-//    public func keys<Key: SliceProtocol>(from: Key? = nil, to: Key? = nil, descending: Bool = false) -> KeySequence<Key> {
+//    public func keys<Key: Slice>(from: Key? = nil, to: Key? = nil, descending: Bool = false) -> KeySequence<Key> {
 //        return KeySequence<Key>(db: self, startKey: from, endKey: to, descending: descending)
 //    }
 
-    public func keys(from: Data? = nil, to: Data? = nil, descending: Bool = false) -> KeySequence<Data> {
-        return KeySequence<Data>(db: self, startKey: from, endKey: to, descending: descending)
+    public func keys(from: Data? = nil, to: Data? = nil, descending: Bool = false) -> KeySequence {
+        let query = SequenceQuery(db: self, startKey: from, endKey: to, descending: descending)
+        return KeySequence(query: query)
     }
 
 //    public func values() -> KeyValueSequence<String> {
 //        return KeyValueSequence<String>(db: self, startKey: nil, endKey: nil, descending: false)
 //    }
 
-//    public func values<Key: SliceProtocol>(from: Key? = nil, to: Key? = nil, descending: Bool = false) -> KeyValueSequence<Key> {
+//    public func values<Key: Slice>(from: Key? = nil, to: Key? = nil, descending: Bool = false) -> KeyValueSequence<Key> {
 //        return KeyValueSequence<Key>(db: self, startKey: from, endKey: to, descending: descending)
 //    }
     
-    public func values(from: Data? = nil, to: Data? = nil, descending: Bool = false) -> KeyValueSequence<Data> {
-        return KeyValueSequence<Data>(db: self, startKey: from, endKey: to, descending: descending)
+    public func values(from: Data? = nil, to: Data? = nil, descending: Bool = false) -> KeyValueSequence {
+        let query = SequenceQuery(db: self, startKey: from, endKey: to, descending: descending)
+        return KeyValueSequence(query: query)
     }
 
     public func getSnapshot() -> Snapshot {
@@ -183,43 +178,7 @@ public final class Database {
     }
     
     /// Internal compare designed to be used for key bounds checking during iteration.
-    func compare(_ a: SliceProtocol, _ b: SliceProtocol) -> ComparisonResult {
-        if let comparator = self.comparator {
-            return comparator.compare(a, b)
-        } else {
-
-            // compare memory
-            return a.slice { (aBytes: UnsafePointer<Int8>, aCount: Int) in
-                return b.slice { (bBytes: UnsafePointer<Int8>, bCount: Int) in
-                    var cmp = memcmp(aBytes, bBytes, min(aCount, bCount))
-                    
-                    if (cmp == 0) {
-                        cmp = Int32(aCount - bCount)
-                    }
-                    
-                    return ComparisonResult(rawValue: (cmp < 0) ? -1 : (cmp > 0) ? 1 : 0)!
-                }
-            }
-        }
-    }
-    
-    /// A Swift implementation of the default LevelDB BytewiseComparator. Note this is not actually passed
-    /// to LevelDB, it's only used where needed from Swift code
-    final class DefaultComparator: Comparator {
-        var name: String { get { return "leveldb.BytewiseComparator" } }
-        func compare(_ a: SliceProtocol, _ b: SliceProtocol) -> ComparisonResult {
-            // compare memory
-            return a.slice { (aBytes: UnsafePointer<Int8>, aCount: Int) in
-                return b.slice { (bBytes: UnsafePointer<Int8>, bCount: Int) in
-                    var cmp = memcmp(aBytes, bBytes, min(aCount, bCount))
-                    
-                    if (cmp == 0) {
-                        cmp = Int32(aCount - bCount)
-                    }
-                    
-                    return ComparisonResult(rawValue: (cmp < 0) ? -1 : (cmp > 0) ? 1 : 0)!
-                }
-            }
-        }
+    func compare(_ a: Slice, _ b: Slice) -> ComparisonResult {
+        return comparator.compare(a, b)
     }
 }
