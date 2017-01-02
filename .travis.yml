@@ -1,3 +1,3 @@
 language: objective-c
 osx_image: xcode8.2
-script: xcodebuild test -project LevelDB.xcodeproj -scheme LevelDB-iOS -destination 'platform=Simulator,name=iPhone'
+script: xcodebuild test -project LevelDB.xcodeproj -scheme LevelDB-iOS -destination 'platform=iOS Simulator,OS=10.2,name=iPhone 5s'
