@@ -7,11 +7,11 @@ env:
   - PROJECT=LevelDB.xcodeproj
   - IOS_FRAMEWORK_SCHEME="LevelDB-iOS"
   - MACOS_FRAMEWORK_SCHEME="LevelDB-OSX"
-  - IOS_SDK=iphonesimulator10.0
+  - IOS_SDK=iphonesimulator10.2
   - MACOS_SDK=macosx10.12
 
 script: 
   - set -o pipefail
   - xcodebuild -version
   - xcodebuild -showsdks
-  - xcodebuild -project "$PROJECT" -scheme "$IOS_FRAMEWORK_SCHEME" -sdk "$IOS_SDK" -destination "OS=10.0,name=iPhone 7 Plus" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty;
+  - xcodebuild -project "$PROJECT" -scheme "$IOS_FRAMEWORK_SCHEME" -sdk "$IOS_SDK" -destination "OS=10.2,name=iPhone 7 Plus" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty;
