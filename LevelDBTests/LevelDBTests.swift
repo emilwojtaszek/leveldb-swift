@@ -10,16 +10,16 @@ import LevelDB
 @testable import LevelDB
 
 class LevelDBTests: XCTestCase {
-    
+
     override func setUp() {
         super.setUp()
     }
-    
+
     override func tearDown() {
         super.tearDown()
     }
-    
-    func createDb(options : FileOptions? = nil) -> Database? {
+
+    func createDb(options: FileOptions? = nil) -> Database? {
         #if TARGET_OS_IPHONE
             let dirs = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
             let directory = (dirs as [String])[0].stringByAppendingPathComponent("LevelDB")
@@ -30,7 +30,7 @@ class LevelDBTests: XCTestCase {
         do {
             try FileManager.default.removeItem(atPath: directory)
         } catch _ { /* swallow */ }
-        
+
         if let opt = options {
             return try! Database.create(path: directory, options: opt)
         } else {
@@ -39,12 +39,7 @@ class LevelDBTests: XCTestCase {
             return try! Database.create(path: directory, options: opt)
         }
     }
-    
-    // Given a sequence of elements of type T, return Array<T>
-    func toArray<T, S: Sequence>(_ sequence: S) -> Array<T> where S.Iterator.Element == T {
-        return Array<T>(sequence)
-    }
-    
+
     func testPut() {
         let db = createDb()!
         let value = "test1".data(using: .utf8)
@@ -52,7 +47,7 @@ class LevelDBTests: XCTestCase {
         let response = try! db.get("test").map({ String(data: $0, encoding: .utf8) })
         XCTAssertEqual("test1", response!)
     }
-    
+
     func testDelete() {
         let db = createDb()!
         let key = "test"
@@ -61,7 +56,7 @@ class LevelDBTests: XCTestCase {
         let response = try! db.get(key)
         XCTAssertNil(response)
     }
-    
+
     func testWriteBatch() {
         let db = createDb()!
         let batch = WriteBatch()
@@ -69,11 +64,11 @@ class LevelDBTests: XCTestCase {
         let key2 = "test2"
         batch.put(key1, value: key1.data(using: .utf8))
         batch.put(key2, value: key2.data(using: .utf8))
-        try! db.write(batch);
+        try! db.write(batch)
         let response = try! db.get(key2).map({ String(data: $0, encoding: .utf8) })
         XCTAssertEqual("test2", response!)
     }
-    
+
     func testKeySequence() {
         let db = createDb()!
         let key1 = "test1"
@@ -101,7 +96,7 @@ class LevelDBTests: XCTestCase {
         }
         XCTAssertEqual(index, 2)
     }
-    
+
     func testKeyValueSequence() {
         let db = createDb()!
         let key1 = "test1"
@@ -138,7 +133,7 @@ class LevelDBTests: XCTestCase {
             XCTAssertEqual(keyName, key)
             index -= 1
         }
-        
+
         XCTAssertEqual(index, 0)
         index = 2
         print("iterating all keys from test21 to test11 descending")
@@ -149,13 +144,12 @@ class LevelDBTests: XCTestCase {
         }
         XCTAssertEqual(index, 1)
     }
-    
 
     func testComparator() {
         let opt = FileOptions()
         opt.createIfMissing = true
         opt.comparator = TestComparator()
-        
+
         let db = createDb(options: opt)!
         let key1 = "test1".data(using: .utf8)!
         let key2 = "test2".data(using: .utf8)!

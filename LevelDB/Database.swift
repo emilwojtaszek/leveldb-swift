@@ -21,14 +21,14 @@ There should only be one instance created for a specific directory.
 public final class Database {
     var pointer: OpaquePointer?
     let comparator: Comparator
-    
+
     public class var majorVersion: Int {
-        get { return Int(leveldb_major_version()) }
+        return Int(leveldb_major_version())
     }
     public class var minorVersion: Int {
-        get { return Int(leveldb_minor_version()) }
-    } 
-    
+        return Int(leveldb_minor_version())
+    }
+
     /**
     :param directory  The directory for the database. This should already exist?
     */
@@ -45,17 +45,17 @@ public final class Database {
             if let error = error {
                 throw LevelDBError.openError(message: String(cString: error))
             }
-            
+
             throw LevelDBError.undefinedError
         }
 
         //
         return Database(pointer, comparator: options.comparator)
     }
-    
+
     public class func destroy(path: String, options: FileOptions = FileOptions()) throws {
         var error: UnsafeMutablePointer<Int8>? = nil
-        
+
         // close database
         path.utf8CString.withUnsafeBufferPointer {
             leveldb_destroy_db(options.pointer(), $0.baseAddress!, &error)
@@ -69,7 +69,7 @@ public final class Database {
 
     public class func repair(path: String, options: FileOptions = FileOptions()) throws {
         var error: UnsafeMutablePointer<Int8>? = nil
-        
+
         // rapair
         path.utf8CString.withUnsafeBufferPointer {
             leveldb_repair_db(options.pointer(), $0.baseAddress!, &error)
@@ -91,7 +91,7 @@ public final class Database {
             leveldb_close(pointer)
         }
     }
-    
+
     public func get(_ key: Slice, options: ReadOptions = ReadOptions()) throws -> Data? {
         var valueLength = 0
         var error: UnsafeMutablePointer<Int8>? = nil
@@ -100,12 +100,12 @@ public final class Database {
         key.slice { (keyBytes, keyCount) in
             value = leveldb_get(pointer, options.pointer(), keyBytes, keyCount, &valueLength, &error)
         }
-        
+
         // throw if error
         guard error == nil else {
             throw LevelDBError.readError(message: String(cString: error!))
         }
-        
+
         // check fetch value lenght
         guard valueLength > 0 else {
             return nil
@@ -114,7 +114,7 @@ public final class Database {
         // create data
         return Data(bytes: value!, count: valueLength)
     }
-    
+
     public func put(_ key: Slice, value: Data?, options: WriteOptions = WriteOptions()) throws {
         var error: UnsafeMutablePointer<Int8>? = nil
 
@@ -134,45 +134,45 @@ public final class Database {
             throw LevelDBError.writeError(message: String(cString: error!))
         }
     }
-    
+
     public func delete(_ key: Slice, options: WriteOptions = WriteOptions()) throws {
         var error: UnsafeMutablePointer<Int8>? = nil
-        
+
         //
         key.slice { (keyBytes, keyCount) in
             leveldb_delete(pointer, options.pointer(), keyBytes, keyCount, &error)
         }
-        
+
         // throw on error
         guard error == nil else {
             throw LevelDBError.writeError(message: String(cString: error!))
         }
     }
-    
+
     public func write(_ batch: WriteBatch, options: WriteOptions = WriteOptions()) throws {
         var error: UnsafeMutablePointer<Int8>? = nil
-        
+
         //
         leveldb_write(pointer, options.pointer(), batch.pointer, &error)
         if error != nil {
             throw LevelDBError.writeError(message: String(cString: error!))
         }
     }
-    
+
     public func keys(from: Data? = nil, to: Data? = nil, descending: Bool = false) -> KeySequence {
         let query = SequenceQuery(db: self, startKey: from, endKey: to, descending: descending)
         return KeySequence(query: query)
     }
-    
+
     public func values(from: Data? = nil, to: Data? = nil, descending: Bool = false) -> KeyValueSequence {
         let query = SequenceQuery(db: self, startKey: from, endKey: to, descending: descending)
         return KeyValueSequence(query: query)
     }
 
     public func getSnapshot() -> Snapshot {
-        return Snapshot(self);
+        return Snapshot(self)
     }
-    
+
     /// Internal compare designed to be used for key bounds checking during iteration.
     func compare(_ a: Slice, _ b: Slice) -> ComparisonResult {
         return comparator.compare(a, b)

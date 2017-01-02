@@ -19,17 +19,17 @@ public protocol Comparator {
 /// A Swift implementation of the default LevelDB BytewiseComparator. Note this is not actually passed
 /// to LevelDB, it's only used where needed from Swift code
 final class DefaultComparator: Comparator {
-    var name: String { get { return "leveldb.BytewiseComparator" } }
+    var name: String { return "leveldb.BytewiseComparator" }
     func compare(_ a: Slice, _ b: Slice) -> ComparisonResult {
         // compare memory
         return a.slice { (aBytes: UnsafePointer<Int8>, aCount: Int) in
             return b.slice { (bBytes: UnsafePointer<Int8>, bCount: Int) in
                 var cmp = memcmp(aBytes, bBytes, min(aCount, bCount))
-                
-                if (cmp == 0) {
+
+                if cmp == 0 {
                     cmp = Int32(aCount - bCount)
                 }
-                
+
                 return ComparisonResult(rawValue: (cmp < 0) ? -1 : (cmp > 0) ? 1 : 0)!
             }
         }
@@ -37,7 +37,7 @@ final class DefaultComparator: Comparator {
 }
 
 public protocol Options {
-    
+
     /// Get initialized pointer to options C struct
     ///
     /// - Returns: Pointer to options struct
@@ -45,7 +45,7 @@ public protocol Options {
 }
 
 final public class FileOptions: Options {
-    
+
     /// Private storage of C struct of options
     private let options: OpaquePointer
 
@@ -59,17 +59,17 @@ final public class FileOptions: Options {
     var blockRestartInterval: Int = 16
     var compression: CompressionType = CompressionType.snappy
     var comparator: Comparator = DefaultComparator()
-    
+
     ///
     init() {
-        self.options = leveldb_options_create();
+        self.options = leveldb_options_create()
     }
-    
+
     ///
     deinit {
         leveldb_options_destroy(options)
     }
-    
+
     ///
     public func pointer() -> OpaquePointer {
         leveldb_options_set_block_restart_interval(options, Int32(blockRestartInterval))
@@ -77,12 +77,10 @@ final public class FileOptions: Options {
         leveldb_options_set_compression(options, Int32(compression.rawValue))
         leveldb_options_set_create_if_missing(options, createIfMissing ? 1: 0)
         leveldb_options_set_error_if_exists(options, errorIfExists ? 1: 0)
-        leveldb_options_set_max_open_files(options, Int32(maxOpenFiles));
+        leveldb_options_set_max_open_files(options, Int32(maxOpenFiles))
         leveldb_options_set_paranoid_checks(options, paranoidChecks ? 1: 0)
         leveldb_options_set_write_buffer_size(options, Int(writeBufferSize))
-        
-        
-        
+
 //        if let comparatorObj = comparator {
 //            let state = UnsafeMutablePointer<Comparator>.allocate(capacity: 1)
 //            state.initialize(to: comparatorObj)
@@ -104,8 +102,8 @@ final public class FileOptions: Options {
 //            leveldb_options_set_comparator(opt, cmp)
 //        }
 //        // TODO: Filter policy
-        
-        return self.options;
+
+        return self.options
     }
 }
 
@@ -117,17 +115,17 @@ final public class ReadOptions: Options {
     var verifyChecksums = false
     var fillCache = true
     var snapshot: Snapshot?
-    
+
     ///
     init() {
-        self.options = leveldb_readoptions_create();
+        self.options = leveldb_readoptions_create()
     }
-    
+
     ///
     deinit {
         leveldb_readoptions_destroy(options)
     }
-    
+
     ///
     public func pointer() -> OpaquePointer {
         leveldb_readoptions_set_fill_cache(options, fillCache ? 1: 0)
@@ -136,7 +134,7 @@ final public class ReadOptions: Options {
             leveldb_readoptions_set_snapshot(options, snapshot!.pointer)
         }
 
-        return options;
+        return options
     }
 }
 
@@ -146,20 +144,20 @@ final public class WriteOptions: Options {
 
     /// Options properties
     var sync = false
-    
+
     ///
     init() {
-        self.options = leveldb_writeoptions_create();
+        self.options = leveldb_writeoptions_create()
     }
-    
+
     ///
     deinit {
         leveldb_writeoptions_destroy(options)
     }
-    
+
     ///
     public func pointer() -> OpaquePointer {
         leveldb_writeoptions_set_sync(options, sync ? 1: 0)
-        return options;
+        return options
     }
 }

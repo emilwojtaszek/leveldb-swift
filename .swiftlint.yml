@@ -1,0 +1,23 @@
+disabled_rules:
+  - function_parameter_count
+  - nesting
+  - variable_name
+  - weak_delegate
+  - trailing_comma
+  - force_unwrapping
+  - force_cast
+  - force_try
+opt_in_rules:
+  - empty_count
+  - force_unwrapping
+  - private_outlet
+line_length: 180
+type_body_length:
+  warning: 300
+  error: 400
+excluded:
+  - Carthage/
+  - Pods/
+  - fastlane/
+  - tools/
+reporter: "xcode"

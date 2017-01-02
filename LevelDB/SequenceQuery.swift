@@ -14,14 +14,14 @@ struct SequenceQuery {
     let endKey: Slice?
     let descending: Bool
     let options: ReadOptions
-    
+
     //
     init(db: Database,
          startKey: Slice? = nil,
          endKey: Slice? = nil,
          descending: Bool = false,
          options: ReadOptions = ReadOptions()) {
-        
+
         self.db = db
         self.startKey = startKey
         self.endKey = endKey

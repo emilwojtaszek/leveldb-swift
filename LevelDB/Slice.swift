@@ -29,7 +29,7 @@ extension String: Slice {
             f($0.baseAddress!, Int(strlen($0.baseAddress!)))
         }
     }
-    
+
     public func data() -> Data {
         return self.utf8CString.withUnsafeBufferPointer {
             return Data(buffer: $0)

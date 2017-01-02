@@ -9,11 +9,11 @@ import Foundation
 public struct KeySequence: Sequence {
     public typealias Iterator = AnyIterator<Data?>
     private let query: SequenceQuery
-    
+
     init(query: SequenceQuery) {
         self.query = query
     }
-    
+
     public func makeIterator() -> Iterator {
         let iterator = DBIterator(query: self.query)
 
@@ -21,7 +21,7 @@ public struct KeySequence: Sequence {
             guard iterator.isValid else {
                 return nil
             }
-            
+
             let currentKey = iterator.key!
             if let key = self.query.endKey {
                 let result = self.query.db.compare(currentKey, key)
@@ -30,13 +30,13 @@ public struct KeySequence: Sequence {
                         return nil
                 }
             }
-            
+
             if self.query.descending {
                 _ = iterator.prevRow()
             } else {
                 _ = iterator.nextRow()
             }
-            
+
             return currentKey.data()
         })
     }
