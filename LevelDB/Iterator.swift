@@ -29,9 +29,7 @@ final public class DBIterator {
     }
         
     var isValid: Bool {
-        get {
-            return leveldb_iter_valid(db_pointer) != 0
-        }
+        return leveldb_iter_valid(db_pointer) != 0
     }
     
     @discardableResult func seekToFirst() -> Bool {
@@ -63,32 +61,32 @@ final public class DBIterator {
     }
     
     var key: Data? {
-        get {
-            var length: Int = 0
-            let bytes = leveldb_iter_key(db_pointer, &length)
-            guard length > 0 && bytes != nil else { return nil }
-            return Data(bytes: bytes!, count: length)
+        var length: Int = 0
+        let bytes = leveldb_iter_key(db_pointer, &length)
+        guard length > 0 && bytes != nil else {
+            return nil
         }
+
+        return Data(bytes: bytes!, count: length)
     }
     
     var value: Data? {
-        get {
-            var length: Int = 0
-            let bytes = leveldb_iter_value(db_pointer, &length)
-            guard length > 0 && bytes != nil else { return nil }
-            return Data(bytes: bytes!, count: length)
+        var length: Int = 0
+        let bytes = leveldb_iter_value(db_pointer, &length)
+        guard length > 0 && bytes != nil else {
+            return nil
         }
+        
+        return Data(bytes: bytes!, count: length)
     }
     
     var error: String? {
-        get {
-            var error: UnsafeMutablePointer<Int8>? = nil
-            leveldb_iter_get_error(db_pointer, &error)
-            if error != nil {
-                return String(cString: error!)
-            } else {
-                return nil
-            }
+        var error: UnsafeMutablePointer<Int8>? = nil
+        leveldb_iter_get_error(db_pointer, &error)
+        if error != nil {
+            return String(cString: error!)
+        } else {
+            return nil
         }
     }
 
