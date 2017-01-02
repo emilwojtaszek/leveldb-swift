@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/emilwojtaszek/leveldb-swift.svg?branch=travis-ci)](https://travis-ci.org/emilwojtaszek/leveldb-swift)
+
 #LevelDB - Swift
 
 ##A Swift wrapper for [LevelDB](https://github.com/google/leveldb)*
