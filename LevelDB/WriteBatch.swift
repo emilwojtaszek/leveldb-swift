@@ -38,27 +38,4 @@ open class WriteBatch {
     open func clear() {
         leveldb_writebatch_clear(pointer)
     }
-
-    // TODO: iterate
-}
-
-public final class BatchUpdate {
-    typealias UpdatesBlock = (WriteBatch) -> ()
-    private let updates: UpdatesBlock
-
-    init(updates: @escaping UpdatesBlock) {
-        self.updates = updates
-    }
-
-    func perform() -> WriteBatch {
-        let batch = WriteBatch()
-        updates(batch)
-        
-        return batch
-    }
-}
-
-let batch = BatchUpdate {
-    $0.put("key1", value: Data())
-    $0.delete("key2")
 }

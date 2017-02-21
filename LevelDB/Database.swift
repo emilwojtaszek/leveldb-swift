@@ -19,6 +19,8 @@ public enum LevelDBError: Error {
 There should only be one instance created for a specific directory.
 */
 public final class Database {
+    typealias BatchUpdate = (WriteBatch) -> ()
+    
     var pointer: OpaquePointer?
     let comparator: Comparator
 
@@ -149,10 +151,12 @@ public final class Database {
         }
     }
 
-    public func write(_ update: BatchUpdate, options: WriteOptions = WriteOptions()) throws {
+    public func write(options: WriteOptions = WriteOptions(), _ update: BatchUpdate) throws {
         var error: UnsafeMutablePointer<Int8>? = nil
 
-        let batch = update.perform()
+        let batch = WriteBatch()
+        update(batch)
+        
         //
         leveldb_write(pointer, options.pointer(), batch.pointer, &error)
         if error != nil {
