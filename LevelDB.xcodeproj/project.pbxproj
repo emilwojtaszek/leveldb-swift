@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		025BC07F1E5C5188005C6A72 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025BC07E1E5C5188005C6A72 /* Serializable.swift */; };
+		025BC0811E5C85FF005C6A72 /* Comparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025BC0801E5C85FF005C6A72 /* Comparator.swift */; };
 		20258DB01E1198150046CBC5 /* SequenceQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20258DAE1E107CDE0046CBC5 /* SequenceQuery.swift */; };
 		20258DB11E1198170046CBC5 /* Slice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22891BB319A8C234003EF513 /* Slice.swift */; };
 		20258DB21E1198170046CBC5 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275915C19532794009080EB /* Database.swift */; };
@@ -223,6 +224,7 @@
 
 /* Begin PBXFileReference section */
 		025BC07E1E5C5188005C6A72 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
+		025BC0801E5C85FF005C6A72 /* Comparator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comparator.swift; sourceTree = "<group>"; };
 		20258DAE1E107CDE0046CBC5 /* SequenceQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SequenceQuery.swift; sourceTree = "<group>"; };
 		2235BDF0199123BD0008DA7E /* KeySequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeySequence.swift; sourceTree = "<group>"; };
 		2240E47F195F007400B009EE /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
@@ -700,6 +702,7 @@
 				22891BB319A8C234003EF513 /* Slice.swift */,
 				2275915C19532794009080EB /* Database.swift */,
 				2240E47F195F007400B009EE /* Options.swift */,
+				025BC0801E5C85FF005C6A72 /* Comparator.swift */,
 				22881A0F1969406300EC031D /* Snapshot.swift */,
 				22BA4A0B19697F2F00772430 /* WriteBatch.swift */,
 				22881A1119694AF900EC031D /* Iterator.swift */,
@@ -1058,6 +1061,7 @@
 				20258DB31E1198170046CBC5 /* Options.swift in Sources */,
 				227B08F419828EAB009C3BC5 /* port_posix.cc in Sources */,
 				227B08F519828EB7009C3BC5 /* block.cc in Sources */,
+				025BC0811E5C85FF005C6A72 /* Comparator.swift in Sources */,
 				20258DB51E1198170046CBC5 /* WriteBatch.swift in Sources */,
 				227B08F619828EBD009C3BC5 /* block_builder.cc in Sources */,
 				20258DB91E1198170046CBC5 /* SequenceQuery.swift in Sources */,

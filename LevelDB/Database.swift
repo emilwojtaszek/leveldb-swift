@@ -19,8 +19,8 @@ public enum LevelDBError: Error {
 There should only be one instance created for a specific directory.
 */
 public final class Database {
-    typealias BatchUpdate = (WriteBatch) -> ()
-    
+    typealias BatchUpdate = (WriteBatch) -> Void
+
     var pointer: OpaquePointer?
     let comparator: Comparator
 
@@ -34,12 +34,13 @@ public final class Database {
     /**
     :param directory  The directory for the database. This should already exist?
     */
-    public class func create(path: String, options: FileOptions = FileOptions()) throws -> Database {
+    public class func create(path: String, options: [FileOption] = FileOption.standard, comparator: Comparator = DefaultComparator()) throws -> Database {
         var error: UnsafeMutablePointer<Int8>? = nil
 
         // open
+        let options = FileOptions(options: options)
         let dbPointer = path.utf8CString.withUnsafeBufferPointer {
-            return leveldb_open(options.pointer(), $0.baseAddress!, &error)
+            return leveldb_open(options.pointer, $0.baseAddress!, &error)
         }
 
         // check if error
@@ -52,15 +53,16 @@ public final class Database {
         }
 
         //
-        return Database(pointer, comparator: options.comparator)
+        return Database(pointer, comparator: comparator)
     }
 
-    public class func destroy(path: String, options: FileOptions = FileOptions()) throws {
+    public class func destroy(path: String, options: [FileOption] = FileOption.standard) throws {
         var error: UnsafeMutablePointer<Int8>? = nil
 
         // close database
+        let options = FileOptions(options: options)
         path.utf8CString.withUnsafeBufferPointer {
-            leveldb_destroy_db(options.pointer(), $0.baseAddress!, &error)
+            leveldb_destroy_db(options.pointer, $0.baseAddress!, &error)
         }
 
         //
@@ -69,12 +71,13 @@ public final class Database {
         }
     }
 
-    public class func repair(path: String, options: FileOptions = FileOptions()) throws {
+    public class func repair(path: String, options: [FileOption] = FileOption.standard) throws {
         var error: UnsafeMutablePointer<Int8>? = nil
 
         // rapair
+        let options = FileOptions(options: options)
         path.utf8CString.withUnsafeBufferPointer {
-            leveldb_repair_db(options.pointer(), $0.baseAddress!, &error)
+            leveldb_repair_db(options.pointer, $0.baseAddress!, &error)
         }
 
         //
@@ -94,13 +97,14 @@ public final class Database {
         }
     }
 
-    public func get(_ key: Slice, options: ReadOptions = ReadOptions()) throws -> Data? {
+    public func get(_ key: Slice, options: [ReadOption] = ReadOption.standard) throws -> Data? {
         var valueLength = 0
         var error: UnsafeMutablePointer<Int8>? = nil
         var value: UnsafeMutablePointer<Int8>? = nil
 
+        let options = ReadOptions(options: options)
         key.slice { (keyBytes, keyCount) in
-            value = leveldb_get(pointer, options.pointer(), keyBytes, keyCount, &valueLength, &error)
+            value = leveldb_get(pointer, options.pointer, keyBytes, keyCount, &valueLength, &error)
         }
 
         // throw if error
@@ -117,17 +121,18 @@ public final class Database {
         return Data(bytes: value!, count: valueLength)
     }
 
-    public func put(_ key: Slice, value: Data?, options: WriteOptions = WriteOptions()) throws {
+    public func put(_ key: Slice, value: Data?, options: [WriteOption] = WriteOption.standard) throws {
         var error: UnsafeMutablePointer<Int8>? = nil
 
         //
+        let options = WriteOptions(options: options)
         key.slice { (keyBytes, keyCount) in
             if let value = value {
                 value.withUnsafeBytes {
-                    leveldb_put(pointer, options.pointer(), keyBytes, keyCount, $0, value.count, &error)
+                    leveldb_put(pointer, options.pointer, keyBytes, keyCount, $0, value.count, &error)
                 }
             } else {
-                leveldb_put(pointer, options.pointer(), keyBytes, keyCount, nil, 0, &error)
+                leveldb_put(pointer, options.pointer, keyBytes, keyCount, nil, 0, &error)
             }
         }
 
@@ -137,12 +142,13 @@ public final class Database {
         }
     }
 
-    public func delete(_ key: Slice, options: WriteOptions = WriteOptions()) throws {
+    public func delete(_ key: Slice, options: [WriteOption] = WriteOption.standard) throws {
         var error: UnsafeMutablePointer<Int8>? = nil
 
         //
+        let options = WriteOptions(options: options)
         key.slice { (keyBytes, keyCount) in
-            leveldb_delete(pointer, options.pointer(), keyBytes, keyCount, &error)
+            leveldb_delete(pointer, options.pointer, keyBytes, keyCount, &error)
         }
 
         // throw on error
@@ -151,14 +157,15 @@ public final class Database {
         }
     }
 
-    public func write(options: WriteOptions = WriteOptions(), _ update: BatchUpdate) throws {
+    public func write(options: [WriteOption] = WriteOption.standard, _ update: BatchUpdate) throws {
         var error: UnsafeMutablePointer<Int8>? = nil
 
         let batch = WriteBatch()
         update(batch)
-        
+
+        let options = WriteOptions(options: options)
         //
-        leveldb_write(pointer, options.pointer(), batch.pointer, &error)
+        leveldb_write(pointer, options.pointer, batch.pointer, &error)
         if error != nil {
             throw LevelDBError.writeError(message: String(cString: error!))
         }

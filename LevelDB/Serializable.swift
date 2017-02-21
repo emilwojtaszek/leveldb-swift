@@ -51,7 +51,7 @@ extension Decoder {
 
     func decode<T: Deserializable>(data: Data) -> T? {
         let model = decode(modelData: data)
-        
+
         return model.map { T(entry: $0) }
     }
 }
@@ -60,15 +60,15 @@ struct DecoderEncoder: Decoder, Encoder {
     func encode(model: Entry) -> Data? {
         return NSKeyedArchiver.archivedData(withRootObject: model)
     }
-    
+
     func encode(models: [Entry]) -> Data? {
         return NSKeyedArchiver.archivedData(withRootObject: models)
     }
-    
+
     func decode(arrayData: Data) -> [Entry]? {
         return NSKeyedUnarchiver.unarchiveObject(with: arrayData) as? [Entry]
     }
-    
+
     func decode(modelData: Data) -> Entry? {
         return NSKeyedUnarchiver.unarchiveObject(with: modelData) as? Entry
     }
@@ -78,41 +78,41 @@ final class Storage {
     let database: Database
     let encoder: Encoder
     let decoder: Decoder
-    
+
     init(database: Database,
          encoder: Encoder = DecoderEncoder(),
          decoder: Decoder = DecoderEncoder()) {
-        
+
         self.database = database
         self.encoder = encoder
         self.decoder = decoder
     }
-    
-    func get<T: Deserializable>(_ key: Slice, options: ReadOptions = ReadOptions()) -> T? {
+
+    func get<T: Deserializable>(_ key: Slice, options: [ReadOption] = ReadOption.standard) -> T? {
         guard let data = try? database.get(key, options: options) else { return nil }
-        
+
         return data.flatMap { decoder.decode(data: $0) }
     }
-    
-    func get<T: Deserializable>(_ key: Slice, options: ReadOptions) -> [T]? {
+
+    func get<T: Deserializable>(_ key: Slice, options: [ReadOption] = ReadOption.standard) -> [T]? {
         guard let data = try? database.get(key, options: options) else { return nil }
-        
+
         return data.flatMap { decoder.decode(data: $0) }
     }
-    
-    func put<T: Serializable>(_ key: Slice, value: T, options: WriteOptions = WriteOptions()) {
+
+    func put<T: Serializable>(_ key: Slice, value: T, options: [WriteOption] = WriteOption.standard) {
         guard let data = encoder.encode(model: value) else { return }
-        
+
         try? database.put(key, value: data, options: options)
     }
-    
-    func put<T: Serializable>(_ key: Slice, value: [T], options: WriteOptions = WriteOptions()) {
+
+    func put<T: Serializable>(_ key: Slice, value: [T], options: [WriteOption] = WriteOption.standard) {
         guard let data = encoder.encode(array: value) else { return }
-        
+
         try? database.put(key, value: data, options: options)
     }
-    
-    func delete(_ key: Slice, options: WriteOptions = WriteOptions()) {
+
+    func delete(_ key: Slice, options: [WriteOption] = WriteOption.standard) {
         try? database.delete(key, options: options)
     }
 }

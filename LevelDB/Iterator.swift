@@ -10,7 +10,7 @@ final public class DBIterator {
     private let db_pointer: OpaquePointer
 
     init(query: SequenceQuery) {
-        db_pointer = leveldb_create_iterator(query.db.pointer!, query.options.pointer())
+        db_pointer = leveldb_create_iterator(query.db.pointer!, query.options.pointer)
 
         if let key = query.startKey {
             self.seek(key)
