@@ -8,105 +8,105 @@
 
 import Foundation
 
-typealias LevelDBModel = [String: Any]
+typealias Entry = [String: Any]
 
-protocol LevelDBSerializable {
-    func toLevelDBModel() -> LevelDBModel
+protocol Serializable {
+    func toEntry() -> Entry
 }
 
-protocol LevelDBDeserializable {
-    init(levelDBmodel: LevelDBModel)
+protocol Deserializable {
+    init(entry: Entry)
 }
 
-protocol LevelDBEncoder {
-    func encode(model: LevelDBModel) -> Data?
-    func encode(models: [LevelDBModel]) -> Data?
+protocol Encoder {
+    func encode(model: Entry) -> Data?
+    func encode(models: [Entry]) -> Data?
 }
 
-protocol LevelDBDecoder {
-    func decode(modelData: Data) -> LevelDBModel?
-    func decode(arrayData: Data) -> [LevelDBModel]?
+protocol Decoder {
+    func decode(modelData: Data) -> Entry?
+    func decode(arrayData: Data) -> [Entry]?
 }
 
-extension LevelDBEncoder {
-    func encode<T: LevelDBSerializable>(array: [T]) -> Data? {
-        let models = array.map { $0.toLevelDBModel() }
+extension Encoder {
+    func encode<T: Serializable>(array: [T]) -> Data? {
+        let models = array.map { $0.toEntry() }
         
         return encode(models: models)
     }
     
-    func encode<T: LevelDBSerializable>(model: T) -> Data? {
-        let model = model.toLevelDBModel()
+    func encode<T: Serializable>(model: T) -> Data? {
+        let model = model.toEntry()
         
         return encode(model: model)
     }
 }
 
-extension LevelDBDecoder {
-    func decode<T: LevelDBDeserializable>(data: Data) -> [T]? {
+extension Decoder {
+    func decode<T: Deserializable>(data: Data) -> [T]? {
         let models = decode(arrayData: data)
         
-        return models?.map { T(levelDBmodel: $0) }
+        return models?.map { T(entry: $0) }
     }
     
-    func decode<T: LevelDBDeserializable>(data: Data) -> T? {
+    func decode<T: Deserializable>(data: Data) -> T? {
         let model = decode(modelData: data)
         
-        return model.map { T(levelDBmodel: $0) }
+        return model.map { T(entry: $0) }
     }
 }
 
-struct LevelDBDecoderEncoder: LevelDBDecoder, LevelDBEncoder {
-    func encode(model: LevelDBModel) -> Data? {
+struct DecoderEncoder: Decoder, Encoder {
+    func encode(model: Entry) -> Data? {
         return NSKeyedArchiver.archivedData(withRootObject: model)
     }
     
-    func encode(models: [LevelDBModel]) -> Data? {
+    func encode(models: [Entry]) -> Data? {
         return NSKeyedArchiver.archivedData(withRootObject: models)
     }
     
-    func decode(arrayData: Data) -> [LevelDBModel]? {
-        return NSKeyedUnarchiver.unarchiveObject(with: arrayData) as? [LevelDBModel]
+    func decode(arrayData: Data) -> [Entry]? {
+        return NSKeyedUnarchiver.unarchiveObject(with: arrayData) as? [Entry]
     }
     
-    func decode(modelData: Data) -> LevelDBModel? {
-        return NSKeyedUnarchiver.unarchiveObject(with: modelData) as? LevelDBModel
+    func decode(modelData: Data) -> Entry? {
+        return NSKeyedUnarchiver.unarchiveObject(with: modelData) as? Entry
     }
 }
 
 final class Storage {
     let database: Database
-    let encoder: LevelDBEncoder
-    let decoder: LevelDBDecoder
+    let encoder: Encoder
+    let decoder: Decoder
     
     init(database: Database,
-         encoder: LevelDBEncoder = LevelDBDecoderEncoder(),
-         decoder: LevelDBDecoder = LevelDBDecoderEncoder()) {
+         encoder: Encoder = DecoderEncoder(),
+         decoder: Decoder = DecoderEncoder()) {
         
         self.database = database
         self.encoder = encoder
         self.decoder = decoder
     }
     
-    func get<T: LevelDBDeserializable>(_ key: Slice, options: ReadOptions = ReadOptions()) -> T? {
+    func get<T: Deserializable>(_ key: Slice, options: ReadOptions = ReadOptions()) -> T? {
         guard let data = try? database.get(key, options: options) else { return nil }
         
         return data.flatMap { decoder.decode(data: $0) }
     }
     
-    func get<T: LevelDBDeserializable>(_ key: Slice, options: ReadOptions) -> [T]? {
+    func get<T: Deserializable>(_ key: Slice, options: ReadOptions) -> [T]? {
         guard let data = try? database.get(key, options: options) else { return nil }
         
         return data.flatMap { decoder.decode(data: $0) }
     }
     
-    func put<T: LevelDBSerializable>(_ key: Slice, value: T, options: WriteOptions = WriteOptions()) {
+    func put<T: Serializable>(_ key: Slice, value: T, options: WriteOptions = WriteOptions()) {
         guard let data = encoder.encode(model: value) else { return }
         
         try? database.put(key, value: data, options: options)
     }
     
-    func put<T: LevelDBSerializable>(_ key: Slice, value: [T], options: WriteOptions = WriteOptions()) {
+    func put<T: Serializable>(_ key: Slice, value: [T], options: WriteOptions = WriteOptions()) {
         guard let data = encoder.encode(array: value) else { return }
         
         try? database.put(key, value: data, options: options)
@@ -116,5 +116,3 @@ final class Storage {
         try? database.delete(key, options: options)
     }
 }
-
-
