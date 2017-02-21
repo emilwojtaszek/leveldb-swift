@@ -41,3 +41,17 @@ open class WriteBatch {
 
     // TODO: iterate
 }
+
+public final class BatchUpdate {
+    typealias UpdatesBlock = (WriteBatch) -> ()
+    let updates: UpdatesBlock
+    
+    init(updates: @escaping UpdatesBlock) {
+        self.updates = updates
+    }
+}
+
+let batch = BatchUpdate {
+    $0.put("key1", value: Data())
+    $0.delete("key2")
+}

@@ -31,13 +31,13 @@ protocol Decoder {
 extension Encoder {
     func encode<T: Serializable>(array: [T]) -> Data? {
         let models = array.map { $0.toEntry() }
-        
+
         return encode(models: models)
     }
-    
+
     func encode<T: Serializable>(model: T) -> Data? {
         let model = model.toEntry()
-        
+
         return encode(model: model)
     }
 }
@@ -45,10 +45,10 @@ extension Encoder {
 extension Decoder {
     func decode<T: Deserializable>(data: Data) -> [T]? {
         let models = decode(arrayData: data)
-        
+
         return models?.map { T(entry: $0) }
     }
-    
+
     func decode<T: Deserializable>(data: Data) -> T? {
         let model = decode(modelData: data)
         
