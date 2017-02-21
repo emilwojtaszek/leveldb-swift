@@ -28,5 +28,4 @@ struct SequenceQuery {
         self.descending = descending
         self.options = options
     }
-
 }
