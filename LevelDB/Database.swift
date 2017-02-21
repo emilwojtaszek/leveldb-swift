@@ -152,9 +152,7 @@ public final class Database {
     public func write(_ update: BatchUpdate, options: WriteOptions = WriteOptions()) throws {
         var error: UnsafeMutablePointer<Int8>? = nil
 
-        let batch = WriteBatch()
-        update.updates(batch)
-        
+        let batch = update.perform()
         //
         leveldb_write(pointer, options.pointer(), batch.pointer, &error)
         if error != nil {

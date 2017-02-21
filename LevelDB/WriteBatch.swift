@@ -44,10 +44,17 @@ open class WriteBatch {
 
 public final class BatchUpdate {
     typealias UpdatesBlock = (WriteBatch) -> ()
-    let updates: UpdatesBlock
-    
+    private let updates: UpdatesBlock
+
     init(updates: @escaping UpdatesBlock) {
         self.updates = updates
+    }
+
+    func perform() -> WriteBatch {
+        let batch = WriteBatch()
+        updates(batch)
+        
+        return batch
     }
 }
 
