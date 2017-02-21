@@ -20,19 +20,19 @@ protocol Deserializable {
 
 protocol Encoder {
     func encode(model: Entry) -> Data?
-    func encode(models: [Entry]) -> Data?
+    func encode(array: [Entry]) -> Data?
 }
 
 protocol Decoder {
-    func decode(modelData: Data) -> Entry?
-    func decode(arrayData: Data) -> [Entry]?
+    func decode(data: Data) -> Entry?
+    func decode(data: Data) -> [Entry]?
 }
 
 extension Encoder {
     func encode<T: Serializable>(array: [T]) -> Data? {
         let models = array.map { $0.toEntry() }
 
-        return encode(models: models)
+        return encode(array: models)
     }
 
     func encode<T: Serializable>(model: T) -> Data? {
@@ -44,13 +44,13 @@ extension Encoder {
 
 extension Decoder {
     func decode<T: Deserializable>(data: Data) -> [T]? {
-        let models = decode(arrayData: data)
+        let models: [Entry]? = decode(data: data)
 
         return models?.map { T(entry: $0) }
     }
 
     func decode<T: Deserializable>(data: Data) -> T? {
-        let model = decode(modelData: data)
+        let model: Entry? = decode(data: data)
 
         return model.map { T(entry: $0) }
     }
@@ -61,16 +61,16 @@ struct DecoderEncoder: Decoder, Encoder {
         return NSKeyedArchiver.archivedData(withRootObject: model)
     }
 
-    func encode(models: [Entry]) -> Data? {
-        return NSKeyedArchiver.archivedData(withRootObject: models)
+    func encode(array: [Entry]) -> Data? {
+        return NSKeyedArchiver.archivedData(withRootObject: array)
     }
 
-    func decode(arrayData: Data) -> [Entry]? {
-        return NSKeyedUnarchiver.unarchiveObject(with: arrayData) as? [Entry]
+    func decode(data: Data) -> [Entry]? {
+        return NSKeyedUnarchiver.unarchiveObject(with: data) as? [Entry]
     }
 
-    func decode(modelData: Data) -> Entry? {
-        return NSKeyedUnarchiver.unarchiveObject(with: modelData) as? Entry
+    func decode(data: Data) -> Entry? {
+        return NSKeyedUnarchiver.unarchiveObject(with: data) as? Entry
     }
 }
 
