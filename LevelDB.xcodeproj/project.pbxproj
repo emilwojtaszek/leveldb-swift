@@ -32,8 +32,12 @@
 		021FFCEB1E5DB8F40075A712 /* EncodableDecodableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCE91E5DB8F40075A712 /* EncodableDecodableModel.swift */; };
 		021FFCED1E5DB9030075A712 /* SerializableDeserializableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCEC1E5DB9030075A712 /* SerializableDeserializableModel.swift */; };
 		021FFCEE1E5DB9030075A712 /* SerializableDeserializableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCEC1E5DB9030075A712 /* SerializableDeserializableModel.swift */; };
-		021FFCEF1E5DC0CA0075A712 /* StorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCD21E5D9A750075A712 /* StorageSpec.swift */; };
-		021FFCF01E5DC0CA0075A712 /* StorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCD21E5D9A750075A712 /* StorageSpec.swift */; };
+		021FFCEF1E5DC0CA0075A712 /* StorageEncodableDecodableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCD21E5D9A750075A712 /* StorageEncodableDecodableSpec.swift */; };
+		021FFCF01E5DC0CA0075A712 /* StorageEncodableDecodableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCD21E5D9A750075A712 /* StorageEncodableDecodableSpec.swift */; };
+		021FFCF21E5DDE2E0075A712 /* StorageDeserializableSerializableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCF11E5DDE2E0075A712 /* StorageDeserializableSerializableSpec.swift */; };
+		021FFCF31E5DDE2E0075A712 /* StorageDeserializableSerializableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCF11E5DDE2E0075A712 /* StorageDeserializableSerializableSpec.swift */; };
+		021FFCF51E5DDE550075A712 /* StorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCF41E5DDE550075A712 /* StorageSpec.swift */; };
+		021FFCF71E5DE0BB0075A712 /* StorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCF41E5DDE550075A712 /* StorageSpec.swift */; };
 		025BC07F1E5C5188005C6A72 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025BC07E1E5C5188005C6A72 /* Serializable.swift */; };
 		025BC0811E5C85FF005C6A72 /* Comparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025BC0801E5C85FF005C6A72 /* Comparator.swift */; };
 		20258DB01E1198150046CBC5 /* SequenceQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20258DAE1E107CDE0046CBC5 /* SequenceQuery.swift */; };
@@ -258,13 +262,15 @@
 		021FFCC61E5D96160075A712 /* Deserializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deserializable.swift; sourceTree = "<group>"; };
 		021FFCCE1E5D96930075A712 /* EncryptorDecryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptorDecryptor.swift; sourceTree = "<group>"; };
 		021FFCD01E5D96A00075A712 /* SerializerDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerializerDeserializer.swift; sourceTree = "<group>"; };
-		021FFCD21E5D9A750075A712 /* StorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageSpec.swift; sourceTree = "<group>"; };
+		021FFCD21E5D9A750075A712 /* StorageEncodableDecodableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageEncodableDecodableSpec.swift; sourceTree = "<group>"; };
 		021FFCD81E5D9CAF0075A712 /* DatabaseProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
 		021FFCDD1E5DA02E0075A712 /* DatabaseMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseMock.swift; sourceTree = "<group>"; };
 		021FFCE21E5DB4720075A712 /* SerializerDeserializerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerializerDeserializerMock.swift; sourceTree = "<group>"; };
 		021FFCE51E5DB4900075A712 /* EncoderDecoderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncoderDecoderMock.swift; sourceTree = "<group>"; };
 		021FFCE91E5DB8F40075A712 /* EncodableDecodableModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncodableDecodableModel.swift; sourceTree = "<group>"; };
 		021FFCEC1E5DB9030075A712 /* SerializableDeserializableModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerializableDeserializableModel.swift; sourceTree = "<group>"; };
+		021FFCF11E5DDE2E0075A712 /* StorageDeserializableSerializableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageDeserializableSerializableSpec.swift; sourceTree = "<group>"; };
+		021FFCF41E5DDE550075A712 /* StorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageSpec.swift; sourceTree = "<group>"; };
 		025BC07E1E5C5188005C6A72 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
 		025BC0801E5C85FF005C6A72 /* Comparator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comparator.swift; sourceTree = "<group>"; };
 		0570F81B061FD62DD6D4686E /* Pods-LevelDB-iOS-LevelDBTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelDB-iOS-LevelDBTests-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-LevelDB-iOS-LevelDBTests-iOS/Pods-LevelDB-iOS-LevelDBTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -493,7 +499,9 @@
 		021FFCD71E5D9B060075A712 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
-				021FFCD21E5D9A750075A712 /* StorageSpec.swift */,
+				021FFCD21E5D9A750075A712 /* StorageEncodableDecodableSpec.swift */,
+				021FFCF41E5DDE550075A712 /* StorageSpec.swift */,
+				021FFCF11E5DDE2E0075A712 /* StorageDeserializableSerializableSpec.swift */,
 			);
 			name = Specs;
 			sourceTree = "<group>";
@@ -1264,12 +1272,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				227B093B198298A1009C3BC5 /* LevelDBTests.swift in Sources */,
+				021FFCF31E5DDE2E0075A712 /* StorageDeserializableSerializableSpec.swift in Sources */,
 				021FFCEE1E5DB9030075A712 /* SerializableDeserializableModel.swift in Sources */,
 				021FFCE41E5DB4720075A712 /* SerializerDeserializerMock.swift in Sources */,
 				22EB9F30198D13FB00A7DF7B /* TestComparator.swift in Sources */,
-				021FFCF01E5DC0CA0075A712 /* StorageSpec.swift in Sources */,
+				021FFCF01E5DC0CA0075A712 /* StorageEncodableDecodableSpec.swift in Sources */,
 				021FFCEB1E5DB8F40075A712 /* EncodableDecodableModel.swift in Sources */,
 				021FFCE11E5DAE970075A712 /* DatabaseMock.swift in Sources */,
+				021FFCF71E5DE0BB0075A712 /* StorageSpec.swift in Sources */,
 				021FFCE71E5DB4900075A712 /* EncoderDecoderMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1345,12 +1355,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				227B093F198298EE009C3BC5 /* LevelDBTests.swift in Sources */,
+				021FFCF21E5DDE2E0075A712 /* StorageDeserializableSerializableSpec.swift in Sources */,
 				021FFCED1E5DB9030075A712 /* SerializableDeserializableModel.swift in Sources */,
 				021FFCE31E5DB4720075A712 /* SerializerDeserializerMock.swift in Sources */,
 				22EB9F2F198D13FB00A7DF7B /* TestComparator.swift in Sources */,
-				021FFCEF1E5DC0CA0075A712 /* StorageSpec.swift in Sources */,
+				021FFCEF1E5DC0CA0075A712 /* StorageEncodableDecodableSpec.swift in Sources */,
 				021FFCEA1E5DB8F40075A712 /* EncodableDecodableModel.swift in Sources */,
 				021FFCE01E5DAE960075A712 /* DatabaseMock.swift in Sources */,
+				021FFCF51E5DDE550075A712 /* StorageSpec.swift in Sources */,
 				021FFCE61E5DB4900075A712 /* EncoderDecoderMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
