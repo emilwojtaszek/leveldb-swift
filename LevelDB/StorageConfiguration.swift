@@ -8,17 +8,18 @@
 
 import Foundation
 
-struct StorageConfiguration {
+public struct StorageConfiguration {
     let encoder: Encoder
     let decoder: Decoder
 
     let serializer: Serializer
     let deserializer: Deserializer
 
-    init(encoder: Encoder,
-         decoder: Decoder,
-         serializer: Serializer,
-         deserializer: Deserializer) {
+    public init(encoder: Encoder = EncryptorDecryptor(),
+         decoder: Decoder = EncryptorDecryptor(),
+         serializer: Serializer = SerializerDeserializer(),
+         deserializer: Deserializer = SerializerDeserializer()) {
+
         self.encoder = encoder
         self.decoder = decoder
         self.serializer = serializer

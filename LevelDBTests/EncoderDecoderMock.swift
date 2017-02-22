@@ -29,7 +29,7 @@ final class EncoderDecoderMock: Encoder, Decoder {
 
     func encode(data: Data) -> Data {
         encodeWasCalled = true
-        return mockedData
+        return data
     }
 
     func decode(data: Data) -> [Data] {
@@ -39,6 +39,6 @@ final class EncoderDecoderMock: Encoder, Decoder {
 
     func decode(data: Data) -> Data {
         decodeWasCalled = true
-        return mockedData
+        return data
     }
 }

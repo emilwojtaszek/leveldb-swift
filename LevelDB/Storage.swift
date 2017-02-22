@@ -8,18 +8,18 @@
 
 import Foundation
 
-final class Storage {
+public final class Storage {
 
     let database: DatabaseProtocol
     let configuration: StorageConfiguration
 
-    init(database: DatabaseProtocol, configuration: StorageConfiguration) {
+    public init(database: DatabaseProtocol, configuration: StorageConfiguration) {
         self.database = database
         self.configuration = configuration
     }
 }
 
-extension Storage {
+public extension Storage {
 
     func get(_ key: Slice, options: [ReadOption] = ReadOption.standard) -> Data? {
         guard let data = try? database.get(key, options: options) else { return nil }
@@ -38,7 +38,7 @@ extension Storage {
     }
 }
 
-extension Storage {
+public extension Storage {
     func get<T: Deserializable>(_ key: Slice, options: [ReadOption] = ReadOption.standard) -> T? {
         guard let data = get(key, options: options) else { return nil }
 
@@ -64,7 +64,7 @@ extension Storage {
     }
 }
 
-extension Storage {
+public extension Storage {
 
     func get<T: Decodable>(_ key: Slice, options: [ReadOption] = ReadOption.standard) -> T? {
         guard let data = get(key, options: options) else { return nil }

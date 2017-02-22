@@ -15,7 +15,7 @@ final class DatabaseMock: DatabaseProtocol {
     private(set) var getWasCalled = false
     private(set) var putWasCalled = false
 
-    init(mockedData: Data) {
+    init(mockedData: Data = Data()) {
         self.mockedData = mockedData
     }
 
