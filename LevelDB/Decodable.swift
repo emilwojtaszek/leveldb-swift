@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol Decodable {
+public protocol Decodable {
     init(data: Data)
 }
 
-protocol Decoder {
+public protocol Decoder {
     func decode(data: Data) -> Data
     func decode(data: Data) -> [Data]
 }

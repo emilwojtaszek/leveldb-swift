@@ -24,6 +24,16 @@
 		021FFCDA1E5D9CAF0075A712 /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCD81E5D9CAF0075A712 /* DatabaseProtocol.swift */; };
 		021FFCDB1E5D9CC50075A712 /* StorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCD21E5D9A750075A712 /* StorageSpec.swift */; };
 		021FFCDC1E5D9CC60075A712 /* StorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCD21E5D9A750075A712 /* StorageSpec.swift */; };
+		021FFCE01E5DAE960075A712 /* DatabaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCDD1E5DA02E0075A712 /* DatabaseMock.swift */; };
+		021FFCE11E5DAE970075A712 /* DatabaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCDD1E5DA02E0075A712 /* DatabaseMock.swift */; };
+		021FFCE31E5DB4720075A712 /* SerializerDeserializerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCE21E5DB4720075A712 /* SerializerDeserializerMock.swift */; };
+		021FFCE41E5DB4720075A712 /* SerializerDeserializerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCE21E5DB4720075A712 /* SerializerDeserializerMock.swift */; };
+		021FFCE61E5DB4900075A712 /* EncoderDecoderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCE51E5DB4900075A712 /* EncoderDecoderMock.swift */; };
+		021FFCE71E5DB4900075A712 /* EncoderDecoderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCE51E5DB4900075A712 /* EncoderDecoderMock.swift */; };
+		021FFCEA1E5DB8F40075A712 /* EncodableDecodableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCE91E5DB8F40075A712 /* EncodableDecodableModel.swift */; };
+		021FFCEB1E5DB8F40075A712 /* EncodableDecodableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCE91E5DB8F40075A712 /* EncodableDecodableModel.swift */; };
+		021FFCED1E5DB9030075A712 /* SerializableDeserializableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCEC1E5DB9030075A712 /* SerializableDeserializableModel.swift */; };
+		021FFCEE1E5DB9030075A712 /* SerializableDeserializableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCEC1E5DB9030075A712 /* SerializableDeserializableModel.swift */; };
 		025BC07F1E5C5188005C6A72 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025BC07E1E5C5188005C6A72 /* Serializable.swift */; };
 		025BC0811E5C85FF005C6A72 /* Comparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025BC0801E5C85FF005C6A72 /* Comparator.swift */; };
 		20258DB01E1198150046CBC5 /* SequenceQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20258DAE1E107CDE0046CBC5 /* SequenceQuery.swift */; };
@@ -250,6 +260,11 @@
 		021FFCD01E5D96A00075A712 /* SerializerDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerializerDeserializer.swift; sourceTree = "<group>"; };
 		021FFCD21E5D9A750075A712 /* StorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageSpec.swift; sourceTree = "<group>"; };
 		021FFCD81E5D9CAF0075A712 /* DatabaseProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
+		021FFCDD1E5DA02E0075A712 /* DatabaseMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseMock.swift; sourceTree = "<group>"; };
+		021FFCE21E5DB4720075A712 /* SerializerDeserializerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerializerDeserializerMock.swift; sourceTree = "<group>"; };
+		021FFCE51E5DB4900075A712 /* EncoderDecoderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncoderDecoderMock.swift; sourceTree = "<group>"; };
+		021FFCE91E5DB8F40075A712 /* EncodableDecodableModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncodableDecodableModel.swift; sourceTree = "<group>"; };
+		021FFCEC1E5DB9030075A712 /* SerializableDeserializableModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerializableDeserializableModel.swift; sourceTree = "<group>"; };
 		025BC07E1E5C5188005C6A72 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
 		025BC0801E5C85FF005C6A72 /* Comparator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comparator.swift; sourceTree = "<group>"; };
 		0570F81B061FD62DD6D4686E /* Pods-LevelDB-iOS-LevelDBTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelDB-iOS-LevelDBTests-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-LevelDB-iOS-LevelDBTests-iOS/Pods-LevelDB-iOS-LevelDBTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -468,6 +483,9 @@
 		021FFCD61E5D9AAC0075A712 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				021FFCDD1E5DA02E0075A712 /* DatabaseMock.swift */,
+				021FFCE21E5DB4720075A712 /* SerializerDeserializerMock.swift */,
+				021FFCE51E5DB4900075A712 /* EncoderDecoderMock.swift */,
 			);
 			name = Mocks;
 			sourceTree = "<group>";
@@ -478,6 +496,15 @@
 				021FFCD21E5D9A750075A712 /* StorageSpec.swift */,
 			);
 			name = Specs;
+			sourceTree = "<group>";
+		};
+		021FFCE81E5DB7B40075A712 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				021FFCE91E5DB8F40075A712 /* EncodableDecodableModel.swift */,
+				021FFCEC1E5DB9030075A712 /* SerializableDeserializableModel.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		2253E04919701FC500DCA0F0 /* leveldb */ = {
@@ -802,6 +829,7 @@
 				2275902F19531FBB009080EB /* LevelDBTests.swift */,
 				021FFCD71E5D9B060075A712 /* Specs */,
 				021FFCD61E5D9AAC0075A712 /* Mocks */,
+				021FFCE81E5DB7B40075A712 /* Models */,
 				021FFCD51E5D9AA50075A712 /* Factories */,
 			);
 			path = LevelDBTests;
@@ -1237,7 +1265,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				227B093B198298A1009C3BC5 /* LevelDBTests.swift in Sources */,
+				021FFCEE1E5DB9030075A712 /* SerializableDeserializableModel.swift in Sources */,
+				021FFCE41E5DB4720075A712 /* SerializerDeserializerMock.swift in Sources */,
 				22EB9F30198D13FB00A7DF7B /* TestComparator.swift in Sources */,
+				021FFCEB1E5DB8F40075A712 /* EncodableDecodableModel.swift in Sources */,
+				021FFCE11E5DAE970075A712 /* DatabaseMock.swift in Sources */,
+				021FFCE71E5DB4900075A712 /* EncoderDecoderMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1313,7 +1346,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				227B093F198298EE009C3BC5 /* LevelDBTests.swift in Sources */,
+				021FFCED1E5DB9030075A712 /* SerializableDeserializableModel.swift in Sources */,
+				021FFCE31E5DB4720075A712 /* SerializerDeserializerMock.swift in Sources */,
 				22EB9F2F198D13FB00A7DF7B /* TestComparator.swift in Sources */,
+				021FFCEA1E5DB8F40075A712 /* EncodableDecodableModel.swift in Sources */,
+				021FFCE01E5DAE960075A712 /* DatabaseMock.swift in Sources */,
+				021FFCE61E5DB4900075A712 /* EncoderDecoderMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

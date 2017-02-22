@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol Encodable {
+public protocol Encodable {
     func toData() -> Data
 }
 
-protocol Encoder {
+public protocol Encoder {
     func encode(data: Data) -> Data
     func encode(array: [Data]) -> Data
 }

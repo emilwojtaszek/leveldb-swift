@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol Deserializable {
+public protocol Deserializable {
     init(entry: Entry)
 }
 
-protocol Deserializer {
+public protocol Deserializer {
     func deserialize(data: Data) -> Entry?
     func deserialize(data: Data) -> [Entry]?
 }

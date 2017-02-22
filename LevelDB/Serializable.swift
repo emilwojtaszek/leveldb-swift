@@ -8,13 +8,13 @@
 
 import Foundation
 
-typealias Entry = [String: Any]
+public typealias Entry = [String: Any]
 
-protocol Serializable {
+public protocol Serializable {
     func toEntry() -> Entry
 }
 
-protocol Serializer {
+public protocol Serializer {
     func serialize(model: Entry) -> Data?
     func serialize(array: [Entry]) -> Data?
 }
