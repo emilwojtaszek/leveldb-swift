@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		021FFCBF1E5D95EA0075A712 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCBE1E5D95EA0075A712 /* Storage.swift */; };
+		021FFCC11E5D95F10075A712 /* StorageConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCC01E5D95F10075A712 /* StorageConfiguration.swift */; };
+		021FFCC31E5D96020075A712 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCC21E5D96020075A712 /* Encodable.swift */; };
+		021FFCC51E5D96080075A712 /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCC41E5D96080075A712 /* Decodable.swift */; };
+		021FFCC71E5D96160075A712 /* Deserializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCC61E5D96160075A712 /* Deserializable.swift */; };
+		021FFCC81E5D96190075A712 /* Deserializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCC61E5D96160075A712 /* Deserializable.swift */; };
+		021FFCC91E5D961C0075A712 /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCC41E5D96080075A712 /* Decodable.swift */; };
+		021FFCCA1E5D961F0075A712 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCC21E5D96020075A712 /* Encodable.swift */; };
+		021FFCCB1E5D96220075A712 /* StorageConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCC01E5D95F10075A712 /* StorageConfiguration.swift */; };
+		021FFCCC1E5D96250075A712 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025BC07E1E5C5188005C6A72 /* Serializable.swift */; };
+		021FFCCD1E5D96290075A712 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCBE1E5D95EA0075A712 /* Storage.swift */; };
+		021FFCCF1E5D96930075A712 /* EncryptorDecryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCCE1E5D96930075A712 /* EncryptorDecryptor.swift */; };
+		021FFCD11E5D96A00075A712 /* SerializerDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCD01E5D96A00075A712 /* SerializerDeserializer.swift */; };
 		025BC07F1E5C5188005C6A72 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025BC07E1E5C5188005C6A72 /* Serializable.swift */; };
 		025BC0811E5C85FF005C6A72 /* Comparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025BC0801E5C85FF005C6A72 /* Comparator.swift */; };
 		20258DB01E1198150046CBC5 /* SequenceQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20258DAE1E107CDE0046CBC5 /* SequenceQuery.swift */; };
@@ -223,6 +236,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		021FFCBE1E5D95EA0075A712 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		021FFCC01E5D95F10075A712 /* StorageConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageConfiguration.swift; sourceTree = "<group>"; };
+		021FFCC21E5D96020075A712 /* Encodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encodable.swift; sourceTree = "<group>"; };
+		021FFCC41E5D96080075A712 /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
+		021FFCC61E5D96160075A712 /* Deserializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deserializable.swift; sourceTree = "<group>"; };
+		021FFCCE1E5D96930075A712 /* EncryptorDecryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptorDecryptor.swift; sourceTree = "<group>"; };
+		021FFCD01E5D96A00075A712 /* SerializerDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerializerDeserializer.swift; sourceTree = "<group>"; };
 		025BC07E1E5C5188005C6A72 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
 		025BC0801E5C85FF005C6A72 /* Comparator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comparator.swift; sourceTree = "<group>"; };
 		20258DAE1E107CDE0046CBC5 /* SequenceQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SequenceQuery.swift; sourceTree = "<group>"; };
@@ -707,6 +727,13 @@
 				22BA4A0B19697F2F00772430 /* WriteBatch.swift */,
 				22881A1119694AF900EC031D /* Iterator.swift */,
 				025BC07E1E5C5188005C6A72 /* Serializable.swift */,
+				021FFCC61E5D96160075A712 /* Deserializable.swift */,
+				021FFCBE1E5D95EA0075A712 /* Storage.swift */,
+				021FFCC01E5D95F10075A712 /* StorageConfiguration.swift */,
+				021FFCC21E5D96020075A712 /* Encodable.swift */,
+				021FFCC41E5D96080075A712 /* Decodable.swift */,
+				021FFCCE1E5D96930075A712 /* EncryptorDecryptor.swift */,
+				021FFCD01E5D96A00075A712 /* SerializerDeserializer.swift */,
 				2235BDF0199123BD0008DA7E /* KeySequence.swift */,
 				22E9BA011993BB16009EA25F /* KeyValueSequence.swift */,
 				20258DAE1E107CDE0046CBC5 /* SequenceQuery.swift */,
@@ -974,6 +1001,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22E9BA031993BB16009EA25F /* KeyValueSequence.swift in Sources */,
+				021FFCCB1E5D96220075A712 /* StorageConfiguration.swift in Sources */,
 				2253E1901971797500DCA0F0 /* Database.swift in Sources */,
 				2253E1911971797500DCA0F0 /* Options.swift in Sources */,
 				2253E1921971797500DCA0F0 /* Snapshot.swift in Sources */,
@@ -984,9 +1012,12 @@
 				227B09131982976A009C3BC5 /* builder.cc in Sources */,
 				227B09141982976A009C3BC5 /* c.cc in Sources */,
 				227B09151982976A009C3BC5 /* db_impl.cc in Sources */,
+				021FFCCC1E5D96250075A712 /* Serializable.swift in Sources */,
 				227B09161982976A009C3BC5 /* db_iter.cc in Sources */,
+				021FFCC91E5D961C0075A712 /* Decodable.swift in Sources */,
 				227B09171982976A009C3BC5 /* dbformat.cc in Sources */,
 				227B09181982976A009C3BC5 /* filename.cc in Sources */,
+				021FFCCA1E5D961F0075A712 /* Encodable.swift in Sources */,
 				227B09191982976A009C3BC5 /* log_reader.cc in Sources */,
 				22E499E31B4564D800E4E86A /* dumpfile.cc in Sources */,
 				227B091A1982976A009C3BC5 /* log_writer.cc in Sources */,
@@ -1003,6 +1034,7 @@
 				227B092419829791009C3BC5 /* block_builder.cc in Sources */,
 				227B092519829791009C3BC5 /* filter_block.cc in Sources */,
 				227B092619829791009C3BC5 /* format.cc in Sources */,
+				021FFCCD1E5D96290075A712 /* Storage.swift in Sources */,
 				227B092719829791009C3BC5 /* iterator.cc in Sources */,
 				227B092819829791009C3BC5 /* merger.cc in Sources */,
 				227B092919829791009C3BC5 /* table.cc in Sources */,
@@ -1020,6 +1052,7 @@
 				227B0935198297AB009C3BC5 /* hash.cc in Sources */,
 				227B0936198297AB009C3BC5 /* histogram.cc in Sources */,
 				227B0937198297AB009C3BC5 /* logging.cc in Sources */,
+				021FFCC81E5D96190075A712 /* Deserializable.swift in Sources */,
 				227B0938198297AB009C3BC5 /* options.cc in Sources */,
 				227B0939198297AB009C3BC5 /* status.cc in Sources */,
 			);
@@ -1039,6 +1072,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				227B08E519828E34009C3BC5 /* builder.cc in Sources */,
+				021FFCC11E5D95F10075A712 /* StorageConfiguration.swift in Sources */,
 				20258DB61E1198170046CBC5 /* Iterator.swift in Sources */,
 				227B08E619828E38009C3BC5 /* c.cc in Sources */,
 				227B08E719828E47009C3BC5 /* db_impl.cc in Sources */,
@@ -1046,6 +1080,7 @@
 				227B08E919828E54009C3BC5 /* dbformat.cc in Sources */,
 				227B08EA19828E5C009C3BC5 /* filename.cc in Sources */,
 				227B08EB19828E70009C3BC5 /* log_reader.cc in Sources */,
+				021FFCCF1E5D96930075A712 /* EncryptorDecryptor.swift in Sources */,
 				227B08EC19828E74009C3BC5 /* log_writer.cc in Sources */,
 				227B08ED19828E77009C3BC5 /* memtable.cc in Sources */,
 				22E499E21B4564D700E4E86A /* dumpfile.cc in Sources */,
@@ -1055,7 +1090,9 @@
 				20258DB41E1198170046CBC5 /* Snapshot.swift in Sources */,
 				227B08F019828E87009C3BC5 /* version_edit.cc in Sources */,
 				227B08F119828E8B009C3BC5 /* version_set.cc in Sources */,
+				021FFCC51E5D96080075A712 /* Decodable.swift in Sources */,
 				227B08F219828E8F009C3BC5 /* write_batch.cc in Sources */,
+				021FFCC31E5D96020075A712 /* Encodable.swift in Sources */,
 				227B08F319828E9B009C3BC5 /* memenv.cc in Sources */,
 				20258DB71E1198170046CBC5 /* KeySequence.swift in Sources */,
 				20258DB31E1198170046CBC5 /* Options.swift in Sources */,
@@ -1063,10 +1100,12 @@
 				227B08F519828EB7009C3BC5 /* block.cc in Sources */,
 				025BC0811E5C85FF005C6A72 /* Comparator.swift in Sources */,
 				20258DB51E1198170046CBC5 /* WriteBatch.swift in Sources */,
+				021FFCBF1E5D95EA0075A712 /* Storage.swift in Sources */,
 				227B08F619828EBD009C3BC5 /* block_builder.cc in Sources */,
 				20258DB91E1198170046CBC5 /* SequenceQuery.swift in Sources */,
 				227B08F719828EC1009C3BC5 /* filter_block.cc in Sources */,
 				227B08F919828EC9009C3BC5 /* format.cc in Sources */,
+				021FFCD11E5D96A00075A712 /* SerializerDeserializer.swift in Sources */,
 				227B08FA19828ECD009C3BC5 /* iterator.cc in Sources */,
 				227B08FB19828ED0009C3BC5 /* merger.cc in Sources */,
 				227B08FC19828ED6009C3BC5 /* table.cc in Sources */,
@@ -1081,6 +1120,7 @@
 				227B090419828F02009C3BC5 /* crc32c.cc in Sources */,
 				227B090519828F06009C3BC5 /* env.cc in Sources */,
 				227B090719828F24009C3BC5 /* env_posix.cc in Sources */,
+				021FFCC71E5D96160075A712 /* Deserializable.swift in Sources */,
 				227B090819828F28009C3BC5 /* filter_policy.cc in Sources */,
 				20258DB11E1198170046CBC5 /* Slice.swift in Sources */,
 				227B090919828F2B009C3BC5 /* hash.cc in Sources */,
