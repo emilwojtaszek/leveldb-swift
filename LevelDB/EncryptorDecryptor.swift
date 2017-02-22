@@ -12,15 +12,15 @@ final class EncryptorDecryptor: Encoder, Decoder {
     func decode(data: Data) -> Data {
         return data
     }
-    
+
     func encode(data: Data) -> Data {
         return data
     }
-    
+
     func encode(array: [Data]) -> Data {
         return NSKeyedArchiver.archivedData(withRootObject: array)
     }
-    
+
     func decode(data: Data) -> [Data] {
         return NSKeyedUnarchiver.unarchiveObject(with: data) as! [Data]
     }

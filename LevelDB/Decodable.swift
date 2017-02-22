@@ -20,14 +20,13 @@ protocol Decoder {
 extension Decoder {
     func decode<T: Decodable>(data: Data) -> T? {
         let data: Data = decode(data: data)
-        
+
         return T(data: data)
     }
-    
+
     func decode<T: Decodable>(data: Data) -> [T]? {
         let dataArray: [Data] = decode(data: data)
-        
+
         return dataArray.map { T(data: $0) }
     }
 }
-

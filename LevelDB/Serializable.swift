@@ -22,13 +22,13 @@ protocol Serializer {
 extension Serializer {
     func serialize<T: Serializable>(array: [T]) -> Data? {
         let models = array.map { $0.toEntry() }
-        
+
         return serialize(array: models)
     }
-    
+
     func serialize<T: Serializable>(model: T) -> Data? {
         let model = model.toEntry()
-        
+
         return serialize(model: model)
     }
 }

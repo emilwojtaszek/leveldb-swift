@@ -20,6 +20,10 @@
 		021FFCCD1E5D96290075A712 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCBE1E5D95EA0075A712 /* Storage.swift */; };
 		021FFCCF1E5D96930075A712 /* EncryptorDecryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCCE1E5D96930075A712 /* EncryptorDecryptor.swift */; };
 		021FFCD11E5D96A00075A712 /* SerializerDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCD01E5D96A00075A712 /* SerializerDeserializer.swift */; };
+		021FFCD91E5D9CAF0075A712 /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCD81E5D9CAF0075A712 /* DatabaseProtocol.swift */; };
+		021FFCDA1E5D9CAF0075A712 /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCD81E5D9CAF0075A712 /* DatabaseProtocol.swift */; };
+		021FFCDB1E5D9CC50075A712 /* StorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCD21E5D9A750075A712 /* StorageSpec.swift */; };
+		021FFCDC1E5D9CC60075A712 /* StorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCD21E5D9A750075A712 /* StorageSpec.swift */; };
 		025BC07F1E5C5188005C6A72 /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025BC07E1E5C5188005C6A72 /* Serializable.swift */; };
 		025BC0811E5C85FF005C6A72 /* Comparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025BC0801E5C85FF005C6A72 /* Comparator.swift */; };
 		20258DB01E1198150046CBC5 /* SequenceQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20258DAE1E107CDE0046CBC5 /* SequenceQuery.swift */; };
@@ -244,6 +248,8 @@
 		021FFCC61E5D96160075A712 /* Deserializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deserializable.swift; sourceTree = "<group>"; };
 		021FFCCE1E5D96930075A712 /* EncryptorDecryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptorDecryptor.swift; sourceTree = "<group>"; };
 		021FFCD01E5D96A00075A712 /* SerializerDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerializerDeserializer.swift; sourceTree = "<group>"; };
+		021FFCD21E5D9A750075A712 /* StorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageSpec.swift; sourceTree = "<group>"; };
+		021FFCD81E5D9CAF0075A712 /* DatabaseProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
 		025BC07E1E5C5188005C6A72 /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
 		025BC0801E5C85FF005C6A72 /* Comparator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comparator.swift; sourceTree = "<group>"; };
 		0570F81B061FD62DD6D4686E /* Pods-LevelDB-iOS-LevelDBTests-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelDB-iOS-LevelDBTests-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-LevelDB-iOS-LevelDBTests-iOS/Pods-LevelDB-iOS-LevelDBTests-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -452,6 +458,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		021FFCD51E5D9AA50075A712 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Factories;
+			sourceTree = "<group>";
+		};
+		021FFCD61E5D9AAC0075A712 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Mocks;
+			sourceTree = "<group>";
+		};
+		021FFCD71E5D9B060075A712 /* Specs */ = {
+			isa = PBXGroup;
+			children = (
+				021FFCD21E5D9A750075A712 /* StorageSpec.swift */,
+			);
+			name = Specs;
+			sourceTree = "<group>";
+		};
 		2253E04919701FC500DCA0F0 /* leveldb */ = {
 			isa = PBXGroup;
 			children = (
@@ -744,6 +772,7 @@
 				025BC07E1E5C5188005C6A72 /* Serializable.swift */,
 				021FFCC61E5D96160075A712 /* Deserializable.swift */,
 				021FFCBE1E5D95EA0075A712 /* Storage.swift */,
+				021FFCD81E5D9CAF0075A712 /* DatabaseProtocol.swift */,
 				021FFCC01E5D95F10075A712 /* StorageConfiguration.swift */,
 				021FFCC21E5D96020075A712 /* Encodable.swift */,
 				021FFCC41E5D96080075A712 /* Decodable.swift */,
@@ -768,9 +797,12 @@
 		2275902C19531FBB009080EB /* LevelDBTests */ = {
 			isa = PBXGroup;
 			children = (
+				2275902D19531FBB009080EB /* Supporting Files */,
 				22EB9F2E198D13FB00A7DF7B /* TestComparator.swift */,
 				2275902F19531FBB009080EB /* LevelDBTests.swift */,
-				2275902D19531FBB009080EB /* Supporting Files */,
+				021FFCD71E5D9B060075A712 /* Specs */,
+				021FFCD61E5D9AAC0075A712 /* Mocks */,
+				021FFCD51E5D9AA50075A712 /* Factories */,
 			);
 			path = LevelDBTests;
 			sourceTree = "<group>";
@@ -1161,6 +1193,7 @@
 				227B09191982976A009C3BC5 /* log_reader.cc in Sources */,
 				22E499E31B4564D800E4E86A /* dumpfile.cc in Sources */,
 				227B091A1982976A009C3BC5 /* log_writer.cc in Sources */,
+				021FFCDB1E5D9CC50075A712 /* StorageSpec.swift in Sources */,
 				227B091B1982976A009C3BC5 /* memtable.cc in Sources */,
 				227B091C1982976A009C3BC5 /* repair.cc in Sources */,
 				227B091D1982976A009C3BC5 /* table_cache.cc in Sources */,
@@ -1188,6 +1221,7 @@
 				227B0931198297AB009C3BC5 /* crc32c.cc in Sources */,
 				227B0932198297AB009C3BC5 /* env.cc in Sources */,
 				227B0933198297AB009C3BC5 /* env_posix.cc in Sources */,
+				021FFCDA1E5D9CAF0075A712 /* DatabaseProtocol.swift in Sources */,
 				227B0934198297AB009C3BC5 /* filter_policy.cc in Sources */,
 				227B0935198297AB009C3BC5 /* hash.cc in Sources */,
 				227B0936198297AB009C3BC5 /* histogram.cc in Sources */,
@@ -1259,10 +1293,12 @@
 				227B090319828EFC009C3BC5 /* comparator.cc in Sources */,
 				227B090419828F02009C3BC5 /* crc32c.cc in Sources */,
 				227B090519828F06009C3BC5 /* env.cc in Sources */,
+				021FFCDC1E5D9CC60075A712 /* StorageSpec.swift in Sources */,
 				227B090719828F24009C3BC5 /* env_posix.cc in Sources */,
 				021FFCC71E5D96160075A712 /* Deserializable.swift in Sources */,
 				227B090819828F28009C3BC5 /* filter_policy.cc in Sources */,
 				20258DB11E1198170046CBC5 /* Slice.swift in Sources */,
+				021FFCD91E5D9CAF0075A712 /* DatabaseProtocol.swift in Sources */,
 				227B090919828F2B009C3BC5 /* hash.cc in Sources */,
 				227B090A19828F2E009C3BC5 /* histogram.cc in Sources */,
 				025BC07F1E5C5188005C6A72 /* Serializable.swift in Sources */,

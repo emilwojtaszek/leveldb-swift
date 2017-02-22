@@ -11,10 +11,10 @@ import Foundation
 struct StorageConfiguration {
     let encoder: Encoder
     let decoder: Decoder
-    
+
     let serializer: Serializer
     let deserializer: Deserializer
-    
+
     init(encoder: Encoder,
          decoder: Decoder,
          serializer: Serializer,

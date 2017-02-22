@@ -20,13 +20,13 @@ protocol Encoder {
 extension Encoder {
     func encode<T: Encodable>(model: T) -> Data? {
         let data = model.toData()
-        
+
         return encode(data: data)
     }
-    
+
     func encode<T: Encodable>(array: [T]) -> Data? {
         let dataArray = array.map { $0.toData() }
-        
+
         return encode(array: dataArray)
     }
 }
