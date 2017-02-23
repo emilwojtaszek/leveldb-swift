@@ -14,7 +14,6 @@ public protocol Encodable {
 
 public protocol Encoder {
     func encode(data: Data) -> Data
-    func encode(array: [Data]) -> Data
 }
 
 extension Encoder {
@@ -22,11 +21,5 @@ extension Encoder {
         let data = model.toData()
 
         return encode(data: data)
-    }
-
-    func encode<T: Encodable>(array: [T]) -> Data? {
-        let dataArray = array.map { $0.toData() }
-
-        return encode(array: dataArray)
     }
 }

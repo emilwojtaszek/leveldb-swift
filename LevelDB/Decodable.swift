@@ -14,7 +14,6 @@ public protocol Decodable {
 
 public protocol Decoder {
     func decode(data: Data) -> Data
-    func decode(data: Data) -> [Data]
 }
 
 extension Decoder {
@@ -22,11 +21,5 @@ extension Decoder {
         let data: Data = decode(data: data)
 
         return T(data: data)
-    }
-
-    func decode<T: Decodable>(data: Data) -> [T]? {
-        let dataArray: [Data] = decode(data: data)
-
-        return dataArray.map { T(data: $0) }
     }
 }

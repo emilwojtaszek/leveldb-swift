@@ -16,9 +16,9 @@ public struct StorageConfiguration {
     let deserializer: Deserializer
 
     public init(encoder: Encoder = EncryptorDecryptor(),
-         decoder: Decoder = EncryptorDecryptor(),
-         serializer: Serializer = SerializerDeserializer(),
-         deserializer: Deserializer = SerializerDeserializer()) {
+                decoder: Decoder = EncryptorDecryptor(),
+                serializer: Serializer = SerializerDeserializer(),
+                deserializer: Deserializer = SerializerDeserializer()) {
 
         self.encoder = encoder
         self.decoder = decoder

@@ -14,7 +14,7 @@ import LevelDB
 final class StorageSerializableDeserializableSpec: QuickSpec {
     override func spec() {
         describe("Storage") {
-            var sut: Storage!
+            var sut: Storage<DatabaseMock>!
             var database: DatabaseMock!
 
             context("when storing serializable") {
