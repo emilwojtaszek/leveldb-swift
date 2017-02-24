@@ -6,7 +6,7 @@
 
 import Foundation
 import XCTest
-import LevelDB
+
 @testable import LevelDB
 
 //class LevelDBTests: XCTestCase {
