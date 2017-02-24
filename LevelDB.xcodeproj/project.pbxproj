@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0211B6C51E5F9E7D00CA96EF /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0211B6C41E5F9E7D00CA96EF /* Config.xcconfig */; };
-		0211B6C61E5F9E7D00CA96EF /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0211B6C41E5F9E7D00CA96EF /* Config.xcconfig */; };
 		0211B6CE1E5FA64200CA96EF /* Pods_LevelDB_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0211B6CD1E5FA64200CA96EF /* Pods_LevelDB_iOS.framework */; };
 		0211B6CF1E60295500CA96EF /* EncryptorDecryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCCE1E5D96930075A712 /* EncryptorDecryptor.swift */; };
 		021FFCBF1E5D95EA0075A712 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021FFCBE1E5D95EA0075A712 /* Storage.swift */; };
@@ -259,7 +257,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0211B6C41E5F9E7D00CA96EF /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		0211B6C81E5FA53F00CA96EF /* Pods_LevelDB_iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_LevelDB_iOS.framework; path = "Pods/../build/Debug-iphoneos/Pods_LevelDB_iOS.framework"; sourceTree = "<group>"; };
 		0211B6CA1E5FA60E00CA96EF /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = "../../../Library/Developer/Xcode/DerivedData/LevelDB-evbqbbyasxxgsrfbfoszkbbfxmnp/Build/Products/Debug-iphonesimulator/CryptoSwift-iOS/CryptoSwift.framework"; sourceTree = "<group>"; };
 		0211B6CD1E5FA64200CA96EF /* Pods_LevelDB_iOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_LevelDB_iOS.framework; path = "Pods/../build/Debug-iphoneos/Pods_LevelDB_iOS.framework"; sourceTree = "<group>"; };
@@ -853,7 +850,6 @@
 			isa = PBXGroup;
 			children = (
 				2275902E19531FBB009080EB /* Info.plist */,
-				0211B6C41E5F9E7D00CA96EF /* Config.xcconfig */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1055,7 +1051,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0211B6C61E5F9E7D00CA96EF /* Config.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1070,7 +1065,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0211B6C51E5F9E7D00CA96EF /* Config.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
