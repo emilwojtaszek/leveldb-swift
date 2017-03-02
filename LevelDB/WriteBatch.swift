@@ -38,6 +38,4 @@ open class WriteBatch {
     open func clear() {
         leveldb_writebatch_clear(pointer)
     }
-
-    // TODO: iterate
 }

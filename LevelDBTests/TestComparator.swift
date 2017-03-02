@@ -6,6 +6,8 @@
 
 import Foundation
 import LevelDB
+import Quick
+import Nimble
 
 class TestComparator: LevelDB.Comparator {
     var name: String {

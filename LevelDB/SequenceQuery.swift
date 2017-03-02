@@ -20,13 +20,12 @@ struct SequenceQuery {
          startKey: Slice? = nil,
          endKey: Slice? = nil,
          descending: Bool = false,
-         options: ReadOptions = ReadOptions()) {
+         options: [ReadOption] = ReadOption.standard) {
 
         self.db = db
         self.startKey = startKey
         self.endKey = endKey
         self.descending = descending
-        self.options = options
+        self.options = ReadOptions(options: options)
     }
-
 }
